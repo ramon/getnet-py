@@ -7,7 +7,7 @@ toy.py
 violations.pyflakes.txt
 cover/
 docs/_build
-getnet-py.egg-info/
+getnet_py.egg-info/
 *.pyc
 *.swp
 *~
