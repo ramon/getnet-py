@@ -4,7 +4,7 @@ class ServiceBase:
 
     def __init__(self, client) -> None:
         if not self.path:
-            raise NotImplementedError('The classes parameter path must be defined')
+            raise NotImplementedError("The classes parameter path must be defined")
 
         self._api = client
 

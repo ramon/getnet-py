@@ -7,9 +7,9 @@ HOMOLOG = 1
 PRODUCTION = 2
 
 API_URLS = {
-    SANDBOX: 'https://api-sandbox.getnet.com.br',
-    HOMOLOG: 'https://api-homologacao.getnet.com.br',
-    PRODUCTION: 'https://api.getnet.com.br'
+    SANDBOX: "https://api-sandbox.getnet.com.br",
+    HOMOLOG: "https://api-homologacao.getnet.com.br",
+    PRODUCTION: "https://api.getnet.com.br",
 }
 
 
@@ -47,15 +47,19 @@ class API:
             response.raise_for_status()
         return response.json()
 
-    def auth(self) -> 'API':
+    def auth(self) -> "API":
         if not self.access_token:
             path = "/auth/oauth/v2/token"
-            data = {'scope': 'oob', 'grant_type': 'client_credentials'}
+            data = {"scope": "oob", "grant_type": "client_credentials"}
 
-            response = self.post(path, data=data, auth=(self.client_id, self.client_secret))
+            response = self.post(
+                path, data=data, auth=(self.client_id, self.client_secret)
+            )
 
-            self.access_token = response.get('access_token')
-            self.request.headers.update({'Authorization': "Bearer {}".format(self.access_token)})
+            self.access_token = response.get("access_token")
+            self.request.headers.update(
+                {"Authorization": "Bearer {}".format(self.access_token)}
+            )
 
         return self
 
