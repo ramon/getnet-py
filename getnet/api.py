@@ -60,4 +60,4 @@ class API:
         return self
 
     def generate_token_card(self, card_number: str, customer_id: str):
-        return services.Token(self).call(card_number, customer_id)
+        return services.TokenCardService(self).create(card_number, customer_id)

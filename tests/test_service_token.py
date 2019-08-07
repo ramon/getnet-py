@@ -5,11 +5,11 @@ try:
 except ImportError:
     from unittest import mock
 
-from getnet.services import Token
+from getnet.services import TokenCardService
 
 @mock.patch('getnet.API')
 class ServiceTokenTest(unittest.TestCase):
     def test_invalid_card_number(self, APIClass):
-        token = Token(APIClass)
+        token = TokenCardService(APIClass)
         with self.assertRaises(AttributeError):
-            token.call('123', '312')
+            token.create('123', '312')

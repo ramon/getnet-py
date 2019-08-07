@@ -8,9 +8,6 @@ class ServiceBase:
 
         self._api = client
 
-    def call(self, *args, **kwargs):
-        raise NotImplementedError('This method must be implemented.')
-
     def _format_url(self, **kwargs) -> str:
         return self.path.format(**kwargs)
 
