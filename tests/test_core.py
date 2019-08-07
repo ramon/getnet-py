@@ -1,3 +1,4 @@
+import os
 import random
 import unittest
 
@@ -9,8 +10,7 @@ import getnet
 class APIAuthTest(unittest.TestCase):
     def setUp(self) -> None:
         self.client = getnet.API(
-            "d1c3d817-1676-4e28-a789-1e10c3af15b0",
-            "388183f9-ab04-4c21-9234-5bddeb381d7a",
+            os.environ.get("GETNET_CLIENT_ID"), os.environ.get("GETNET_CLIENT_SECRET")
         )
 
     def testAuth(self):
