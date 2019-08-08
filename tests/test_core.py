@@ -51,7 +51,7 @@ class APIAuthTest(unittest.TestCase):
                 customer_id="customer_21081826",
                 cardholder_identification="12345678912",
                 verify_card=False,
-                security_code="123"
+                security_code="123",
             )
 
             self.assertIsInstance(create_response, Card)
@@ -60,5 +60,3 @@ class APIAuthTest(unittest.TestCase):
             print(e.request.headers)
             print(e.request.body)
             print(e.response.data)
-
-

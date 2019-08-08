@@ -26,19 +26,19 @@ class Card:
     status: str
 
     def __init__(
-            self,
-            card_id: str,
-            number_token: Union[CardToken, str],
-            brand: str = None,
-            cardholder_name: str = None,
-            last_four_digits: str = None,
-            expiration_month: str = None,
-            expiration_year: str = None,
-            customer_id: str = None,
-            used_at=None,
-            created_at=None,
-            updated_at=None,
-            status: str = None,
+        self,
+        card_id: str,
+        number_token: Union[CardToken, str],
+        brand: str = None,
+        cardholder_name: str = None,
+        last_four_digits: str = None,
+        expiration_month: str = None,
+        expiration_year: str = None,
+        customer_id: str = None,
+        used_at=None,
+        created_at=None,
+        updated_at=None,
+        status: str = None,
     ):
         self.last_four_digits = last_four_digits
         self.updated_at = updated_at
@@ -57,7 +57,7 @@ class Card:
             else CardToken(number_token)
         )
 
-    def __eq__(self, other: 'Card'):
+    def __eq__(self, other: "Card"):
         return self.card_id == other.card_id
 
 
@@ -65,16 +65,16 @@ class CardService(ServiceBase):
     path = "/v1/cards/{card_id}"
 
     def create(
-            self,
-            number_token: CardToken,
-            brand: str,
-            cardholder_name: str,
-            cardholder_identification: str,
-            security_code: str,
-            expiration_month: str,
-            expiration_year: str,
-            customer_id: str,
-            verify_card: bool = False,
+        self,
+        number_token: CardToken,
+        brand: str,
+        cardholder_name: str,
+        cardholder_identification: str,
+        security_code: str,
+        expiration_month: str,
+        expiration_year: str,
+        customer_id: str,
+        verify_card: bool = False,
     ) -> Card:
         if not brand in BRANDS:
             raise AttributeError("Brand is invalid")
@@ -119,13 +119,9 @@ class CardService(ServiceBase):
         return cards
 
     def get(self, card_id: Union[CardToken, str]) -> Card:
-        response = self._get(
-            self._format_url(card_id=str(card_id))
-        )
+        response = self._get(self._format_url(card_id=str(card_id)))
 
         return Card(**response)
 
     def delete(self, card_id: Union[CardToken, str]) -> None:
-        response = self._delete(
-            self._format_url(card_id=str(card_id))
-        )
+        response = self._delete(self._format_url(card_id=str(card_id)))

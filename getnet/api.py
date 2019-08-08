@@ -34,7 +34,9 @@ class API:
             return response.json()
         except HTTPError as error:
             if 400 <= error.response.status_code < 500:
-                message = u'{} ({})'.format(error.response.json().get('message'), error.response.url)
+                message = u"{} ({})".format(
+                    error.response.json().get("message"), error.response.url
+                )
                 raise APIException(message, response=response)
 
     def get(self, path, **kwargs):
@@ -46,7 +48,6 @@ class API:
         url = self.base_url + path
         response = self.request.post(url, **kwargs)
         return self._process_response(response)
-
 
     def put(self, path: str, data: dict, **kwargs):
         url = self.base_url + path
