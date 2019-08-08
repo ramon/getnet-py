@@ -1,3 +1,6 @@
+import re
+
+
 class ServiceBase:
     _api = None
     path: str = None
@@ -9,7 +12,15 @@ class ServiceBase:
         self._api = client
 
     def _format_url(self, **kwargs) -> str:
-        return self.path.format(**kwargs)
+        keys = re.search(r"{(\w+)}", self.path).groups()
+        data = {}
+
+        for key in keys:
+            data[key] = ""
+
+        data.update(**kwargs)
+
+        return self.path.format(**data)
 
     def _get(self, *args, **kwargs):
         return self._api.get(*args, **kwargs)
@@ -19,3 +30,6 @@ class ServiceBase:
 
     def _put(self, *args, **kwargs):
         return self._api.put(*args, **kwargs)
+
+    def _delete(self, *args, **kwargs):
+        return self._api.delete(*args, **kwargs)

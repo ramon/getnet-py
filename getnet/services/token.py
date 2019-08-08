@@ -25,7 +25,7 @@ class TokenCardService(ServiceBase):
             )
 
         response = self._post(
-            self.path, data={"card_number": card_number, "customer_id": customer_id}
+            self.path, json={"card_number": card_number, "customer_id": customer_id}
         )
 
         return CardToken(response.get("number_token"))

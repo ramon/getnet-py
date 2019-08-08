@@ -1,6 +1,8 @@
 import requests
+from requests import HTTPError
 
 from getnet import services
+from getnet.exceptions import APIException
 
 SANDBOX = 0
 HOMOLOG = 1
@@ -26,26 +28,30 @@ class API:
 
         self.request = requests.Session()
 
+    def _process_response(self, response):
+        try:
+            response.raise_for_status()
+            return response.json()
+        except HTTPError as error:
+            if 400 <= error.response.status_code < 500:
+                message = u'{} ({})'.format(error.response.json().get('message'), error.response.url)
+                raise APIException(message, response=response)
+
     def get(self, path, **kwargs):
         url = self.base_url + path
         response = self.request.get(url, **kwargs)
-        if not response.ok:
-            response.raise_for_status()
-        return response.json()
+        return self._process_response(response)
 
-    def post(self, path: str, data: dict, **kwargs):
+    def post(self, path: str, **kwargs):
         url = self.base_url + path
-        response = self.request.post(url, data=data, **kwargs)
-        if not response.ok:
-            response.raise_for_status()
-        return response.json()
+        response = self.request.post(url, **kwargs)
+        return self._process_response(response)
+
 
     def put(self, path: str, data: dict, **kwargs):
         url = self.base_url + path
         response = self.request.put(url, data, **kwargs)
-        if not response.ok:
-            response.raise_for_status()
-        return response.json()
+        return self._process_response(response)
 
     def auth(self) -> "API":
         if not self.access_token:
@@ -65,3 +71,6 @@ class API:
 
     def generate_token_card(self, card_number: str, customer_id: str):
         return services.TokenCardService(self).create(card_number, customer_id)
+
+    def cards(self):
+        return services.CardService(self)
