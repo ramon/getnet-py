@@ -12,6 +12,9 @@ class CardToken:
     def __str__(self):
         return self.number
 
+    def __eq__(self, other):
+        return self.number == other.number
+
 
 class TokenCardService(ServiceBase):
     path = "/v1/tokens/card"

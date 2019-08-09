@@ -103,7 +103,7 @@ class CardService(ServiceBase):
             card_id=response.get("card_id"), number_token=response.get("number_token")
         )
 
-    def all(self, customer_id: str = None, status: str = None) -> List[Card]:
+    def all(self, customer_id: str = None, status: str = "all") -> List[Card]:
         if status and not status in CARD_STATUS:
             raise AttributeError("Status invalid.")
 
@@ -124,4 +124,4 @@ class CardService(ServiceBase):
         return Card(**response)
 
     def delete(self, card_id: Union[CardToken, str]) -> None:
-        response = self._delete(self._format_url(card_id=str(card_id)))
+        return self._delete(self._format_url(card_id=str(card_id)))

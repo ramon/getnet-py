@@ -33,7 +33,7 @@ class APIAuthTest(unittest.TestCase):
             )
         )
 
-    def xtestCardService(self):
+    def testCardService(self):
         card_service = self.client.auth().cards()
 
         token_card = self.client.generate_token_card(
@@ -41,22 +41,31 @@ class APIAuthTest(unittest.TestCase):
         )
 
         self.assertIsInstance(token_card, CardToken)
-        try:
-            create_response = card_service.create(
-                number_token=token_card,
-                brand="Mastercard",
-                cardholder_name="JOAO DA SILVA",
-                expiration_month="12",
-                expiration_year="20",
-                customer_id="customer_21081826",
-                cardholder_identification="12345678912",
-                verify_card=False,
-                security_code="123",
-            )
 
-            self.assertIsInstance(create_response, Card)
-            self.assertEqual(create_response.number_token, token_card)
-        except Exception as e:
-            print(e.request.headers)
-            print(e.request.body)
-            print(e.response.data)
+        create_response = card_service.create(
+            number_token=token_card,
+            brand="Mastercard",
+            cardholder_name="JOAO DA SILVA",
+            expiration_month="12",
+            expiration_year="20",
+            customer_id="customer_21081826",
+            cardholder_identification="12345678912",
+            verify_card=False,
+            security_code="123",
+        )
+        self.assertIsInstance(create_response, Card)
+        self.assertEqual(create_response.number_token, token_card)
+
+        all_response = card_service.all(customer_id="customer_21081826")
+        self.assertIsInstance(all_response, list)
+        self.assertIn(create_response, all_response)
+
+        get_response = card_service.get(create_response.card_id)
+        self.assertIsInstance(get_response, Card)
+        self.assertEqual(get_response, create_response)
+
+        delete_response = card_service.delete(create_response.card_id)
+        self.assertTrue(delete_response)
+        with self.assertRaises(APIException) as e:
+            card_service.get(create_response.card_id)
+            self.assertFalse(e.response.ok)

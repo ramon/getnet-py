@@ -27,6 +27,7 @@ class API:
         self.base_url = API_URLS[environment]
 
         self.request = requests.Session()
+        self.request.headers.update({"user-agent": "getnet-py/0.1.0"})
 
     def _process_response(self, response):
         try:
@@ -53,6 +54,14 @@ class API:
         url = self.base_url + path
         response = self.request.put(url, data, **kwargs)
         return self._process_response(response)
+
+    def delete(self, path: str, **kwargs) -> bool:
+        url = self.base_url + path
+        response = self.request.delete(url, **kwargs)
+        if response.status_code != 204:
+            return self._process_response(response)
+
+        return True
 
     def auth(self) -> "API":
         if not self.access_token:
