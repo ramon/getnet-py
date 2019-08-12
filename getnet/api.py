@@ -3,6 +3,7 @@ from requests import HTTPError
 
 from getnet import services
 from getnet.exceptions import APIException
+from getnet.services.payments import PaymentBoletoService
 
 SANDBOX = 0
 HOMOLOG = 1
@@ -16,6 +17,7 @@ API_URLS = {
 
 
 class API:
+    seller_id: str = None
     client_id: str = None
     client_secret: str = None
     access_token: str = None
@@ -27,6 +29,7 @@ class API:
         client_secret: str,
         environment: int = SANDBOX,
     ):
+        self.seller_id = seller_id
         self.client_id = client_id
         self.client_secret = client_secret
 
@@ -41,8 +44,10 @@ class API:
             return response.json()
         except HTTPError as error:
             if 400 <= error.response.status_code < 500:
-                message = u"{} ({})".format(
-                    error.response.json().get("message"), error.response.url
+                message = u"{} {} ({})".format(
+                    error.response.status_code,
+                    error.response.json().get("message"),
+                    error.response.url,
                 )
                 raise APIException(message, response=response)
 
@@ -93,3 +98,7 @@ class API:
 
     def customers(self):
         return services.CustomerService(self)
+
+    def payment(self, type: str):
+        if type == "boleto":
+            return PaymentBoletoService(self)

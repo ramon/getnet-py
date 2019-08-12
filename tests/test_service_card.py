@@ -52,13 +52,13 @@ class CardServiceTest(unittest.TestCase):
         "cardholder_name": "JOAO DA SILVA",
         "expiration_month": "12",
         "expiration_year": "20",
-        "security_code": "123"
+        "security_code": "123",
     }
 
     return_verify = {
         "status": "VERIFIED",
         "verification_id": "ae267804-503c-4163-b1b1-f5da5120b74e",
-        "authorization_code": "6964722471672911"
+        "authorization_code": "6964722471672911",
     }
 
     def setUp(self) -> None:
@@ -127,4 +127,3 @@ class CardServiceTest(unittest.TestCase):
         self.object._post.assert_called_with(
             self.object._format_url(card_id="verification"), json=mock.ANY
         )
-

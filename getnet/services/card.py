@@ -129,11 +129,11 @@ class CardService(ServiceBase):
     def verify(
         self,
         number_token: Union[CardToken, str],
-        brand:str,
+        brand: str,
         cardholder_name: str,
         expiration_month: str,
         expiration_year: str,
-        security_code: str
+        security_code: str,
     ) -> dict:
         if isinstance(number_token, str):
             number_token = CardToken(number_token)
@@ -150,7 +150,7 @@ class CardService(ServiceBase):
             "cardholder_name": cardholder_name,
             "expiration_month": expiration_month,
             "expiration_year": expiration_year,
-            "security_code": security_code
+            "security_code": security_code,
         }
 
         response = self._post(self._format_url(card_id="verification"), json=data)

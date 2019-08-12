@@ -12,8 +12,12 @@ class ServiceBase:
         self._api = client
 
     def _format_url(self, **kwargs) -> str:
-        keys = re.search(r"{(\w+)}", self.path).groups()
-        data = {}.fromkeys(list(keys), "")
+        data = {}
+
+        matchs = re.search(r"{(\w+)}", self.path)
+        if matchs:
+            data = {}.fromkeys(list(matchs.groups()), "")
+
         data.update(**kwargs)
 
         return self.path.format(**data).rstrip("/")

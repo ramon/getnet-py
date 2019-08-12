@@ -4,7 +4,9 @@ import unittest
 
 import getnet
 from getnet.exceptions import APIException
-from getnet.services import Card, CardToken
+from getnet.services import Card, CardToken, Customer
+from getnet.services.payments import Order, Boleto, Payment
+from tests.test_service_customer import sample as customer_sample
 
 
 class APIAuthTest(unittest.TestCase):
@@ -52,11 +54,11 @@ class APIAuthTest(unittest.TestCase):
             cardholder_name="JOAO DA SILVA",
             expiration_month="12",
             expiration_year="20",
-            security_code="123"
+            security_code="123",
         )
 
         self.assertIsInstance(verify_response, dict)
-        self.assertEqual(verify_response.get('status'), "VERIFIED")
+        self.assertEqual(verify_response.get("status"), "VERIFIED")
 
         create_response = card_service.create(
             number_token=token_card,
@@ -85,3 +87,31 @@ class APIAuthTest(unittest.TestCase):
         with self.assertRaises(APIException) as e:
             card_service.get(create_response.card_id)
             self.assertFalse(e.response.ok)
+
+    def testPaymentBoletoService(self):
+        payment_service = self.client.auth().payment("boleto")
+
+        order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")
+        boleto = Boleto(
+            document_number="170500000019763",
+            expiration_date="16/11/2019",
+            instructions="Não receber após o vencimento",
+        )
+        customer = Customer(**customer_sample)
+
+        response = payment_service.create(
+            amount=100, currency="BRL", order=order, boleto=boleto, customer=customer
+        )
+
+        self.assertIsInstance(response, Payment)
+        self.assertIsNotNone(response.payment_id)
+        self.assertEqual(len(response.boleto.links), 2)
+        self.assertEqual(
+            response.boleto.links["boleto_pdf"],
+            "".join(
+                [
+                    self.client.base_url,
+                    "/v1/payments/boleto/{}/pdf".format(response.payment_id),
+                ]
+            ),
+        )
