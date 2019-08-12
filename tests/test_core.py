@@ -46,6 +46,18 @@ class APIAuthTest(unittest.TestCase):
 
         self.assertIsInstance(token_card, CardToken)
 
+        verify_response = card_service.verify(
+            number_token=token_card,
+            brand="Mastercard",
+            cardholder_name="JOAO DA SILVA",
+            expiration_month="12",
+            expiration_year="20",
+            security_code="123"
+        )
+
+        self.assertIsInstance(verify_response, dict)
+        self.assertEqual(verify_response.get('status'), "VERIFIED")
+
         create_response = card_service.create(
             number_token=token_card,
             brand="Mastercard",

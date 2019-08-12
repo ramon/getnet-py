@@ -46,6 +46,21 @@ class CardServiceTest(unittest.TestCase):
         ]
     }
 
+    sample_verify = {
+        "number_token": "dfe05208b105578c070f806c80abd3af09e246827d29b866cf4ce16c205849977c9496cbf0d0234f42339937f327747075f68763537b90b31389e01231d4d13c",
+        "brand": "Mastercard",
+        "cardholder_name": "JOAO DA SILVA",
+        "expiration_month": "12",
+        "expiration_year": "20",
+        "security_code": "123"
+    }
+
+    return_verify = {
+        "status": "VERIFIED",
+        "verification_id": "ae267804-503c-4163-b1b1-f5da5120b74e",
+        "authorization_code": "6964722471672911"
+    }
+
     def setUp(self) -> None:
         self.api_mock = mock.patch("getnet.API")
 
@@ -105,3 +120,11 @@ class CardServiceTest(unittest.TestCase):
         self.object._delete.assert_called_with(
             self.object._format_url(card_id=sample.get("card_id"))
         )
+
+    def test_verify(self):
+        self.object._post = mock.MagicMock(return_value=self.return_verify)
+        self.object.verify(**self.sample_verify)
+        self.object._post.assert_called_with(
+            self.object._format_url(card_id="verification"), json=mock.ANY
+        )
+

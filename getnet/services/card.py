@@ -125,3 +125,34 @@ class CardService(ServiceBase):
 
     def delete(self, card_id: Union[CardToken, str]) -> None:
         return self._delete(self._format_url(card_id=str(card_id)))
+
+    def verify(
+        self,
+        number_token: Union[CardToken, str],
+        brand:str,
+        cardholder_name: str,
+        expiration_month: str,
+        expiration_year: str,
+        security_code: str
+    ) -> dict:
+        if isinstance(number_token, str):
+            number_token = CardToken(number_token)
+
+        if not brand in BRANDS:
+            raise AttributeError("Brand is invalid")
+
+        if not VERIFY_CODE.match(security_code):
+            raise AttributeError("Security code invalid")
+
+        data = {
+            "number_token": str(number_token),
+            "brand": brand,
+            "cardholder_name": cardholder_name,
+            "expiration_month": expiration_month,
+            "expiration_year": expiration_year,
+            "security_code": security_code
+        }
+
+        response = self._post(self._format_url(card_id="verification"), json=data)
+
+        return response
