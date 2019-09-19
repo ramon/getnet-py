@@ -46,7 +46,17 @@ class Payment:
     status: str
     boleto: object = None
     credit: object = None
+    credit_cancel: object = None
+    received_at: str
+    service = None
 
-    def __init__(self, **kwargs):
+    def __init__(self, service = None, **kwargs):
+        self.service = service
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    def cancel(self):
+        if self.boleto is not None or self.credit_cancel is not None:
+            raise Exception('Only credit payment can be canceled.')
+
+        return self.service.cancel(self.payment_id)

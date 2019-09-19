@@ -3,7 +3,7 @@ from requests import HTTPError
 
 from getnet import services
 from getnet.exceptions import APIException
-from getnet.services.payments import PaymentBoletoService
+from getnet.services.payments import PaymentBoletoService, PaymentCancelService, PaymentCreditService
 
 SANDBOX = 0
 HOMOLOG = 1
@@ -102,3 +102,7 @@ class API:
     def payment(self, type: str):
         if type == "boleto":
             return PaymentBoletoService(self)
+        elif type == "credit":
+            return PaymentCreditService(self)
+        elif type == "cancel":
+            return PaymentCancelService(self)

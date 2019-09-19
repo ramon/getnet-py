@@ -24,6 +24,8 @@ class Card:
     created_at: str
     updated_at: str
     status: str
+    bin: str
+    security_code: str
 
     def __init__(
         self,
@@ -39,6 +41,8 @@ class Card:
         created_at=None,
         updated_at=None,
         status: str = None,
+        bin: str = None,
+        security_code: str = None
     ):
         self.last_four_digits = last_four_digits
         self.updated_at = updated_at
@@ -51,6 +55,8 @@ class Card:
         self.brand = brand
         self.status = status
         self.card_id = card_id
+        self.bin = bin
+        self.security_code = security_code
         self.number_token = (
             number_token
             if isinstance(number_token, CardToken)

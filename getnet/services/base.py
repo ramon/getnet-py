@@ -11,16 +11,18 @@ class ServiceBase:
 
         self._api = client
 
-    def _format_url(self, **kwargs) -> str:
+    def _format_url(self, path = None, **kwargs) -> str:
         data = {}
 
-        matchs = re.search(r"{(\w+)}", self.path)
+        path = self.path + path if path is not None else self.path
+
+        matchs = re.search(r"{(\w+)}", path)
         if matchs:
             data = {}.fromkeys(list(matchs.groups()), "")
 
         data.update(**kwargs)
 
-        return self.path.format(**data).rstrip("/")
+        return path.format(**data).rstrip("/")
 
     def _get(self, *args, **kwargs):
         return self._api.get(*args, **kwargs)
