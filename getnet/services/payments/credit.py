@@ -118,7 +118,7 @@ class Credit:
             "card": _format_card(self.card)
         }
 
-        if self.dynamic_mcc != None:
+        if self.dynamic_mcc is not None:
             data["dynamic_mcc"] = self.dynamic_mcc
 
         return data

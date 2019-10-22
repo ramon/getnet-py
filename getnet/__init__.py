@@ -1,8 +1,9 @@
 import logging
 
 from .api import API
+from .exceptions import APIException
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import requests
 

@@ -90,7 +90,7 @@ class APIAuthTest(unittest.TestCase):
             card_service.get(create_response.card_id)
             self.assertFalse(e.response.ok)
 
-    def testPaymentCreditService(self):
+    def xtestPaymentCreditService(self):
         payment_service = self.client.auth().payment("credit")
 
         customer = Customer(**customer_sample)
@@ -128,17 +128,17 @@ class APIAuthTest(unittest.TestCase):
         self.assertEqual(payment_response.status, "APPROVED")
         self.assertIsNotNone(payment_response.credit.transaction_id)
 
-        payment_cancel_response = payment_response.cancel()
-        self.assertIsInstance(payment_cancel_response, Payment)
-        self.assertEqual(payment_cancel_response.payment_id, payment_response.payment_id)
-        self.assertEqual(payment_cancel_response.status, "CANCELED")
+        # payment_cancel_response = payment_response.cancel()
+        # self.assertIsInstance(payment_cancel_response, Payment)
+        # self.assertEqual(payment_cancel_response.payment_id, payment_response.payment_id)
+        # self.assertEqual(payment_cancel_response.status, "CANCELED")
 
-    def xtestPaymentBoletoService(self):
+    def testPaymentBoletoService(self):
         payment_service = self.client.auth().payment("boleto")
 
         order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")
         boleto = Boleto(
-            document_number="170500000019763",
+            document_number="44181342000120",
             expiration_date="16/11/2019",
             instructions="Não receber após o vencimento",
         )
@@ -149,7 +149,7 @@ class APIAuthTest(unittest.TestCase):
                 amount=100, currency="BRL", order=order, boleto=boleto, customer=customer
             )
         except Exception as e:
-            print(e)
+            print(e.response)
 
         self.assertIsInstance(response, Payment)
         self.assertIsNotNone(response.payment_id)
