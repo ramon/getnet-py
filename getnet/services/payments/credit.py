@@ -30,10 +30,12 @@ def _format_card(card: Card):
     data = {
         "number_token": str(card.number_token),
         "cardholder_name": card.cardholder_name,
-        "security_code": card.security_code,
         "expiration_month": str(card.expiration_month),
         "expiration_year": str(card.expiration_year)
     }
+
+    if card.security_code is not None:
+        data["security_code"] = card.security_code
 
     if card.brand is not None:
         data['brand'] = card.brand
