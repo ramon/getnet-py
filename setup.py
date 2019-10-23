@@ -13,6 +13,8 @@ with open("getnet/__init__.py", "r") as f:
     else:
         raise RuntimeError("No version number found!")
 
+print('Version: {}'.format(VERSION))
+
 APP_NAME = "getnet-py"
 
 with open("README.md", "r") as fh:

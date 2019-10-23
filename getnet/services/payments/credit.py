@@ -27,14 +27,18 @@ def _format_customer(customer: Customer):
 
 
 def _format_card(card: Card):
-    return {
+    data = {
         "number_token": str(card.number_token),
         "cardholder_name": card.cardholder_name,
         "security_code": card.security_code,
-        "brand": card.brand,
-        "expiration_month": card.expiration_month,
-        "expiration_year": card.expiration_year
+        "expiration_month": str(card.expiration_month),
+        "expiration_year": str(card.expiration_year)
     }
+
+    if card.brand is not None:
+        data['brand'] = card.brand
+
+    return data
 
 
 class Credit:
