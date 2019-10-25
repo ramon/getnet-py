@@ -73,7 +73,6 @@ class CardService(ServiceBase):
     def create(
         self,
         number_token: CardToken,
-        brand: str,
         cardholder_name: str,
         cardholder_identification: str,
         security_code: str,
@@ -81,8 +80,9 @@ class CardService(ServiceBase):
         expiration_year: str,
         customer_id: str,
         verify_card: bool = False,
+        brand: str = None,
     ) -> Card:
-        if not brand in BRANDS:
+        if brand is not None and brand not in BRANDS:
             raise AttributeError("Brand is invalid")
 
         if not CARDHOLDER_IDENTIFICATION_REGEX.match(cardholder_identification):

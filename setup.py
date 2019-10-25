@@ -25,6 +25,7 @@ setuptools.setup(
     version=VERSION,
     description="A Getnet Santander SDK",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Ramon Soares",
     author_email="contato@ramonsoares.com",
     url="https://github.com/ramon/getnet-py",
