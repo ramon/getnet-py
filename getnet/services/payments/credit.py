@@ -4,6 +4,7 @@ from typing import Union
 
 from getnet.services import Customer, Card
 from getnet.services.payments import Order, Payment
+from getnet.services.payments.utils import Device
 from ..base import ServiceBase
 
 BRANDS = ("Mastercard", "Visa", "Amex", "Elo", "Hipercard")
@@ -88,7 +89,7 @@ class Credit:
         transaction_id: str = None,
         brand: str = None
     ) -> None:
-        if len(soft_descriptor) > 22:
+        if soft_descriptor is not None and len(soft_descriptor) > 22:
             raise AttributeError("The soft_descriptor must have bellow 23 characters")
 
         self.card = card
@@ -152,7 +153,8 @@ class PaymentCreditService(ServiceBase):
         currency: str,
         order: Order,
         credit: Credit,
-        customer: Customer
+        customer: Customer,
+        device: Device = None
     ) -> Payment:
         data = {
             "seller_id": self._api.seller_id,
@@ -162,6 +164,9 @@ class PaymentCreditService(ServiceBase):
             "credit": credit.toJSON(),
             "customer": _format_customer(customer),
         }
+
+        if device is not None:
+            data["device"] = device.toJSON()
 
         response = self._post(self._format_url(), json=data)
 

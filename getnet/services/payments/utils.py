@@ -60,3 +60,18 @@ class Payment:
             raise Exception('Only credit payment can be canceled.')
 
         return self.service.cancel(self.payment_id)
+
+
+class Device:
+    ip_address: str
+    device_id: str
+
+    def __init__(self, ip_address, device_id):
+        self.device_id = device_id
+        self.ip_address = ip_address
+
+    def toJSON(self):
+        return {
+            'device_id': self.device_id,
+            'ip_address': self.ip_address
+        }
