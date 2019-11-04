@@ -113,6 +113,7 @@ class Credit:
         self.terminal_nsu = terminal_nsu
         self.transaction_id = transaction_id
         self.brand = brand
+        self.soft_descriptor = soft_descriptor
 
     def toJSON(self):
         data = {
@@ -127,6 +128,21 @@ class Credit:
 
         if self.dynamic_mcc is not None:
             data["dynamic_mcc"] = self.dynamic_mcc
+
+        if self.soft_descriptor is not None:
+            data["soft_descriptor"] = self.soft_descriptor
+
+        return data
+
+    def toSubscriptionJSON(self):
+        data = {
+            "transaction_type": self.transaction_type,
+            "number_installments": self.number_installments,
+            "card": _format_card(self.card)
+        }
+
+        if self.soft_descriptor is not None:
+            data["soft_descriptor"] = self.soft_descriptor
 
         return data
 

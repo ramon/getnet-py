@@ -1,8 +1,10 @@
 from datetime import datetime
+from typing import Union
 
-from getnet.services import Credit, Customer, Plan, Payment
+from getnet.services import Credit, Customer, Payment
 from getnet.services.base import ServiceBase
 from getnet.services.payments.utils import Device
+from getnet.services.recurrency import Plan
 
 
 class SubscriptionPlan:
@@ -14,7 +16,7 @@ class SubscriptionPlan:
     def toJSON(self):
         return {
             "payment_type": {
-                "credit": self.credit.toJSON()
+                "credit": self.credit.toSubscriptionJSON()
             }
         }
 
@@ -47,7 +49,7 @@ class Subscription:
         status_details: str = None,
         create_date: datetime = None,
         end_date: datetime = None,
-        payment_date: datetime = None,
+        payment_date: Union[int, datetime] = None,
         next_scheduled_date: datetime = None,
         payment: Payment = None
     ):
@@ -61,36 +63,39 @@ class Subscription:
         self.status_details = status_details
         self.payment = payment
         self.create_date = (
-            datetime.strptime(create_date, '%Y-%m-%dT%H:%M:%S.%j%z')
+            datetime.strptime(create_date, '%Y-%m-%dT%H:%M:%S.%f%z')
             if create_date and not isinstance(create_date, datetime)
             else create_date
         )
         self.end_date = (
-            datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%j%z')
+            datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%f%z')
             if end_date and not isinstance(end_date, datetime)
             else end_date
         )
         self.payment_date = (
-            datetime.strptime(payment_date, '%Y-%m-%dT%H:%M:%S.%j%z')
-            if payment_date and not isinstance(payment_date, datetime)
+            datetime.strptime(payment_date, '%Y-%m-%dT%H:%M:%S.%f%z')
+            if payment_date and not isinstance(payment_date, datetime) and not isinstance(payment_date, int)
             else payment_date
         )
         self.next_scheduled_date = (
-            datetime.strptime(next_scheduled_date, '%Y-%m-%dT%H:%M:%S.%j%z')
+            datetime.strptime(next_scheduled_date, '%Y-%m-%dT%H:%M:%S.%f%z')
             if next_scheduled_date and not isinstance(next_scheduled_date, datetime)
             else next_scheduled_date
         )
 
     def toJSON(self):
-        return {
-            "seller_id": self.seller_id,
+        data = {
+            "seller_id": str(self.seller_id),
             "customer_id": self.customer.customer_id,
             "plan_id": self.plan.plan_id,
             "order_id": self.order_id,
-            "subscription": self.subscription.toJSON(),
-            "devise": self.device.toJSON()
+            "subscription": self.subscription.toJSON()
         }
 
+        if self.device is not None:
+            data["devise"] = self.device.toJSON()
+
+        return data
 
 class SubscriptionList(list):
     def __init__(self, seq=(), page=1, limit=100, total=None):
@@ -103,10 +108,10 @@ class SubscriptionList(list):
 class SubscriptionService(ServiceBase):
     path = "/v1/subscriptions/{plan_id}"
 
-    def create(self, subscription: Subscription) -> Plan:
-        response = self._post(self._format_url(), json=subscription.toJSON())
+    def create(self, subscription: Subscription) -> Subscription:
+        response = self._post(self._format_url(), json=subscription.toJSON(), headers={ 'seller_id': self._api.seller_id })
 
-        return Plan(**response)
+        return Subscription(**response)
 
     def all(
         self,
@@ -134,7 +139,7 @@ class SubscriptionService(ServiceBase):
             "sort_type": "asc",
         }
 
-        response = self._get(self._format_url(), params=params)
+        response = self._get(self._format_url(), params=params, headers={ 'seller_id': self._api.seller_id })
 
         values = [Subscription(**subscription) for subscription in response.get("subscription")]
 
@@ -142,7 +147,7 @@ class SubscriptionService(ServiceBase):
             values, response.get("page"), response.get("limit"), response.get("total")
         )
 
-    def get(self, plan_id: str):
-        response = self._get(self._format_url(plan_id=plan_id))
+    def get(self, plan_id: str) -> Subscription:
+        response = self._get(self._format_url(plan_id=plan_id), headers={ 'seller_id': self._api.seller_id })
 
         return Subscription(**response)

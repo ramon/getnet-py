@@ -5,9 +5,10 @@ from random import random
 
 import getnet
 from getnet.exceptions import APIException
-from getnet.services import Card, CardToken, Customer, PlanService, Plan
+from getnet.services import Card, CardToken, Customer
 from getnet.services.payments import Order, Boleto, Payment
 from getnet.services.payments.credit import Credit
+from getnet.services.recurrency import Plan, PlanService, SubscriptionService, Subscription, SubscriptionPlan
 from tests.test_service_customer import sample as customer_sample
 
 
@@ -25,7 +26,7 @@ class APIAuthTest(unittest.TestCase):
         self.client.auth()
         self.assertIsNotNone(self.client.access_token)
 
-    def testInvalidAuth(self):
+    def xtestInvalidAuth(self):
         client = getnet.API(
             "d1c3d817-1676-4e28-a789-1e10c3af15b0",
             "d1c3d817-1676-4e28-a789-1e10c3af15b0",
@@ -34,7 +35,7 @@ class APIAuthTest(unittest.TestCase):
         with self.assertRaises(APIException):
             client.auth()
 
-    def testGenerateCardToken(self):
+    def xtestGenerateCardToken(self):
         client = self.client.auth()
         self.assertIsNotNone(
             client.generate_token_card(
@@ -42,7 +43,7 @@ class APIAuthTest(unittest.TestCase):
             )
         )
 
-    def testCardService(self):
+    def xtestCardService(self):
         card_service = self.client.auth().cards()
 
         token_card = self.client.generate_token_card(
@@ -92,7 +93,7 @@ class APIAuthTest(unittest.TestCase):
             card_service.get(create_response.card_id)
             self.assertFalse(e.response.ok)
 
-    def testPaymentCreditService(self):
+    def xtestPaymentCreditService(self):
         payment_service = self.client.auth().payment("credit")
 
         customer = Customer(**customer_sample)
@@ -135,7 +136,7 @@ class APIAuthTest(unittest.TestCase):
         self.assertEqual(payment_cancel_response.payment_id, payment_response.payment_id)
         self.assertEqual(payment_cancel_response.status, "CANCELED")
 
-    def testPaymentBoletoService(self):
+    def xtestPaymentBoletoService(self):
         payment_service = self.client.auth().payment("boleto")
 
         order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")
@@ -146,12 +147,9 @@ class APIAuthTest(unittest.TestCase):
         )
         customer = Customer(**customer_sample)
 
-        try:
-            response = payment_service.create(
-                amount=100, currency="BRL", order=order, boleto=boleto, customer=customer
-            )
-        except Exception as e:
-            print(e.response)
+        response = payment_service.create(
+            amount=100, currency="BRL", order=order, boleto=boleto, customer=customer
+        )
 
         self.assertIsInstance(response, Payment)
         self.assertIsNotNone(response.payment_id)
@@ -166,7 +164,7 @@ class APIAuthTest(unittest.TestCase):
             ),
         )
 
-    def testCustomerService(self):
+    def xtestCustomerService(self):
         customer_service = self.client.auth().customers()
         customer_data = customer_sample.copy()
         customer_id = str(uuid.uuid4())
@@ -179,17 +177,13 @@ class APIAuthTest(unittest.TestCase):
 
         customer = Customer(**customer_data)
 
-        try:
-            response = customer_service.create(customer)
+        response = customer_service.create(customer)
 
-            self.assertIsInstance(response, Customer)
-            self.assertEqual(customer_id, customer.customer_id)
-            self.assertEqual(document_number, customer.document_number)
-        except Exception as err:
-            self.fail()
+        self.assertIsInstance(response, Customer)
+        self.assertEqual(customer_id, customer.customer_id)
+        self.assertEqual(document_number, customer.document_number)
 
-    def testPlanService(self):
-
+    def xtestPlanService(self):
         service = PlanService(self.client.auth())
         response = service.create(Plan(
             seller_id=self.client.seller_id,
@@ -214,5 +208,64 @@ class APIAuthTest(unittest.TestCase):
 
         self.assertEqual(response.plan_id, plan.plan_id)
 
-    def xtestSubscriptionService(self):
-        pass
+    def testSubscriptionService(self):
+        service = SubscriptionService(self.client.auth())
+
+        customer_service = self.client.auth().customers()
+        customer_data = customer_sample.copy()
+        customer_id = str(uuid.uuid4())
+        document_number = str(random())[2:13]
+        customer_data.update({
+            'seller_id': self.client.seller_id,
+            'customer_id': customer_id,
+            'document_number': document_number
+        })
+
+        customer = customer_service.create(Customer(**customer_data))
+
+        plan_service = PlanService(self.client.auth())
+        plan = plan_service.create(Plan(
+            seller_id=self.client.seller_id,
+            name="Plan Demo",
+            description="Plan Demo",
+            amount=1990,
+            currency='BRL',
+            product_type='service',
+            period={
+                'type': 'monthly',
+                'billing_cycle': 12,
+            }
+        ))
+
+        token_card = self.client.generate_token_card(
+            "4012001037141112", customer.customer_id
+        )
+
+        card = Card(
+            card_id="123",
+            number_token=token_card,
+            brand="Visa",
+            cardholder_name="Luciano Santos",
+            security_code="123",
+            expiration_month="12",
+            expiration_year="20"
+        )
+
+        full_credit = Credit(
+            card=card,
+            soft_descriptor="Full Credit Card"
+        )
+
+        order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "service")
+
+        response = service.create(Subscription(
+            seller_id=self.client.seller_id,
+            order_id=order.order_id,
+            customer=customer,
+            plan=plan,
+            subscription=SubscriptionPlan(credit=full_credit)
+        ))
+
+        self.assertIsInstance(response, Subscription)
+
+
