@@ -1,9 +1,11 @@
 import os
 import unittest
+import uuid
+from random import random
 
 import getnet
 from getnet.exceptions import APIException
-from getnet.services import Card, CardToken, Customer
+from getnet.services import Card, CardToken, Customer, PlanService, Plan
 from getnet.services.payments import Order, Boleto, Payment
 from getnet.services.payments.credit import Credit
 from tests.test_service_customer import sample as customer_sample
@@ -40,7 +42,7 @@ class APIAuthTest(unittest.TestCase):
             )
         )
 
-    def xtestCardService(self):
+    def testCardService(self):
         card_service = self.client.auth().cards()
 
         token_card = self.client.generate_token_card(
@@ -90,7 +92,7 @@ class APIAuthTest(unittest.TestCase):
             card_service.get(create_response.card_id)
             self.assertFalse(e.response.ok)
 
-    def xtestPaymentCreditService(self):
+    def testPaymentCreditService(self):
         payment_service = self.client.auth().payment("credit")
 
         customer = Customer(**customer_sample)
@@ -128,10 +130,10 @@ class APIAuthTest(unittest.TestCase):
         self.assertEqual(payment_response.status, "APPROVED")
         self.assertIsNotNone(payment_response.credit.transaction_id)
 
-        # payment_cancel_response = payment_response.cancel()
-        # self.assertIsInstance(payment_cancel_response, Payment)
-        # self.assertEqual(payment_cancel_response.payment_id, payment_response.payment_id)
-        # self.assertEqual(payment_cancel_response.status, "CANCELED")
+        payment_cancel_response = payment_response.cancel()
+        self.assertIsInstance(payment_cancel_response, Payment)
+        self.assertEqual(payment_cancel_response.payment_id, payment_response.payment_id)
+        self.assertEqual(payment_cancel_response.status, "CANCELED")
 
     def testPaymentBoletoService(self):
         payment_service = self.client.auth().payment("boleto")
@@ -164,27 +166,53 @@ class APIAuthTest(unittest.TestCase):
             ),
         )
 
-    def xtestPaymentCancelService(self):
-        payment_service = self.client.auth().payment("boleto")
+    def testCustomerService(self):
+        customer_service = self.client.auth().customers()
+        customer_data = customer_sample.copy()
+        customer_id = str(uuid.uuid4())
+        document_number = str(random())[2:13]
+        customer_data.update({
+            'seller_id': self.client.seller_id,
+            'customer_id': customer_id,
+            'document_number': document_number
+        })
 
-        order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")
-        boleto = Boleto(
-            document_number="170500000019763",
-            expiration_date="16/11/2019",
-            instructions="Não receber após o vencimento",
-        )
-        customer = Customer(**customer_sample)
+        customer = Customer(**customer_data)
 
-        payment_response = payment_service.create(
-            amount=100, currency="BRL", order=order, boleto=boleto, customer=customer
-        )
+        try:
+            response = customer_service.create(customer)
 
-        self.assertIsInstance(payment_response, Payment)
-        self.assertIsNotNone(payment_response.payment_id)
+            self.assertIsInstance(response, Customer)
+            self.assertEqual(customer_id, customer.customer_id)
+            self.assertEqual(document_number, customer.document_number)
+        except Exception as err:
+            self.fail()
 
-        payment_service = self.client.auth().payment("cancel")
-        payment_service.request(
-            payment_response.boleto.boleto_id,
-            payment_response.amount,
-            "".join([payment_response.payment_id, str(payment_response.amount)]),
-        )
+    def testPlanService(self):
+
+        service = PlanService(self.client.auth())
+        response = service.create(Plan(
+            seller_id=self.client.seller_id,
+            name="Plan Demo",
+            description="Plan Demo",
+            amount=1990,
+            currency='BRL',
+            product_type='service',
+            period={
+                'type': 'monthly',
+                'billing_cycle': 12,
+            }
+        ))
+
+        self.assertIsInstance(response, Plan)
+        self.assertIsNotNone(response.plan_id)
+
+        plans = service.all()
+        self.assertEqual(plans[0].plan_id, response.plan_id)
+
+        plan = service.get(response.plan_id)
+
+        self.assertEqual(response.plan_id, plan.plan_id)
+
+    def xtestSubscriptionService(self):
+        pass

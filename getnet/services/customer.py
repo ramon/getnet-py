@@ -54,6 +54,7 @@ class Customer:
     email: str
     observation: str
     address: CustomerAddress
+    status: str
 
     def __init__(
         self,
@@ -69,6 +70,7 @@ class Customer:
         customer_id: str = None,
         seller_id: str = None,
         address: Union[CustomerAddress, dict] = None,
+        status: str = None
     ):
         if not document_type in DOCUMENT_TYPES:
             raise AttributeError(
@@ -91,6 +93,7 @@ class Customer:
         self.celphone_number = celphone_number
         self.email = email
         self.observation = observation
+        self.status = status
 
         if isinstance(address, dict):
             address = CustomerAddress(**address)
@@ -112,7 +115,8 @@ class Customer:
 
     def toJSON(self):
         data = vars(self).copy()
-        data.popitem()
+        data.pop('status')
+        data.pop('address')
         data["address"] = self.address.toJSON()
         return data
 
@@ -129,7 +133,7 @@ class CustomerService(ServiceBase):
     path = "/v1/customers/{customer_id}"
 
     def create(self, customer: Customer) -> Customer:
-        response = self._post(self._format_url(), json=customer.toJSON())
+        response = self._post(self._format_url(), json=customer.toJSON(), headers={ 'seller_id': self._api.seller_id })
 
         return Customer(**response)
 
@@ -170,6 +174,6 @@ class CustomerService(ServiceBase):
         )
 
     def get(self, customer_id: str):
-        response = self._get(self._format_url(customer_id=customer_id))
+        response = self._get(self._format_url(customer_id=customer_id), headers={ 'seller_id': self._api.seller_id })
 
         return Customer(**response)

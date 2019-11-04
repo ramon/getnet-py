@@ -2,7 +2,7 @@ import re
 
 
 class ServiceBase:
-    _api = None
+    _api: 'API' = None
     path: str = None
 
     def __init__(self, client) -> None:
@@ -11,7 +11,7 @@ class ServiceBase:
 
         self._api = client
 
-    def _format_url(self, path = None, **kwargs) -> str:
+    def _format_url(self, path=None, **kwargs) -> str:
         data = {}
 
         path = self.path + path if path is not None else self.path

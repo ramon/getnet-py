@@ -67,13 +67,22 @@ class CustomerServiceTest(unittest.TestCase):
     }
 
     def setUp(self) -> None:
-        self.api_mock = mock.patch("getnet.API")
-        self.object = CustomerService(self.api_mock)
+        with mock.patch("getnet.API") as MockAPI:
+            self.api_mock = MockAPI.return_value
+            self.object = CustomerService(self.api_mock)
 
     def test_create(self):
+        self.api_mock.seller_id.return_value = "123"
         self.object._post = mock.MagicMock(return_value=sample)
+
         data = Customer(**sample)
         response = self.object.create(data)
+
+        self.object._post.assert_called_with(
+            self.object._format_url(),
+            json=mock.ANY,
+            headers=mock.ANY
+        )
 
         self.assertIsInstance(response, Customer)
         self.assertEqual(response.customer_id, data.customer_id)
@@ -90,13 +99,16 @@ class CustomerServiceTest(unittest.TestCase):
         )
 
     def test_get(self):
+        self.api_mock.seller_id.return_value = "123"
+
         sample = self.return_all_sample["customers"][0]
         self.object._get = mock.MagicMock(return_value=sample)
 
         response = self.object.get(sample.get("customer_id"))
 
         self.object._get.assert_called_with(
-            self.object._format_url(customer_id=sample.get("customer_id"))
+            self.object._format_url(customer_id=sample.get("customer_id")),
+            headers=mock.ANY
         )
         self.assertIsInstance(response, Customer)
         self.assertEqual(response.customer_id, sample.get("customer_id"))
