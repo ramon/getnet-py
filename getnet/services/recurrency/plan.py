@@ -94,7 +94,7 @@ class Plan:
         self.seller_id = seller_id
         self.plan_id = plan_id
         self.create_date = (
-            datetime.strptime(create_date, '%Y-%m-%dT%H:%M:%S.%j%z')
+            datetime.strptime(create_date, '%Y-%m-%dT%H:%M:%S.%f%z')
             if create_date and not isinstance(create_date, datetime)
             else create_date
         )
