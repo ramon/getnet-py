@@ -5,11 +5,11 @@ from random import random
 
 import getnet
 from getnet.exceptions import APIException
-from getnet.services import Card, CardToken, Customer
+from getnet.services import Customer
 from getnet.services.payments import Order, Boleto, Payment
 from getnet.services.payments.credit import Credit
 from getnet.services.recurrency import Plan, PlanService, SubscriptionService, Subscription, SubscriptionPlan
-from tests.test_service_customer import sample as customer_sample
+from old_tests.test_service_customer import sample as customer_sample
 
 
 class APIAuthTest(unittest.TestCase):
@@ -21,7 +21,7 @@ class APIAuthTest(unittest.TestCase):
             getnet.api.HOMOLOG
         )
 
-    def testAuth(self):
+    def xtestAuth(self):
         self.assertIsNone(self.client.access_token)
         self.client.auth()
         self.assertIsNotNone(self.client.access_token)
@@ -208,7 +208,7 @@ class APIAuthTest(unittest.TestCase):
 
         self.assertEqual(response.plan_id, plan.plan_id)
 
-    def testSubscriptionService(self):
+    def xtestSubscriptionService(self):
         service = SubscriptionService(self.client.auth())
 
         customer_service = self.client.auth().customers()
@@ -267,5 +267,3 @@ class APIAuthTest(unittest.TestCase):
         ))
 
         self.assertIsInstance(response, Subscription)
-
-

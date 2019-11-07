@@ -1,15 +1,17 @@
 import re
 
+from getnet import API
+
 
 class ServiceBase:
-    _api: 'API' = None
+    _client: API = None
     path: str = None
 
-    def __init__(self, client) -> None:
+    def __init__(self, client: API) -> None:
         if not self.path:
             raise NotImplementedError("The classes parameter path must be defined")
 
-        self._api = client
+        self._client = client
 
     def _format_url(self, path=None, **kwargs) -> str:
         data = {}
@@ -24,14 +26,11 @@ class ServiceBase:
 
         return path.format(**data).rstrip("/")
 
-    def _get(self, *args, **kwargs):
-        return self._api.get(*args, **kwargs)
+    def get(self, *args, **kwargs):
+        return self._client.get(*args, **kwargs)
 
-    def _post(self, *args, **kwargs):
-        return self._api.post(*args, **kwargs)
+    def post(self, *args, **kwargs):
+        return self._client.post(*args, **kwargs)
 
-    def _put(self, *args, **kwargs):
-        return self._api.put(*args, **kwargs)
-
-    def _delete(self, *args, **kwargs):
-        return self._api.delete(*args, **kwargs)
+    def delete(self, *args, **kwargs):
+        return self._client.delete(*args, **kwargs)

@@ -34,13 +34,13 @@ sample = {
 
 
 class CustomerTest(unittest.TestCase):
-    def test_create_invalid_document_type(self):
+    def xtest_create_invalid_document_type(self):
         with self.assertRaises(AttributeError):
             data = sample.copy()
             data.update({"document_type": "Error"})
             Customer(**data)
 
-    def test_create_invalid_document_number(self):
+    def xtest_create_invalid_document_number(self):
         with self.assertRaises(AttributeError):
             data = sample.copy()
             data.update({"document_number": "0123456789"})
@@ -71,7 +71,7 @@ class CustomerServiceTest(unittest.TestCase):
             self.api_mock = MockAPI.return_value
             self.object = CustomerService(self.api_mock)
 
-    def test_create(self):
+    def xtest_create(self):
         self.api_mock.seller_id.return_value = "123"
         self.object._post = mock.MagicMock(return_value=sample)
 
@@ -87,7 +87,7 @@ class CustomerServiceTest(unittest.TestCase):
         self.assertIsInstance(response, Customer)
         self.assertEqual(response.customer_id, data.customer_id)
 
-    def test_all(self):
+    def xtest_all(self):
         self.object._get = mock.MagicMock(return_value=self.return_all_sample)
 
         response = self.object.all()
@@ -98,7 +98,7 @@ class CustomerServiceTest(unittest.TestCase):
             self.return_all_sample["customers"][0]["customer_id"],
         )
 
-    def test_get(self):
+    def xtest_get(self):
         self.api_mock.seller_id.return_value = "123"
 
         sample = self.return_all_sample["customers"][0]

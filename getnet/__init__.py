@@ -1,9 +1,7 @@
-import logging
+from .api import Client, API, LOGGER
+from .exceptions import *
 
-from .api import API
-from .exceptions import APIException
-
-__version__ = "0.2.1"
+__version__ = "1.0.0"
 
 import requests
 
@@ -13,5 +11,3 @@ if requests.__version__ < "2.0.0":
         "getnet-py expects, please upgrade to 2.0.0 or later."
     )
     raise Warning(msg % requests.__version__)
-
-logging.getLogger("getnet-py").addHandler(logging.NullHandler())

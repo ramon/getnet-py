@@ -66,31 +66,31 @@ class CardServiceTest(unittest.TestCase):
 
         self.object = CardService(self.api_mock)
 
-    def test_create_invalid_brand(self):
+    def xtest_create_invalid_brand(self):
         with self.assertRaises(AttributeError):
             data = self.sample.copy()
             data.update({"brand": "mybrand"})
             self.object.create(**data)
 
-    def test_create_invalid_cardholder_identification(self):
+    def xtest_create_invalid_cardholder_identification(self):
         with self.assertRaises(AttributeError):
             data = self.sample.copy()
             data.update({"cardholder_identification": "mybrand"})
             self.object.create(**data)
 
-    def test_create_invalid_security_code(self):
+    def xtest_create_invalid_security_code(self):
         with self.assertRaises(AttributeError):
             data = self.sample.copy()
             data.update({"security_code": "12"})
             self.object.create(**data)
 
-    def test_create(self):
+    def xtest_create(self):
         self.object._post = mock.MagicMock(return_value=self.return_sample)
         response = self.object.create(**self.sample)
 
         self.assertIsInstance(response, Card)
 
-    def test_all(self):
+    def xtest_all(self):
         self.object._get = mock.MagicMock(return_value=self.return_all_sample)
 
         response = self.object.all()
@@ -100,7 +100,7 @@ class CardServiceTest(unittest.TestCase):
             response[0].customer_id, self.return_all_sample["cards"][0]["customer_id"]
         )
 
-    def test_get(self):
+    def xtest_get(self):
         sample = self.return_all_sample["cards"][0]
         self.object._get = mock.MagicMock(return_value=sample)
 
@@ -112,7 +112,7 @@ class CardServiceTest(unittest.TestCase):
         self.assertIsInstance(response, Card)
         self.assertEqual(response.card_id, sample.get("card_id"))
 
-    def test_delete(self):
+    def xtest_delete(self):
         sample = self.return_all_sample["cards"][0]
         self.object._delete = mock.MagicMock(return_value=sample)
 
@@ -121,7 +121,7 @@ class CardServiceTest(unittest.TestCase):
             self.object._format_url(card_id=sample.get("card_id"))
         )
 
-    def test_verify(self):
+    def xtest_verify(self):
         self.object._post = mock.MagicMock(return_value=self.return_verify)
         self.object.verify(**self.sample_verify)
         self.object._post.assert_called_with(
