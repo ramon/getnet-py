@@ -15,9 +15,9 @@ from old_tests.test_service_customer import sample as customer_sample
 class APIAuthTest(unittest.TestCase):
     def setUp(self) -> None:
         self.client = getnet.API(
-            os.environ.get("GETNET_SELLER_ID"),
-            os.environ.get("GETNET_CLIENT_ID"),
-            os.environ.get("GETNET_CLIENT_SECRET"),
+            os.environ._get("GETNET_SELLER_ID"),
+            os.environ._get("GETNET_CLIENT_ID"),
+            os.environ._get("GETNET_CLIENT_SECRET"),
             getnet.api.HOMOLOG
         )
 
@@ -83,14 +83,14 @@ class APIAuthTest(unittest.TestCase):
         self.assertIsInstance(all_response, list)
         self.assertIn(create_response, all_response)
 
-        get_response = card_service.get(create_response.card_id)
+        get_response = card_service._get(create_response.card_id)
         self.assertIsInstance(get_response, Card)
         self.assertEqual(create_response, get_response)
 
-        delete_response = card_service.delete(create_response.card_id)
+        delete_response = card_service._delete(create_response.card_id)
         self.assertTrue(delete_response)
         with self.assertRaises(APIException) as e:
-            card_service.get(create_response.card_id)
+            card_service._get(create_response.card_id)
             self.assertFalse(e.response.ok)
 
     def xtestPaymentCreditService(self):
@@ -204,7 +204,7 @@ class APIAuthTest(unittest.TestCase):
         plans = service.all()
         self.assertEqual(plans[0].plan_id, response.plan_id)
 
-        plan = service.get(response.plan_id)
+        plan = service._get(response.plan_id)
 
         self.assertEqual(response.plan_id, plan.plan_id)
 

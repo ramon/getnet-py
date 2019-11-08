@@ -1,15 +1,17 @@
 import os
+import unittest
 
 from vcr_unittest import VCRTestCase
 
 import getnet
-from getnet.services.token import Service, CardNumber, CardToken
+from getnet.services.token import Service, CardNumber
+from getnet.services.token.card_token import CardToken
 
 
 class TokenIntegrationTest(VCRTestCase):
     def setUp(self) -> None:
         super(TokenIntegrationTest, self).setUp()
-        self.client = getnet.API(
+        self.client = getnet.Client(
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
@@ -22,3 +24,7 @@ class TokenIntegrationTest(VCRTestCase):
 
         self.assertIsInstance(number_token, CardToken)
         self.assertIsNotNone(number_token.number_token)
+
+
+if __name__ == "__main__":
+    unittest.main()

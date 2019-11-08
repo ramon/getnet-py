@@ -170,13 +170,13 @@ class PlanService(ServiceBase):
 
         response = self._get(self._format_url(), params=params)
 
-        values = [Plan(**plan) for plan in response.get("plans")]
+        values = [Plan(**plan) for plan in response._get("plans")]
 
         return PlanList(
-            values, response.get("page"), response.get("limit"), response.get("total")
+            values, response._get("page"), response._get("limit"), response._get("total")
         )
 
-    def get(self, plan_id: str):
+    def _get(self, plan_id: str):
         response = self._get(self._format_url(plan_id=plan_id))
 
         return Plan(**response)

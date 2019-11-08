@@ -141,13 +141,13 @@ class SubscriptionService(ServiceBase):
 
         response = self._get(self._format_url(), params=params, headers={ 'seller_id': self._api.seller_id })
 
-        values = [Subscription(**subscription) for subscription in response.get("subscription")]
+        values = [Subscription(**subscription) for subscription in response._get("subscription")]
 
         return SubscriptionList(
-            values, response.get("page"), response.get("limit"), response.get("total")
+            values, response._get("page"), response._get("limit"), response._get("total")
         )
 
-    def get(self, plan_id: str) -> Subscription:
+    def _get(self, plan_id: str) -> Subscription:
         response = self._get(self._format_url(plan_id=plan_id), headers={ 'seller_id': self._api.seller_id })
 
         return Subscription(**response)

@@ -167,13 +167,13 @@ class CustomerService(ServiceBase):
 
         response = self._get(self._format_url(), params=params)
 
-        values = [Customer(**customer) for customer in response.get("customers")]
+        values = [Customer(**customer) for customer in response._get("customers")]
 
         return CustomerList(
-            values, response.get("page"), response.get("limit"), response.get("total")
+            values, response._get("page"), response._get("limit"), response._get("total")
         )
 
-    def get(self, customer_id: str):
+    def _get(self, customer_id: str):
         response = self._get(self._format_url(customer_id=customer_id), headers={ 'seller_id': self._api.seller_id })
 
         return Customer(**response)

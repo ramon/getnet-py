@@ -104,7 +104,7 @@ class CardServiceTest(unittest.TestCase):
         sample = self.return_all_sample["cards"][0]
         self.object._get = mock.MagicMock(return_value=sample)
 
-        response = self.object.get(sample.get("card_id"))
+        response = self.object._get(sample.get("card_id"))
 
         self.object._get.assert_called_with(
             self.object._format_url(card_id=sample.get("card_id"))
@@ -116,7 +116,7 @@ class CardServiceTest(unittest.TestCase):
         sample = self.return_all_sample["cards"][0]
         self.object._delete = mock.MagicMock(return_value=sample)
 
-        self.object.delete(sample.get("card_id"))
+        self.object._delete(sample.get("card_id"))
         self.object._delete.assert_called_with(
             self.object._format_url(card_id=sample.get("card_id"))
         )

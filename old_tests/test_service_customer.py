@@ -104,7 +104,7 @@ class CustomerServiceTest(unittest.TestCase):
         sample = self.return_all_sample["customers"][0]
         self.object._get = mock.MagicMock(return_value=sample)
 
-        response = self.object.get(sample.get("customer_id"))
+        response = self.object._get(sample.get("customer_id"))
 
         self.object._get.assert_called_with(
             self.object._format_url(customer_id=sample.get("customer_id")),

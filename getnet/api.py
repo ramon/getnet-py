@@ -2,9 +2,10 @@ import logging
 from datetime import datetime, timedelta
 
 import requests
-from requests import HTTPError
+from requests import Response
 
 from getnet.exceptions import *
+from getnet.services import token
 
 __all__ = ['LOGGER', 'SANDBOX', 'HOMOLOG', 'PRODUCTION', 'Client', 'API']
 
@@ -37,16 +38,16 @@ class handler_request:
         return not isinstance(exc_val, GetnetException)
 
 
-def handler_request_exception(error: HTTPError):
-    status_code = error.response.status_code
+def handler_request_exception(response: Response):
+    status_code = response.status_code
     message = u"{} {} ({})".format(
-        error.response.status_code,
-        error.response.json().get("message"),
-        error.response.url,
+        response.status_code,
+        response.json().get("message"),
+        response.url,
     )
     kwargs = {
-        'request': error.request,
-        'response': error.response
+        'request': response.request,
+        'response': response
     }
 
     if status_code == 400:
@@ -95,7 +96,10 @@ class Client:
 
     def _setup_client(self):
         self.request = requests.Session()
-        self.request.headers.update({"user-agent": "getnet-py/1.0"})
+        self.request.headers.update(
+            {"user-agent": "getnet-py/1.0",
+             "seller_id": self.seller_id}
+        )
         self.auth()
 
     def _access_token_expired(self):
@@ -110,53 +114,57 @@ class Client:
             path = "/auth/oauth/v2/token"
             data = {"scope": "oob", "grant_type": "client_credentials"}
 
-            try:
-                response = self.request.post(self.base_url + path,
-                                             data=data,
-                                             auth=(self.client_id, self.client_secret)
-                )
-                response.raise_for_status()
+            response = self.request.post(self.base_url + path,
+                                         data=data,
+                                         auth=(self.client_id, self.client_secret)
+                                         )
+            if not response.ok:
+                raise handler_request_exception(response)
 
-                self.access_token = response.json().get("access_token")
-                self.access_token_expires = int(datetime.timestamp(datetime.now() + timedelta(seconds=response.json().get('expires_in'))))
-                self.request.headers.update(
-                    {"Authorization": "Bearer {}".format(self.access_token)}
-                )
-            except HTTPError as err:
-                raise handler_request_exception(err)
+            response_data = response.json()
+
+            self.access_token = response_data.get("access_token")
+            self.access_token_expires = int(
+                datetime.timestamp(datetime.now() + timedelta(seconds=response_data.get('expires_in'))))
+            self.request.headers.update(
+                {"Authorization": "Bearer {}".format(self.access_token)}
+            )
 
     def get(self, path, **kwargs):
         with self._handler_request():
             url = self.base_url + path
-            try:
-                response = self.request.get(url, **kwargs)
-                response.raise_for_status()
-                return response.json()
-            except HTTPError as err:
-                raise handler_request_exception(err)
+            response = self.request.get(url, **kwargs)
+            if not response.ok:
+                raise handler_request_exception(response)
+            return response.json()
 
     def post(self, path: str, **kwargs):
         with self._handler_request():
             url = self.base_url + path
-            try:
-                response = self.request.post(url, **kwargs)
-                response.raise_for_status()
-                return response.json()
-            except HTTPError as err:
-                raise handler_request_exception(err)
+            response = self.request.post(url, **kwargs)
+            if not response.ok:
+                raise handler_request_exception(response)
+            return response.json()
 
     def delete(self, path: str, **kwargs):
         with self._handler_request():
             url = self.base_url + path
-            try:
-                response = self.request.delete(url, **kwargs)
-                response.raise_for_status()
-                return response.json()
-            except HTTPError as err:
-                raise handler_request_exception(err)
+            response = self.request.delete(url, **kwargs)
+            if not response.ok:
+                raise handler_request_exception(response)
+            return response.json()
 
-    # def generate_token_card(self, card_number: str, customer_id: str):
-    #     return services.TokenCardService(self).create(card_number, customer_id)
+    def generate_token_card(self, card_number: str, customer_id: str):
+        """Shortcut to card token generation
+
+        :param card_number: str
+        :param customer_id: str
+        :rtype: CardResponse
+        :raises: AttributeError, GetnetException
+        :deprecated
+        """
+        return token.Service(self).generate(token.CardNumber(card_number, customer_id))
+
     #
     # def cards(self):
     #     return services.CardService(self)
@@ -173,6 +181,7 @@ class Client:
     #         return PaymentCancelService(self)
 
 
-# Discontinued = Will be removed in 1.1
-# @todo remove in version 1.1
+""" Discontinued = Will be removed in 1.1
+    :deprecated: Remove in version 1.1
+"""
 API = Client

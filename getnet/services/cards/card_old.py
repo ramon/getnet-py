@@ -2,7 +2,7 @@ import re
 from typing import Union, List
 
 from getnet.services.token import CardToken
-from .base import ServiceBase
+from getnet.services.base import ServiceBase
 
 BRANDS = ("Mastercard", "Visa", "Amex", "Elo", "Hipercard")
 CARD_STATUS = ("all", "active", "renewed")
@@ -106,7 +106,7 @@ class CardService(ServiceBase):
         response = self._post(self._format_url(), json=data)
 
         return Card(
-            card_id=response.get("card_id"), number_token=response.get("number_token")
+            card_id=response._get("card_id"), number_token=response._get("number_token")
         )
 
     def all(self, customer_id: str = None, status: str = "all") -> List[Card]:
@@ -119,17 +119,17 @@ class CardService(ServiceBase):
 
         cards = []
 
-        for card in response.get("cards"):
+        for card in response._get("cards"):
             cards.append(Card(**card))
 
         return cards
 
-    def get(self, card_id: Union[CardToken, str]) -> Card:
+    def _get(self, card_id: Union[CardToken, str]) -> Card:
         response = self._get(self._format_url(card_id=str(card_id)))
 
         return Card(**response)
 
-    def delete(self, card_id: Union[CardToken, str]) -> None:
+    def _delete(self, card_id: Union[CardToken, str]) -> bool:
         return self._delete(self._format_url(card_id=str(card_id)))
 
     def verify(
