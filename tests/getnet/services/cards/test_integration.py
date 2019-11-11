@@ -4,7 +4,7 @@ import unittest
 from vcr_unittest import VCRTestCase
 
 import getnet
-from getnet import NotFound, GetnetException
+from getnet import NotFound
 from getnet.services.base import ResponseList
 from getnet.services.cards import Service, Card
 from getnet.services.cards.card_response import NewCardResponse
@@ -76,14 +76,11 @@ class CardsIntegrationTest(VCRTestCase):
         data = sample.copy()
         data['number_token'] = self.client.generate_token_card('5155901222280001', 'customer_01')
 
-        try:
-            created_card = self.service.create(Card(**data))
-            card = self.service.get(created_card.card_id)
+        created_card = self.service.create(Card(**data))
+        card = self.service.get(created_card.card_id)
 
-            resp = self.service.delete(card.card_id)
-            self.assertTrue(resp)
-        except GetnetException as err:
-            self.fail("deu chabu")
+        resp = self.service.delete(card.card_id)
+        self.assertTrue(resp)
 
     def testDelete404(self):
         with self.assertRaises(NotFound) as err:

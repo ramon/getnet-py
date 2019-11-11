@@ -37,12 +37,12 @@ class Customer:
         address: Union[Address, dict] = None
     ):
         if not document_type in DOCUMENT_TYPES:
-            raise AttributeError(
+            raise TypeError(
                 "Document Type invalid. Choices {}".format(", ".join(DOCUMENT_TYPES))
             )
 
         if not DOCUMENT_NUMBER_REGEX.match(document_number):
-            raise AttributeError(
+            raise TypeError(
                 "Document Number invalid, Only digits and between 11 and 15 characters"
             )
 
