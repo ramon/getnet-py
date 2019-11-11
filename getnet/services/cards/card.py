@@ -8,7 +8,7 @@ from typing import Union
 
 from getnet.services.token.card_token import CardToken
 
-BRANDS = ("Mastercard", "Visa", "Amex", "Elo", "Hipercard")
+BRANDS = ("mastercard", "visa", "amex", "elo", "hipercard")
 CARDHOLDER_IDENTIFICATION_REGEX = re.compile(r"\A\d+\Z")
 VERIFY_CODE = re.compile(r"\A\d{3,4}\Z")
 
@@ -27,26 +27,26 @@ class Card:
                  customer_id: str,
                  number_token: Union[CardToken, str],
                  cardholder_name: str,
-                 expiration_month: str,
-                 expiration_year: str,
+                 expiration_month: int,
+                 expiration_year: int,
                  cardholder_identification: str,
                  security_code: str,
                  verify_card: bool = False,
                  brand: str = None):
         if brand is not None and brand not in BRANDS:
-            raise AttributeError("Brand is invalid")
+            raise TypeError("Brand is invalid")
 
-        if len(expiration_month) != 2 or len(expiration_year) != 2:
-            raise AttributeError('Expiration Month or Year must have 2 characters')
+        if not 1 <= int(expiration_month) <= 12 or not 0 <= int(expiration_year) <= 99:
+            raise TypeError('Expiration Month or Year must have 2 characters')
 
         if len(customer_id) > 100:
-            raise AttributeError('CustomerID must have bellow 100 characters.')
+            raise TypeError('CustomerID must have bellow 100 characters.')
 
-        if not CARDHOLDER_IDENTIFICATION_REGEX.match(cardholder_identification):
-            raise AttributeError("Cardholder identification invalid")
+        if cardholder_identification is not None and not CARDHOLDER_IDENTIFICATION_REGEX.match(cardholder_identification):
+            raise TypeError("Cardholder identification invalid")
 
-        if not VERIFY_CODE.match(security_code):
-            raise AttributeError("Security code must have 3 or 4 characters")
+        if security_code is not None and not VERIFY_CODE.match(security_code):
+            raise TypeError("Security code must have 3 or 4 characters")
 
         self.customer_id = customer_id
         self.number_token = (
@@ -64,4 +64,8 @@ class Card:
 
 
     def as_dict(self):
-        return self.__dict__
+        data = self.__dict__
+        data['number_token'] = self.number_token.number_token
+        data['expiration_month'] = str(self.expiration_month).zfill(2)
+        data['expiration_year'] = str(self.expiration_year).zfill(2)
+        return data

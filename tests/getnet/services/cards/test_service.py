@@ -1,8 +1,9 @@
 import unittest
 from unittest.mock import patch
 
+from getnet.services.base import ResponseList
 from getnet.services.cards import Service, Card
-from getnet.services.cards.card_response import CardResponse
+from getnet.services.cards.card_response import CardResponse, NewCardResponse
 from tests.getnet.services.cards.test_card import sample
 from tests.getnet.services.cards.test_card_response import sample as response_sample
 
@@ -10,22 +11,24 @@ from tests.getnet.services.cards.test_card_response import sample as response_sa
 @patch("getnet.Client")
 class ServiceTest(unittest.TestCase):
     def testCreate(self, client_mock):
-        client_mock.post.return_value = response_sample
+        client_mock.post.return_value = { "card_id": "e8ad2ae4-9e3e-4532-998f-1a5a11e56e58", "number_token": "123"}
 
         service = Service(client_mock)
         card = service.create(Card(**sample))
 
-        self.assertIsInstance(card, CardResponse)
-        self.assertEqual(response_sample.get('card_id'), card.card_id)
+        self.assertIsInstance(card, NewCardResponse)
+        self.assertEqual("e8ad2ae4-9e3e-4532-998f-1a5a11e56e58", str(card.card_id))
+        self.assertEqual("123", card.number_token)
 
     def testAll(self, client_mock):
         client_mock.get.return_value = {"cards": [response_sample, response_sample, response_sample]}
 
         service = Service(client_mock)
-        cards = service.all()
+        cards = service.all('client_id')
 
-        self.assertIsInstance(cards, list)
-        self.assertEqual(3, len(cards))
+        self.assertIsInstance(cards, ResponseList)
+        self.assertIsNone(cards.page)
+        self.assertEqual(3, cards.total)
         self.assertEqual(response_sample.get('card_id'), cards[0].card_id)
 
     def testDelete(self, client_mock):

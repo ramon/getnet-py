@@ -13,6 +13,7 @@ vcrpy-unittest = "*"
 requests = "*"
 cachecontrol = "*"
 requests-oauthlib = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"

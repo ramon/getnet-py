@@ -1,17 +1,16 @@
-from typing import List, Union
-
-from getnet import GetnetException
-from getnet.services.base import ServiceBase
-from getnet.services.cards.card import Card
-from getnet.services.cards.card_response import CardResponse
-from getnet.services.token.card_token import CardToken
-
-CARD_STATUS = ("all", "active", "renewed")
-
 """"Getnet Cards ("Cofre") Service Endpoint
 
     moduleauthor:: Ramon Soares <ramonsoares@gmail.com>
 """
+import uuid
+from typing import List, Union
+
+from getnet.services.base import ServiceBase, ResponseList
+from getnet.services.cards.card import Card
+from getnet.services.cards.card_response import CardResponse, NewCardResponse
+from getnet.services.token.card_token import CardToken
+
+CARD_STATUS = ("all", "active", "renewed")
 
 
 class Service(ServiceBase):
@@ -21,11 +20,11 @@ class Service(ServiceBase):
         response = self._post(self._format_url(card_id='verification'), json=card.as_dict())
         return response.get('status') == "VERIFIED"
 
-    def create(self, card: Card) -> CardResponse:
+    def create(self, card: Card) -> NewCardResponse:
         response = self._post(self._format_url(), json=card.as_dict())
-        return CardResponse(**response)
+        return NewCardResponse(**response)
 
-    def all(self, customer_id: str = None, status: str = "all") -> List[CardResponse]:
+    def all(self, customer_id: str, status: str = "all") -> List[CardResponse]:
         if status and not status in CARD_STATUS:
             raise AttributeError("Status invalid.")
 
@@ -39,12 +38,17 @@ class Service(ServiceBase):
         for card in response.get('cards'):
             cards.append(CardResponse(**card))
 
-        return cards
+        return ResponseList(
+            cards,
+            response.get("page", None),
+            response.get("limit", None),
+            response.get("total", len(cards))
+        )
 
-    def get(self, card_id: Union[CardToken, str]) -> CardResponse:
+    def get(self, card_id: Union[CardToken, uuid.UUID, str]) -> CardResponse:
         response = self._get(self._format_url(card_id=str(card_id)))
         return CardResponse(**response)
 
-    def delete(self, card_id: Union[CardToken, str]) -> bool:
+    def delete(self, card_id: Union[CardToken, uuid.UUID, str]) -> bool:
         self._delete(self._format_url(card_id=str(card_id)))
         return True

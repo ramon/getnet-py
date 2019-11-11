@@ -2,7 +2,10 @@ from requests import RequestException
 
 
 class GetnetException(RequestException):
-    pass
+    def __init__(self, *args, **kwargs):
+        self.error_code = kwargs.pop('error_code')
+        self.description = kwargs.pop('description')
+        super(GetnetException, self).__init__(*args, **kwargs)
 
 # discontinued - Will be removed in version 1.1
 APIException = GetnetException

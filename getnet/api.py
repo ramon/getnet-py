@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime, timedelta
+from typing import Union
 
 import requests
 from requests import Response
@@ -35,23 +36,29 @@ class handler_request:
         return LOGGER
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        return not isinstance(exc_val, GetnetException)
+        pass
 
 
 def handler_request_exception(response: Response):
     status_code = response.status_code
-    message = u"{} {} ({})".format(
-        response.status_code,
-        response.json().get("message"),
-        response.url,
-    )
+    data = response.json()
+    if 'details' in data and len(data.get('details')) != 0:
+        data = data.get('details')[0]
+
     kwargs = {
-        'request': response.request,
+        'error_code': data.get('error_code') or data.get('error') or str(data.get('status_code')),
+        'description': data.get('description_detail') or data.get('description') or data.get('error_description') or data.get('message'),
         'response': response
     }
 
+    message = u"{} {} ({})".format(
+        kwargs.get('error_code'),
+        kwargs.get('description'),
+        response.url,
+    )
+
     if status_code == 400:
-        return BadRequest(message, )
+        return BadRequest(message, **kwargs)
     elif status_code == 402:
         return BusinessError(message, **kwargs)
     elif status_code == 404:
@@ -87,7 +94,7 @@ class Client:
         self.client_secret = client_secret
 
         if environment not in ENVIRONMENTS:
-            raise GetnetException('Invalid environment')
+            raise TypeError('Invalid environment')
 
         self.environment = environment
         self.base_url = API_URLS[environment]
@@ -130,7 +137,7 @@ class Client:
                 {"Authorization": "Bearer {}".format(self.access_token)}
             )
 
-    def get(self, path, **kwargs):
+    def get(self, path, **kwargs) -> dict:
         with self._handler_request():
             url = self.base_url + path
             response = self.request.get(url, **kwargs)
@@ -138,7 +145,7 @@ class Client:
                 raise handler_request_exception(response)
             return response.json()
 
-    def post(self, path: str, **kwargs):
+    def post(self, path: str, **kwargs) -> dict:
         with self._handler_request():
             url = self.base_url + path
             response = self.request.post(url, **kwargs)
@@ -146,13 +153,14 @@ class Client:
                 raise handler_request_exception(response)
             return response.json()
 
-    def delete(self, path: str, **kwargs):
+    def delete(self, path: str, **kwargs) -> Union[bool, dict]:
         with self._handler_request():
             url = self.base_url + path
             response = self.request.delete(url, **kwargs)
             if not response.ok:
                 raise handler_request_exception(response)
-            return response.json()
+
+            return True
 
     def generate_token_card(self, card_number: str, customer_id: str):
         """Shortcut to card token generation

@@ -1,7 +1,7 @@
 import unittest
 
-from getnet.services import Card, CustomerService, Customer
-from getnet.services.customer import CustomerList
+from getnet.services import CustomerService, Customer
+from getnet.services.customers.customer import CustomerList
 
 try:
     import mock

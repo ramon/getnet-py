@@ -32,3 +32,11 @@ class ServiceBase:
 
     def _delete(self, *args, **kwargs):
         return self._client.delete(*args, **kwargs)
+
+
+class ResponseList(list):
+    def __init__(self, seq=(), page=1, limit=100, total=None):
+        self.page = page
+        self.limit = limit
+        self.total = total
+        super(ResponseList, self).__init__(seq)

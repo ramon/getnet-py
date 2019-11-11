@@ -5,7 +5,8 @@ class CardToken:
         self.number_token = number_token
 
     def __str__(self):
-        return self.number_token
+        return str(self.number_token)
 
     def __eq__(self, other):
-        return self.number_token == other.number_token
+        match = other.number_token if isinstance(other, CardToken) else other
+        return self.number_token == match

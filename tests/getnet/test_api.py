@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import patch, MagicMock
 
+from requests import Response
+
 import getnet
 from getnet.exceptions import GetnetException
 from getnet.services.token import Service
@@ -9,7 +11,7 @@ from getnet.services.token.card_token import CardToken
 
 class ClientTest(unittest.TestCase):
     def testInvalidEnvironment(self):
-        with self.assertRaises(GetnetException):
+        with self.assertRaises(TypeError):
             getnet.Client('a', 'b', 'c', 10)
 
     def testInvalidAuthData(self):
@@ -21,7 +23,7 @@ class ClientTest(unittest.TestCase):
             )
 
     @patch('getnet.Client.auth', return_value=True)
-    @patch('requests.Session.get', return_value=True)
+    @patch('requests.Session.get', return_value=MagicMock())
     def testValidateAuthDataBeforeRequest(self, getMock, authMock):
         client = getnet.Client(
             "d1c3d817-1676-4e28-a789-1e10c3af15b0",
@@ -29,6 +31,7 @@ class ClientTest(unittest.TestCase):
             "388183f9-ab04-4c21-9234"
         )
 
+        getMock.ok.return_value = True
         client._access_token_expired = MagicMock(return_value=False)
         client.get('/test')
         client._access_token_expired.assert_called_once()

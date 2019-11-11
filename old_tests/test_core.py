@@ -6,9 +6,9 @@ from random import random
 import getnet
 from getnet.exceptions import APIException
 from getnet.services import Customer
-from getnet.services.payments import Order, Boleto, Payment
-from getnet.services.payments.credit import Credit
-from getnet.services.recurrency import Plan, PlanService, SubscriptionService, Subscription, SubscriptionPlan
+from payments import Order, Boleto, Payment
+from payments.credit import Credit
+from recurrency import Plan, PlanService, SubscriptionService, Subscription, SubscriptionPlan
 from old_tests.test_service_customer import sample as customer_sample
 
 

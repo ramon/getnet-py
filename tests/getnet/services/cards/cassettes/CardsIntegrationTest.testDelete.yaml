@@ -1,0 +1,629 @@
+interactions:
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUjJKNTW3sDQy0zW1NDbSNTEzNNW1sEw10E2x
+        NDJONDU3Nko2TlHSAesEa4kvqSxIBepzSk0sSi2CyqRWFGQWpRbHZwJNNDYzMICIFifng5Xm5ycp
+        8XLVAgDlvBRqfwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '127'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '19'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '41'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MwQqDMBAE0LvgP8ieDaSom6ZHfyRs1jmI0EjioaX475W015l582mbriNRRSnh
+        SBue9CBIxDJ4bwQ8mVGtN9G5mwF71vsorI6pr7KScLx3XG6GZOR/g9e+ZpSwXo8DW/tLi6Y6TSlS
+        25xfw3XUoH8AAAA=
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '125'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '11'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '37'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"card_number": "5155901222280001", "customer_id": "customer_01"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer eabed399-ae65-4c09-b771-e696c84a6c76
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '65'
+      Content-Type:
+      - application/json
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/tokens/card
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAA3GSQoCMRAAwLMD8wfJC5Le0vEz0ktyEUcQPYl/1zrVZ99O5XjffT6vr8dtHuVy
+        LgSVlLAbdehUs0KX4dU1BJaPZJgtMM2ldgScFjbYYgynZJHGGTMQZPax2krVZepNdaLaMjGrjMw0
+        KP4HjjRSgeEp2IJ1lX37/gDALtT8mQAAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '139'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:19 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '16'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '323'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 201
+      message: Created
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUrJMSUpJMjWx1DUwsDTUNTG2MNK1NDE00k0y
+        MzEyMDdNsrQwSFPSAesEa4kvqSxIBepzSk0sSi2CyqRWFGQWpRbHZwJNNDYzMICIFifng5Xm5ycp
+        8XLVAgAXopfGfwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '127'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '19'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '45'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"card_number": "5155901222280001", "customer_id": "customer_01"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 9dbdb549-0091-4382-9412-b642075b980f
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '65'
+      Content-Type:
+      - application/json
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/tokens/card
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAA3LSwoCMQwA0LXC3EF6gqb5tPEykqbJRhxBdCXe3Xn7993Op7J/HjNet/fzHnu5
+        XopDhqB71AriQE1kVGGCOk24uaAJUjWChsShHksWqGWa0ZH66DmghbFQ4CRhTp+NUZdpX21UNfeV
+        yr0dexhgj5bZUYWwa9nOvz8/XVF9mQAAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '139'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:19 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '18'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '92'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 201
+      message: Created
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUjK1TE1JTk1J0jUyMDfRNbE0MtZNTLJI0U0y
+        NjQ0NjE0TzJKM1bSAesEa4kvqSxIBepzSk0sSi2CyqRWFGQWpRbHZwJNNDYzMICIFifng5Xm5ycp
+        8XLVAgDGoZdMfwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '127'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '15'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '34'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"customer_id": "johndoe", "number_token": "c1fe63cce0016c142668065410ba652c63a6340a412345e9ced6d19affaa4e00787f812ea564e3b4655fcb2539da97d2809accdf9572e9c8a137e2ff73964379",
+      "cardholder_name": "John Doe", "expiration_month": "02", "expiration_year":
+      "25", "cardholder_identification": "5155901222280001", "security_code": "123",
+      "verify_card": false, "brand": "visa"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 59edcedb-2074-4923-ab8d-b3113417b2f3
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '368'
+      Content-Type:
+      - application/json
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/cards
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAA3Ly4pCMQwA0H/p2gtJ82jjz0iapCCiAzKuhvl37+5szl8Lf+ftnu3aoAjTYR7K
+        uA6WXMccp8DJiH1JzGyX9vo8V71vvz+Pep0rcJdSRAGgBnJXnaDCCMtVeii5EoMzdmIpi0pNNN/b
+        nc805tgTe7koFy1WkR2rC1m6jewTzCNym4x+7ulIo/reg0yZhrX/L9kejCHEAAAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '162'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:20 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '16'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '754'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 201
+      message: Created
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUjJIM0g1TUmx1DUwNjbUNTE0MNe1MEtM0jUw
+        MzUxskyxNE9NtFDSAesEa4kvqSxIBepzSk0sSi2CyqRWFGQWpRbHZwJNNDYzMICIFifng5Xm5ycp
+        8XLVAgDcP/FSfwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '127'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:20 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '11'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '36'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 0f0e5dd9-0331-4107-86ab-065429d97ea8
+      Connection:
+      - keep-alive
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: GET
+    uri: https://api-homologacao.getnet.com.br/v1/cards/0e31da08-641b-45db-871b-0a3934ab5c8d
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAH2RTU/EIBCG/4rp2TUM3/TsybMnL80Ag1vdlk1LNxrjf3e6iTEeNOHAvB/kAT66
+        hEsextz1nSAFGYU/WA3xoE2OB+94J1AFpTGa5HN3251wbUOp2zLk8Xls694UAtiJ48yDAWOE4JHe
+        zuOCbazzMNW5Hbte/hLfCRfWDBcXnHeCy7giF3ekYz1lWoYZJ2LjoR7nm/tKu7mtrU5sXZlf2MhX
+        fd6myGqrr7RTJChkVUrEaDaBltZ6YY0GEdEamaxCq7RADVJpQyFRthkCloKoueS8Kx4kobGaVNTW
+        mJKiNCpkDC5LLwKmlEswTnLbIyhHshSngtXKBSbaVsoDNoaRAsIBgNcjuF5BL8Udv9nTfp2FsP2Z
+        g/Cd2875n9zPeWvDtu1/gqmNF+o+vwCcIHMN4gEAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '316'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:20 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 072ba6da8cfecb469b466850b27f949a=1e8be227635d6fa10206f1e85469f08b; Path=/v1/cards;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '14'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '135'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MwQqDMBAE0LvgP8ieDSzdNWk9+iNB0xGk0EjiQZH+eyXtdWbenHXVNDSGgJz9
+        Fl94U0/snh2Lqrk/nBp1LGYSsLEQh1k7uVlQW2QhfjtWXG7AmJD+DfZ1Sch+uR7FMv/SHGKZxjhR
+        XX2+jZNemX8AAAA=
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '125'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 11 Nov 2019 17:31:21 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '14'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '41'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 07d50344-8974-4703-b3e0-6e37ef45326e
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - 072ba6da8cfecb469b466850b27f949a=1e8be227635d6fa10206f1e85469f08b
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: DELETE
+    uri: https://api-homologacao.getnet.com.br/v1/cards/0e31da08-641b-45db-871b-0a3934ab5c8d
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Date:
+      - Mon, 11 Nov 2019 17:31:21 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '16'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '160'
+      X-Powered-By:
+      - '59265'
+      preload:
+      - ''
+    status:
+      code: 204
+      message: No Content
+version: 1
