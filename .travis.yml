@@ -19,5 +19,5 @@ matrix:
   - name: "Black"
     python: 3.7
     install: travis_retry pip install black
-    script: black --check .
+    script: black --check -t py36 tests/ getnet/
     after_success: skip
