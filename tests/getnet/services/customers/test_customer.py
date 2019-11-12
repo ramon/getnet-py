@@ -31,13 +31,13 @@ class CustomerTest(unittest.TestCase):
     def testInvalidDocumentType(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['document_type'] = "Fail"
+            data["document_type"] = "Fail"
             Customer(**data)
 
     def testInvalidDocumentNumber(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['document_number'] = "0123456789"
+            data["document_number"] = "0123456789"
             Customer(**data)
 
     def testAddressConversion(self):
@@ -45,7 +45,9 @@ class CustomerTest(unittest.TestCase):
         customer = Customer(**data)
 
         self.assertIsInstance(customer.address, Address)
-        self.assertEqual(customer.address.postal_code, data.get('address').get('postal_code'))
+        self.assertEqual(
+            customer.address.postal_code, data.get("address").get("postal_code")
+        )
 
 
 if __name__ == "__main__":

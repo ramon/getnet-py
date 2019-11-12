@@ -11,7 +11,7 @@ PRODUCT_TYPES = (
     "physical_goods",
     "renew_subs",
     "shareware",
-    "service"
+    "service",
 )
 
 
@@ -21,7 +21,7 @@ class Plan:
     description: str
     amount: int
     currency: str
-    payment_types: List[str] = ('credit_card',)
+    payment_types: List[str] = ("credit_card",)
     sales_tax: int = 0
     product_type: str
     period: Period
@@ -32,13 +32,13 @@ class Plan:
         name: str,
         amount: int,
         currency: str,
-        payment_types: List[str] = ('credit_card',),
+        payment_types: List[str] = ("credit_card",),
         sales_tax: int = 0,
         description: str = None,
         product_type: str = None,
         seller_id: str = None,
         period: Union[Period, dict] = None,
-        plan_id: Union[UUID, str] = None
+        plan_id: Union[UUID, str] = None,
     ):
         self.product_type = product_type
         self.name = name
@@ -49,7 +49,9 @@ class Plan:
         self.sales_tax = sales_tax
         self.seller_id = seller_id
         self.period = period if isinstance(period, Period) else Period(**period)
-        self.plan_id = plan_id if isinstance(plan_id, UUID) or plan_id is None else UUID(plan_id)
+        self.plan_id = (
+            plan_id if isinstance(plan_id, UUID) or plan_id is None else UUID(plan_id)
+        )
 
     def __str__(self):
         return self.name
@@ -64,11 +66,11 @@ class Plan:
     def as_dict(self):
         data = self.__dict__.copy()
 
-        period = data.pop('period')
+        period = data.pop("period")
         data["period"] = period.as_dict()
 
-        plan_id = data.pop('plan_id')
+        plan_id = data.pop("plan_id")
         if plan_id is not None:
-            data['plan_id'] = str(plan_id)
+            data["plan_id"] = str(plan_id)
 
         return data

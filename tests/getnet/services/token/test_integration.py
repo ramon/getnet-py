@@ -15,12 +15,14 @@ class TokenIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG
+            getnet.api.HOMOLOG,
         )
         self.service = Service(self.client)
 
     def testTokenGenerate(self):
-        number_token = self.service.generate(CardNumber('5155901222280001', 'customer_21081826'))
+        number_token = self.service.generate(
+            CardNumber("5155901222280001", "customer_21081826")
+        )
 
         self.assertIsInstance(number_token, CardToken)
         self.assertIsNotNone(number_token.number_token)

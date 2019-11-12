@@ -53,7 +53,9 @@ class Service(ServiceBase):
 
         return PlanResponse(**response)
 
-    def update(self, plan: Union[Plan, UUID, str], name: str = None, description: str = None) -> PlanResponse:
+    def update(
+        self, plan: Union[Plan, UUID, str], name: str = None, description: str = None
+    ) -> PlanResponse:
         if isinstance(plan, str):
             plan_id = UUID(plan)
         elif isinstance(plan, Plan):
@@ -62,14 +64,17 @@ class Service(ServiceBase):
             plan_id = plan
 
         data = {
-            "name": name or (plan.name if isinstance(plan, Plan) else ''),
-            "description": description or (plan.description if isinstance(plan, Plan) else '')
+            "name": name or (plan.name if isinstance(plan, Plan) else ""),
+            "description": description
+            or (plan.description if isinstance(plan, Plan) else ""),
         }
 
         response = self._patch(self._format_url(plan_id=plan_id), json=data)
         return PlanResponse(**response)
 
-    def update_status(self, plan: Union[Plan, UUID, str], active: bool = True) -> PlanResponse:
+    def update_status(
+        self, plan: Union[Plan, UUID, str], active: bool = True
+    ) -> PlanResponse:
         if isinstance(plan, str):
             plan_id = UUID(plan)
         elif isinstance(plan, Plan):
@@ -77,6 +82,8 @@ class Service(ServiceBase):
         else:
             plan_id = plan
 
-        url = self._format_url(plan_id=plan_id) + "/status/{}".format("active" if active else "inactive")
+        url = self._format_url(plan_id=plan_id) + "/status/{}".format(
+            "active" if active else "inactive"
+        )
         response = self._patch(url)
         return PlanResponse(**response)

@@ -8,16 +8,10 @@ sample = {
     "description": "Plano flex",
     "amount": 19990,
     "currency": "BRL",
-    "payment_types": [
-        "credit_card"
-    ],
+    "payment_types": ["credit_card"],
     "sales_tax": 0,
     "product_type": "service",
-    "period": {
-        "type": "monthly",
-        "billing_cycle": 12,
-        "specific_cycle_in_days": 0
-    }
+    "period": {"type": "monthly", "billing_cycle": 12, "specific_cycle_in_days": 0},
 }
 
 

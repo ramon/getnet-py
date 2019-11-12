@@ -17,8 +17,10 @@ class Service(ServiceBase):
     path = "/v1/cards/{card_id}"
 
     def verify(self, card: Card) -> bool:
-        response = self._post(self._format_url(card_id='verification'), json=card.as_dict())
-        return response.get('status') == "VERIFIED"
+        response = self._post(
+            self._format_url(card_id="verification"), json=card.as_dict()
+        )
+        return response.get("status") == "VERIFIED"
 
     def create(self, card: Card) -> NewCardResponse:
         response = self._post(self._format_url(), json=card.as_dict())
@@ -30,19 +32,19 @@ class Service(ServiceBase):
 
         params = {"status": status}
         if customer_id is not None:
-            params.update({'customer_id': customer_id})
+            params.update({"customer_id": customer_id})
 
         response = self._get(self._format_url(), params=params)
 
         cards = []
-        for card in response.get('cards'):
+        for card in response.get("cards"):
             cards.append(CardResponse(**card))
 
         return ResponseList(
             cards,
             response.get("page", None),
             response.get("limit", None),
-            response.get("total", len(cards))
+            response.get("total", len(cards)),
         )
 
     def get(self, card_id: Union[CardToken, uuid.UUID, str]) -> CardResponse:

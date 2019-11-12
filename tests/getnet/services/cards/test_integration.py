@@ -18,14 +18,16 @@ class CardsIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG
+            getnet.api.HOMOLOG,
         )
-        self.number_token = self.client.generate_token_card('5155901222280001', 'customer_01')
+        self.number_token = self.client.generate_token_card(
+            "5155901222280001", "customer_01"
+        )
         self.service = Service(self.client)
 
     def testCreate(self):
         data = sample.copy()
-        data['number_token'] = self.number_token
+        data["number_token"] = self.number_token
         card = self.service.create(Card(**data))
 
         self.assertIsInstance(card, NewCardResponse)
@@ -34,14 +36,14 @@ class CardsIntegrationTest(VCRTestCase):
     def testInvalidCreate(self):
         with self.assertRaises(getnet.exceptions.BadRequest) as err:
             data = sample.copy()
-            data['number_token'] = '123'
+            data["number_token"] = "123"
             self.service.create(Card(**data))
 
         self.assertEqual("TOKENIZATION-400", err.exception.error_code)
 
     def testGet(self):
         data = sample.copy()
-        data['number_token'] = self.number_token
+        data["number_token"] = self.number_token
         sample_card = self.service.create(Card(**data))
 
         card = self.service.get(sample_card.card_id)
@@ -52,7 +54,7 @@ class CardsIntegrationTest(VCRTestCase):
 
     def testInvalidGet(self):
         with self.assertRaises(getnet.exceptions.NotFound) as err:
-            self.service.get('14a2ce5d-ebc3-49dc-a516-cb5239b02285')
+            self.service.get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
 
         self.assertEqual("404", err.exception.error_code)
 
@@ -60,7 +62,7 @@ class CardsIntegrationTest(VCRTestCase):
         with self.assertRaises(TypeError):
             cards = self.service.all()
 
-        cards = self.service.all(sample.get('customer_id'))
+        cards = self.service.all(sample.get("customer_id"))
         self.assertIsInstance(cards, ResponseList)
         self.assertIsNone(cards.page)
         self.assertIsNone(cards.limit)
@@ -74,7 +76,9 @@ class CardsIntegrationTest(VCRTestCase):
 
     def testDelete(self):
         data = sample.copy()
-        data['number_token'] = self.client.generate_token_card('5155901222280001', 'customer_01')
+        data["number_token"] = self.client.generate_token_card(
+            "5155901222280001", "customer_01"
+        )
 
         created_card = self.service.create(Card(**data))
         card = self.service.get(created_card.card_id)

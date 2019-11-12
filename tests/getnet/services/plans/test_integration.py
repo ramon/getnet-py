@@ -17,7 +17,7 @@ class PlansIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG
+            getnet.api.HOMOLOG,
         )
         self.service = Service(self.client)
 
@@ -40,7 +40,7 @@ class PlansIntegrationTest(VCRTestCase):
 
     def testInvalidGet(self):
         with self.assertRaises(NotFound) as err:
-            self.service.get('14a2ce5d-ebc3-49dc-a516-cb5239b02285')
+            self.service.get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
 
         self.assertEqual("Not Found", err.exception.error_code)
 
@@ -59,15 +59,17 @@ class PlansIntegrationTest(VCRTestCase):
         data = sample.copy()
         created_plan = self.service.create(Plan(**data))
 
-        plan1 = self.service.update(created_plan.plan_id, 'FooBar #1', created_plan.description)
-        self.assertEqual('FooBar #1', plan1.name)
+        plan1 = self.service.update(
+            created_plan.plan_id, "FooBar #1", created_plan.description
+        )
+        self.assertEqual("FooBar #1", plan1.name)
 
-        plan2 = self.service.update(created_plan, 'FooBar #2')
-        self.assertEqual('FooBar #2', plan2.name)
+        plan2 = self.service.update(created_plan, "FooBar #2")
+        self.assertEqual("FooBar #2", plan2.name)
 
         created_plan.name = "FooBar #3"
         plan3 = self.service.update(created_plan)
-        self.assertEqual('FooBar #3', plan3.name)
+        self.assertEqual("FooBar #3", plan3.name)
 
     def testUpdateStatus(self):
         data = sample.copy()

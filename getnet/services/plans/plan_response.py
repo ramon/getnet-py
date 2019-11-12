@@ -12,11 +12,7 @@ class PlanResponse(Plan):
     status: str = None
 
     def __init__(
-        self,
-        plan_id: Union[UUID, str],
-        create_date: int,
-        status: str,
-        **kwargs
+        self, plan_id: Union[UUID, str], create_date: int, status: str, **kwargs
     ):
         self.create_date = (
             parser.isoparse(create_date)
@@ -25,16 +21,16 @@ class PlanResponse(Plan):
         )
         self.status = status
 
-        kwargs.update({'plan_id': plan_id})
+        kwargs.update({"plan_id": plan_id})
         super(PlanResponse, self).__init__(**kwargs)
 
     @property
     def is_active(self):
-        return self.status == 'active'
+        return self.status == "active"
 
     def as_dict(self):
         data = __dict__.copy()
-        data.pop('created_date')
-        data.pop('status')
+        data.pop("created_date")
+        data.pop("status")
 
         return data

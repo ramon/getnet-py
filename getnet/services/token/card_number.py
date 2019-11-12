@@ -14,7 +14,7 @@ class CardNumber:
             )
 
         if len(customer_id) > 100:
-            raise AttributeError('CustomerID must have bellow 100 characters.')
+            raise AttributeError("CustomerID must have bellow 100 characters.")
 
         self.card_number = card_number
         self.customer_id = customer_id
@@ -23,8 +23,10 @@ class CardNumber:
         return self.card_number
 
     def __eq__(self, other):
-        return self.card_number == other.card_number and \
-               self.customer_id == other.customer_id
+        return (
+            self.card_number == other.card_number
+            and self.customer_id == other.customer_id
+        )
 
     def as_dict(self) -> dict:
         return self.__dict__

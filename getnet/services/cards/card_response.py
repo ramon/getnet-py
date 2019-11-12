@@ -12,11 +12,7 @@ class NewCardResponse:
     number_token: CardToken
 
     def __init__(self, card_id: str, number_token: Union[CardToken, str]):
-        self.card_id = (
-            card_id
-            if isinstance(card_id, uuid.UUID)
-            else uuid.UUID(card_id)
-        )
+        self.card_id = card_id if isinstance(card_id, uuid.UUID) else uuid.UUID(card_id)
         self.number_token = (
             number_token
             if isinstance(number_token, CardToken)
@@ -33,20 +29,18 @@ class CardResponse(Card):
     status: str
     bin: str
 
-    def __init__(self,
-                 card_id: Union[uuid.UUID, str],
-                 last_four_digits: str = None,
-                 used_at: datetime = None,
-                 created_at: datetime = None,
-                 updated_at: datetime = None,
-                 status: str = None,
-                 bin: str = None,
-                 **kwargs):
-        self.card_id = (
-            card_id
-            if isinstance(card_id, uuid.UUID)
-            else uuid.UUID(card_id)
-        )
+    def __init__(
+        self,
+        card_id: Union[uuid.UUID, str],
+        last_four_digits: str = None,
+        used_at: datetime = None,
+        created_at: datetime = None,
+        updated_at: datetime = None,
+        status: str = None,
+        bin: str = None,
+        **kwargs,
+    ):
+        self.card_id = card_id if isinstance(card_id, uuid.UUID) else uuid.UUID(card_id)
         self.last_four_digits = last_four_digits
         self.used_at = parser.isoparse(used_at) if used_at else None
         self.created_at = parser.isoparse(created_at) if created_at else None
@@ -54,16 +48,13 @@ class CardResponse(Card):
         self.status = status
         self.bin = bin
 
-        kwargs.update({
-            'cardholder_identification': None,
-            'security_code': None
-        })
+        kwargs.update({"cardholder_identification": None, "security_code": None})
 
         super(CardResponse, self).__init__(**kwargs)
 
     def as_dict(self):
         data = super(CardResponse, self).as_dict()
-        data.pop('used_at')
-        data.pop('created_at')
-        data.pop('updated_at')
+        data.pop("used_at")
+        data.pop("created_at")
+        data.pop("updated_at")
         return data

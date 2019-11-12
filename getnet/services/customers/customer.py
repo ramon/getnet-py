@@ -34,7 +34,7 @@ class Customer:
         observation: str = None,
         customer_id: str = None,
         seller_id: str = None,
-        address: Union[Address, dict] = None
+        address: Union[Address, dict] = None,
     ):
         if not document_type in DOCUMENT_TYPES:
             raise TypeError(

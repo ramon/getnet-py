@@ -10,7 +10,8 @@ class PeriodTest(unittest.TestCase):
 
     def testRequireSpecificCycleIfTypeSpecific(self):
         with self.assertRaises(TypeError):
-            Period('specific', 1)
+            Period("specific", 1)
+
 
 if __name__ == "__main__":
     unittest.main()

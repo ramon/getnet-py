@@ -17,17 +17,17 @@ class CustomersIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG
+            getnet.api.HOMOLOG,
         )
         self.service = Service(self.client)
 
     def testCreate(self):
         data = sample.copy()
-        data['document_number'] = "01234567888"
+        data["document_number"] = "01234567888"
 
         customer = self.service.create(Customer(**data))
         self.assertIsInstance(customer, Customer)
-        self.assertEqual(data.get('customer_id'), customer.customer_id)
+        self.assertEqual(data.get("customer_id"), customer.customer_id)
 
     def testInvalidCreate(self):
         with self.assertRaises(getnet.BadRequest) as err:
@@ -37,8 +37,8 @@ class CustomersIntegrationTest(VCRTestCase):
 
     def testGet(self):
         data = sample.copy()
-        data['customer_id'] = "test_integration_get"
-        data['document_number'] = "01234567811"
+        data["customer_id"] = "test_integration_get"
+        data["document_number"] = "01234567811"
         created_customer = self.service.create(Customer(**data))
 
         customer = self.service.get(created_customer.customer_id)
@@ -49,7 +49,7 @@ class CustomersIntegrationTest(VCRTestCase):
 
     def testInvalidGet(self):
         with self.assertRaises(NotFound) as err:
-            self.service.get('14a2ce5d-ebc3-49dc-a516-cb5239b02285')
+            self.service.get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
 
         self.assertEqual("Not Found", err.exception.error_code)
 

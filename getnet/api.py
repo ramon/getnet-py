@@ -8,7 +8,7 @@ from requests import Response
 from getnet.exceptions import *
 from getnet.services import token
 
-__all__ = ['LOGGER', 'SANDBOX', 'HOMOLOG', 'PRODUCTION', 'Client', 'API']
+__all__ = ["LOGGER", "SANDBOX", "HOMOLOG", "PRODUCTION", "Client", "API"]
 
 SANDBOX = 0
 HOMOLOG = 1
@@ -26,7 +26,7 @@ LOGGER = logging.getLogger("getnet-py")
 
 
 class handler_request:
-    def __init__(self, client: 'Client'):
+    def __init__(self, client: "Client"):
         self.client = client
 
     def __enter__(self):
@@ -42,19 +42,22 @@ class handler_request:
 def handler_request_exception(response: Response):
     status_code = response.status_code
     data = response.json()
-    if 'details' in data and len(data.get('details')) > 0:
-        data = data.get('details')[0]
+    if "details" in data and len(data.get("details")) > 0:
+        data = data.get("details")[0]
 
     kwargs = {
-        'error_code': data.get('error_code') or data.get('error') or str(data.get('status_code')),
-        'description': data.get('description_detail') or data.get('description') or data.get('error_description') or data.get('message'),
-        'response': response
+        "error_code": data.get("error_code")
+        or data.get("error")
+        or str(data.get("status_code")),
+        "description": data.get("description_detail")
+        or data.get("description")
+        or data.get("error_description")
+        or data.get("message"),
+        "response": response,
     }
 
-    message = u"{} {} ({})".format(
-        kwargs.get('error_code'),
-        kwargs.get('description'),
-        response.url,
+    message = "{} {} ({})".format(
+        kwargs.get("error_code"), kwargs.get("description"), response.url,
     )
 
     if status_code == 400:
@@ -94,7 +97,7 @@ class Client:
         self.client_secret = client_secret
 
         if environment not in ENVIRONMENTS:
-            raise TypeError('Invalid environment')
+            raise TypeError("Invalid environment")
 
         self.environment = environment
         self.base_url = API_URLS[environment]
@@ -104,14 +107,15 @@ class Client:
     def _setup_client(self):
         self.request = requests.Session()
         self.request.headers.update(
-            {"user-agent": "getnet-py/1.0",
-             "seller_id": self.seller_id}
+            {"user-agent": "getnet-py/1.0", "seller_id": self.seller_id}
         )
         self.auth()
 
     def _access_token_expired(self):
-        return self.access_token is not None and \
-               self.access_token_expires > datetime.timestamp(datetime.now())
+        return (
+            self.access_token is not None
+            and self.access_token_expires > datetime.timestamp(datetime.now())
+        )
 
     def _handler_request(self):
         return handler_request(self)
@@ -121,10 +125,11 @@ class Client:
             path = "/auth/oauth/v2/token"
             data = {"scope": "oob", "grant_type": "client_credentials"}
 
-            response = self.request.post(self.base_url + path,
-                                         data=data,
-                                         auth=(self.client_id, self.client_secret)
-                                         )
+            response = self.request.post(
+                self.base_url + path,
+                data=data,
+                auth=(self.client_id, self.client_secret),
+            )
             if not response.ok:
                 raise handler_request_exception(response)
 
@@ -132,7 +137,10 @@ class Client:
 
             self.access_token = response_data.get("access_token")
             self.access_token_expires = int(
-                datetime.timestamp(datetime.now() + timedelta(seconds=response_data.get('expires_in'))))
+                datetime.timestamp(
+                    datetime.now() + timedelta(seconds=response_data.get("expires_in"))
+                )
+            )
             self.request.headers.update(
                 {"Authorization": "Bearer {}".format(self.access_token)}
             )

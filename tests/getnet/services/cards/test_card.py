@@ -20,36 +20,36 @@ class CardTest(unittest.TestCase):
     def testInvalidExpirationMonth(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['expiration_month'] = 13
+            data["expiration_month"] = 13
             Card(**data)
 
     def testInvalidExpirationYear(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['expiration_year'] = 100
+            data["expiration_year"] = 100
             Card(**data)
 
     def testInvalidCustomerId(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['customer_id'] = "1" * 101
+            data["customer_id"] = "1" * 101
             Card(**data)
 
     def testInvalidSecurityCode2(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['security_code'] = "12"
+            data["security_code"] = "12"
             Card(**data)
 
     def testInvalidSecurityCode5(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['security_code'] = "12345"
+            data["security_code"] = "12345"
             Card(**data)
 
     def testNumberTokenAsStr(self):
         data = sample.copy()
-        data['number_token'] = "12345"
+        data["number_token"] = "12345"
         card = Card(**data)
 
         self.assertIsInstance(card.number_token, CardToken)
@@ -58,7 +58,7 @@ class CardTest(unittest.TestCase):
     def testInvalidBrand(self):
         with self.assertRaises(TypeError):
             data = sample.copy()
-            data['brand'] = "12345"
+            data["brand"] = "12345"
             Card(**data)
 
     def testAsDict(self):

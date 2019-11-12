@@ -47,7 +47,9 @@ class Service(ServiceBase):
 
         response = self._get(self._format_url(), params=params)
 
-        values = [CustomerResponse(**customer) for customer in response.get("customers")]
+        values = [
+            CustomerResponse(**customer) for customer in response.get("customers")
+        ]
 
         return ResponseList(
             values, response.get("page"), response.get("limit"), response.get("total")
