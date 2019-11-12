@@ -17,7 +17,7 @@ multidict==4.5.2
 oauthlib==3.1.0
 packaging==19.2
 phonenumbers==8.10.15
-Pillow==6.1.0
+Pillow==6.2.0
 pluggy==0.13.0
 py==1.8.0
 pyparsing==2.4.4
