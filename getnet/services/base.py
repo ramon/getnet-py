@@ -30,6 +30,9 @@ class ServiceBase:
     def _post(self, *args, **kwargs):
         return self._client.post(*args, **kwargs)
 
+    def _patch(self, *args, **kwargs):
+        return self._client.patch(*args, **kwargs)
+
     def _delete(self, *args, **kwargs):
         return self._client.delete(*args, **kwargs)
 

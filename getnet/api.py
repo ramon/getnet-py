@@ -42,7 +42,7 @@ class handler_request:
 def handler_request_exception(response: Response):
     status_code = response.status_code
     data = response.json()
-    if 'details' in data and len(data.get('details')) != 0:
+    if 'details' in data and len(data.get('details')) > 0:
         data = data.get('details')[0]
 
     kwargs = {
@@ -149,6 +149,14 @@ class Client:
         with self._handler_request():
             url = self.base_url + path
             response = self.request.post(url, **kwargs)
+            if not response.ok:
+                raise handler_request_exception(response)
+            return response.json()
+
+    def patch(self, path: str, **kwargs) -> dict:
+        with self._handler_request():
+            url = self.base_url + path
+            response = self.request.patch(url, **kwargs)
             if not response.ok:
                 raise handler_request_exception(response)
             return response.json()

@@ -1,0 +1,556 @@
+interactions:
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MQQqDMBQE0L3gHeSvDfxESWuXXiTE7wgiGElcWKR3r0S3M/PmLIuqIi+ClNwe
+        Fqz0IfCbRdpJgbtRtaN9qc6bQZnJaA0LI5qpzjITt383XK6Hj4hPg2ObI5Kbr8fGMt9pkpCnIQxU
+        Fr8/Dc1ZH38AAAA=
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '125'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '5'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '77'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MOwqAMBAE0F7wDrK1AddPTCy9SNDNCiIYSSwU8e5KtJ2ZN1eaZBkMRByC2d3C
+        K3SgGoUWUQtboxR1qSoxKkmi1TiR1RNJbSGPMhKznxu/rufBs/8bPrbZczDz+1jJovjSQC5OnRsh
+        Te4HQcf0IH8AAAA=
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '125'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '4'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '42'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"product_type": "service", "name": "Plano flex", "description": "Plano
+      flex", "amount": 19990, "currency": "BRL", "payment_types": ["credit_card"],
+      "sales_tax": 0, "seller_id": "eb523ac0-10e0-4acd-96b4-24436227e5b1", "period":
+      {"type": "monthly", "billing_cycle": 12}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 8581d119-d416-4283-b86c-791fcd9fc69d
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '269'
+      Content-Type:
+      - application/json
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/plans
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAF2PTWvDMAyG/8rQuR7+Sopz3HmHMXbaGEGxldXgOMFxSkPpf59Kd9pFBz3vh3SF
+        JWHuY4AOJHk3DsYJjXYUdjQo0Jqj0IacctQYd5RwgJVSovKw0NBog14KJUkKiz4I1w5WaGtNq/WR
+        mkGxJeNErH7jqvlpTHThXaDVl7jUOOf/CKd5yxU65ZyTB/BbKZT9zrKX91fmC+4T5drXfaEVui/w
+        hUKsvccS4JsvxERrX/ECHduXMofNP9QcsVI5R0/3GCpx5i+u8IemOddT2hkNMaWYf3q/+8RE6Run
+        Vqwb10HM6Gs83yO4GCv1gQcDLZUTSgmlP1TbGdNJ+2ys/ITbL21BSDdnAQAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '273'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '1'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '70'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUjJPTLUwSjVP0jUyNTTQNTExNtO1SE5O0k21
+        NE2zMDczsbC0NFbSAesEa4kvqSxIBepzSk0sSi2CyqRWFGQWpRbHZwJNNDYzMICIFifng5Xm5ycp
+        8XLVAgBQ4n+afwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '127'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '10'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '44'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #1", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7ae82e7b-2510-4436-8ccb-e95f87648993
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/0ec9fb39-2a4f-4f3a-a437-23e919e53970
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC2PvW7DMAyEXyVg16jQnxPIY4ZOHYqiU4vCoGW6FSBLhiwHMYK8exmkCwd+d8fj
+        FeaIqQsDtCDJu7E3Tmi0o7CjQYHWHIU25JSjxrijhD0sFCOVh4X6Rhv0UihJUlj0g3CH3gptrTlo
+        faSmV2xJOBGrX3I+Ydk93VcDLb6EuYacmLxxibwbI10Y4ZTXVKFVzjm5B7+WQslvLDu9vzKfcZso
+        1a5uMy3QfoEvNITaeSwDfHNBjLR0FS/Qsn0ueVj9Q80RC5Vz8HSPoRIyP3GFfzTlVH/jxqgPMYb0
+        0/nNRyZK3zi1Yl35HISEvobzPYIPY6Vu4MFAS+WEUkLpD3VojWmlfTZWfsLtDxIBon1mAQAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '282'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - a54b6791a2c9de2b5a54fe3619988da7=54b8f2ccb7b8c2da87419ec8d6b9a03a; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '6'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '76'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MPQqFMBAE4F7wDrK1AcX/V3qRsNmMIIKRxOKJeHcl2s7MN2eaZBmxCELQu1uw
+        0o+Ym7aChcIgpaplgurtJErKhk03GMO1pTzKSPR+bHjcCPbwX4P/NnsEPT+PVVsUbxrExalzhtLk
+        ugHwESf+fwAAAA==
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '124'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '5'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '43'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #2", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer aa563ede-e9c1-4cfe-8dfc-c15ab79bba4d
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; a54b6791a2c9de2b5a54fe3619988da7=54b8f2ccb7b8c2da87419ec8d6b9a03a;
+        50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/0ec9fb39-2a4f-4f3a-a437-23e919e53970
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC2PvW7DMAyEXyVg16jQnxPIY4ZOHYqiU4vCoGW6FSBLhiwHMYK8exmkCwd+d8fj
+        FeaIqQsDtCDJu7E3Tmi0o7CjQYHWHIU25JSjxrijhD0sFCOVh4X6Rhv0UihJUlj0g3CH3gptrTlo
+        faSmV2xJOBGrX3I+Ydk9aV4NtPgS5hpyYvLGJfJujHRhhFNeU4VWOefkHvxaCiW/sez0/sp8xm2i
+        VLu6zbRA+wW+0BBq57EM8M0FMdLSVbxAy/a55GH1DzVHLFTOwdM9hkrI/MQV/tGUU/2NG6M+xBjS
+        T+c3H5kofePUinXlcxAS+hrO9wg+jJW6gQcDLZUTSgmlP9ShNaaV9tlY+Qm3P8Uccf5mAQAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '282'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:06 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '9'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '157'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic Y2RmOGI0MWItY2QwZi00MzFmLWJhMmQtYzZjY2RlMTcyMzYwOjhiMjFhZjU2LTA5NWEtNGRhNS04YTU3LTMyMDI5MTU2YThiNw==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvm5VJQUEpMTk4tLo4vyc9OzVOyUrI0SUo1M04y0TVNTjXSNTEzS9JNMjBMBLLM
+        jYyTzIzMDQxTlHTAOsFa4ksqC1KB+pxSE4tSi6AyqRUFmUWpxfGZQBONzQwMIKLFyflgpfn5SUq8
+        XLUA1ODkzX8AAAA=
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '125'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:06 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '5'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '45'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #3", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 94be63b4-5ce2-466b-b01a-46723b62701d
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f;
+        50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; a54b6791a2c9de2b5a54fe3619988da7=c894cef5f66c242cccd307d6cb9a625f
+      seller_id:
+      - eb523ac0-10e0-4acd-96b4-24436227e5b1
+      user-agent:
+      - getnet-py/1.0
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/0ec9fb39-2a4f-4f3a-a437-23e919e53970
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC2PvW7DMAyEXyVg16jQnxPIY4ZOHYqiU4vCoGW6FSBLhiwHMYK8exmkCwd+d8fj
+        FeaIqQsDtCDJu7E3Tmi0o7CjQYHWHIU25JSjxrijhD0sFCOVh4X6Rhv0UihJUlj0g3CH3gptrTlo
+        faSmV2xJOBGrX3I+Ydk9GV4NtPgS5hpyYvLGJfJujHRhhFNeU4VWOefkHvxaCiW/sez0/sp8xm2i
+        VLu6zbRA+wW+0BBq57EM8M0FMdLSVbxAy/a55GH1DzVHLFTOwdM9hkrI/MQV/tGUU/2NG6M+xBjS
+        T+c3H5kofePUinXlcxAS+hrO9wg+jJW6gQcDLZUTSgmlP9ShNaaV9tlY+Qm3P4gXwIBmAQAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '282'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 12 Nov 2019 16:39:06 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=211ef3d9c66b2f5cf2a6af627e4fe585; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - a54b6791a2c9de2b5a54fe3619988da7=54b8f2ccb7b8c2da87419ec8d6b9a03a; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '5'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '93'
+      X-Powered-By:
+      - '54086'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+version: 1
