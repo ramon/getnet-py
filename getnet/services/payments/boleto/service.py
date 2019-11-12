@@ -14,7 +14,7 @@ class Service(ServiceBase):
         currency: str,
         order: Order,
         boleto: Boleto,
-        customer: Customer
+        customer: Customer,
     ) -> BoletoPaymentResponse:
         data = {
             "seller_id": self._client.seller_id,

@@ -22,11 +22,7 @@ class CreditCancelResponse:
 class CreditCancelPaymentResponse(PaymentResponse):
     credit_cancel: CreditCancelResponse
 
-    def __init__(
-        self,
-        credit_cancel: Union[CreditCancelResponse, dict],
-        **kwargs
-    ):
+    def __init__(self, credit_cancel: Union[CreditCancelResponse, dict], **kwargs):
         super(CreditCancelPaymentResponse, self).__init__(**kwargs)
         self.credit_cancel = (
             credit_cancel

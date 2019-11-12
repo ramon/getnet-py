@@ -8,7 +8,7 @@ from getnet.services.payments.payment_response import PaymentResponse
 from tests.getnet.services.customers.test_customer import sample as customer_sample
 from tests.getnet.services.payments.boleto.test_boleto import sample as boleto_sample
 from tests.getnet.services.payments.test_payment_response import (
-    sample_boleto  as payment_sample,
+    sample_boleto as payment_sample,
 )
 
 
@@ -27,7 +27,7 @@ class ServiceTest(unittest.TestCase):
             currency="BRL",
             order=self.order,
             boleto=Boleto(**boleto_sample),
-            customer=self.customer
+            customer=self.customer,
         )
 
         self.assertIsInstance(obj, PaymentResponse)

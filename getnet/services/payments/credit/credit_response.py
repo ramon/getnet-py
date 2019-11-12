@@ -51,11 +51,7 @@ class CreditResponse(Credit):
 class CreditPaymentResponse(PaymentResponse):
     credit: CreditResponse
 
-    def __init__(
-        self,
-        credit: Union[CreditResponse, dict],
-        **kwargs
-    ):
+    def __init__(self, credit: Union[CreditResponse, dict], **kwargs):
         super(CreditPaymentResponse, self).__init__(**kwargs)
         self.credit = (
             credit

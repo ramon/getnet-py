@@ -17,22 +17,22 @@ sample = {
         {
             "href": "/v1/payments/boleto/593948e8589f66000ed575e0/pdf",
             "rel": "boleto_pdf",
-            "type": "GET"
+            "type": "GET",
         },
         {
             "href": "/v1/payments/boleto/593948e8589f66000ed575e0/html",
             "rel": "boleto_html",
-            "type": "GET"
-        }
-    ]
+            "type": "GET",
+        },
+    ],
 }
 
 
 class CreditResponseTest(unittest.TestCase):
     def testLinks(self):
         obj = BoletoResponse(**sample.copy())
-        self.assertIsNotNone(obj.links['boleto_pdf'])
-        self.assertIsNotNone(obj.links['boleto_html'])
+        self.assertIsNotNone(obj.links["boleto_pdf"])
+        self.assertIsNotNone(obj.links["boleto_html"])
 
 
 if __name__ == "__main__":

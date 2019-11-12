@@ -1,7 +1,13 @@
 import unittest
 
-from getnet.services.payments.boleto.boleto_response import BoletoPaymentResponse, BoletoResponse
-from getnet.services.payments.credit.credit_response import CreditResponse, CreditPaymentResponse
+from getnet.services.payments.boleto.boleto_response import (
+    BoletoPaymentResponse,
+    BoletoResponse,
+)
+from getnet.services.payments.credit.credit_response import (
+    CreditResponse,
+    CreditPaymentResponse,
+)
 from getnet.services.payments.payment_response import PaymentResponse
 
 sample_credit = {
@@ -49,15 +55,15 @@ sample_boleto = {
             {
                 "href": "/v1/payments/boleto/593948e8589f66000ed575e0/pdf",
                 "rel": "boleto_pdf",
-                "type": "GET"
+                "type": "GET",
             },
             {
                 "href": "/v1/payments/boleto/593948e8589f66000ed575e0/html",
                 "rel": "boleto_html",
-                "type": "GET"
-            }
-        ]
-    }
+                "type": "GET",
+            },
+        ],
+    },
 }
 
 

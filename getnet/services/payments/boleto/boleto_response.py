@@ -25,8 +25,8 @@ class BoletoResponse(Boleto):
         typeful_line: str = None,
         bar_code: str = None,
         _links: List[dict] = iter([]),
-        _base_uri: str = '',
-        **kwargs
+        _base_uri: str = "",
+        **kwargs,
     ):
         super(BoletoResponse, self).__init__(**kwargs)
         self.boleto_id = boleto_id
@@ -48,11 +48,7 @@ class BoletoResponse(Boleto):
 class BoletoPaymentResponse(PaymentResponse):
     boleto: BoletoResponse = None
 
-    def __init__(
-        self,
-        boleto: Union[BoletoResponse, dict],
-        **kwargs
-    ):
+    def __init__(self, boleto: Union[BoletoResponse, dict], **kwargs):
         super(BoletoPaymentResponse, self).__init__(**kwargs)
         self.boleto = (
             boleto
