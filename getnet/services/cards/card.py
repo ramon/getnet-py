@@ -73,4 +73,11 @@ class Card:
         data["number_token"] = self.number_token.number_token
         data["expiration_month"] = str(self.expiration_month).zfill(2)
         data["expiration_year"] = str(self.expiration_year).zfill(2)
+
+        if self.security_code is None:
+            data.pop("security_code")
+
+        if self.brand is None:
+            data.pop("brand")
+
         return data
