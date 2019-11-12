@@ -4,6 +4,7 @@ from typing import Union
 from dateutil import parser
 
 from getnet.services.payments.credit.credit import Credit
+from getnet.services.payments.payment_response import PaymentResponse
 
 
 class CreditResponse(Credit):
@@ -45,3 +46,19 @@ class CreditResponse(Credit):
         self.brand = brand
         kwargs.update({"card": None})
         super(CreditResponse, self).__init__(**kwargs)
+
+
+class CreditPaymentResponse(PaymentResponse):
+    credit: CreditResponse
+
+    def __init__(
+        self,
+        credit: Union[CreditResponse, dict],
+        **kwargs
+    ):
+        super(CreditPaymentResponse, self).__init__(**kwargs)
+        self.credit = (
+            credit
+            if isinstance(credit, CreditResponse) or credit is None
+            else CreditResponse(**credit)
+        )

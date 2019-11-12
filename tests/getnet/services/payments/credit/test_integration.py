@@ -4,16 +4,16 @@ import unittest
 from vcr_unittest import VCRTestCase
 
 import getnet
-from getnet import BadRequest, BusinessError
+from getnet import BusinessError
 from getnet.services.payments import Order, Customer
 from getnet.services.payments.credit import Service, Card, Credit
-from getnet.services.payments.credit.credit_cancel import CreditCancel
+from getnet.services.payments.credit.credit_cancel import CreditCancelResponse
 from getnet.services.payments.payment_response import PaymentResponse
 from tests.getnet.services.customers.test_customer import sample as customer_sample
 from tests.getnet.services.payments.credit.test_card import sample as card_sample
 
 
-class PaymentCreditIntegrationTest(unittest.TestCase):
+class PaymentCreditIntegrationTest(VCRTestCase):
     def setUp(self) -> None:
         super(PaymentCreditIntegrationTest, self).setUp()
         self.client = getnet.Client(
@@ -68,7 +68,7 @@ class PaymentCreditIntegrationTest(unittest.TestCase):
         self.assertEqual(response.status, "APPROVED")
         self.assertIsNotNone(response.credit.transaction_id)
 
-    def xtestCreateWithInvalidInstall(self):
+    def testCreateWithInvalidInstall(self):
         card_token = self.client.generate_token_card(
             "4012001037141112", "customer_21081826"
         )
@@ -112,7 +112,7 @@ class PaymentCreditIntegrationTest(unittest.TestCase):
 
         cancel_response = self.service.cancel(response.payment_id)
         self.assertEqual(cancel_response.status, "CANCELED")
-        self.assertIsInstance(cancel_response.credit_cancel, CreditCancel)
+        self.assertIsInstance(cancel_response.credit_cancel, CreditCancelResponse)
         self.assertEqual(
             cancel_response.credit_cancel.message,
             "Credit transaction cancelled successfully",
