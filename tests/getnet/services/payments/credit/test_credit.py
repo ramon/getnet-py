@@ -2,7 +2,6 @@ import unittest
 
 from getnet.services.payments.credit import Credit
 from getnet.services.payments.credit.card import Card
-from getnet.services.payments.order import Order
 
 sample = {
     "delayed": False,

@@ -29,4 +29,4 @@ class CardNumber:
         )
 
     def as_dict(self) -> dict:
-        return self.__dict__
+        return self.__dict__.copy()

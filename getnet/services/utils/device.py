@@ -18,6 +18,6 @@ class Device:
         self.device_id = device_id
 
     def as_dict(self):
-        data = self.__dict__
+        data = self.__dict__.copy()
         data["ip_address"] = str(self.ip_address)
         return data

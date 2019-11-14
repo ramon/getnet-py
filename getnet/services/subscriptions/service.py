@@ -1,0 +1,87 @@
+from typing import Union
+from uuid import UUID
+
+from getnet.services.base import ServiceBase, ResponseList
+from getnet.services.plans.plan import Plan
+from getnet.services.plans.plan_response import PlanResponse
+from getnet.services.subscriptions.subscription import Subscription
+from getnet.services.subscriptions.subscription_response import SubscriptionResponse
+
+
+class Service(ServiceBase):
+    path = "/v1/subscriptions/{subscription_id}"
+
+    def create(self, subscription: Subscription) -> SubscriptionResponse:
+        subscription.seller_id = self._client.seller_id
+        response = self._post(self._format_url(), json=subscription.as_dict())
+        return SubscriptionResponse(**response)
+
+    def all(
+        self,
+        page: int = 1,
+        limit: int = 100,
+        customer_id: str = None,
+        plan_id: str = None,
+        subscription_id: str = None,
+        status: str = None,
+        sort: str = "create_date",
+        sort_type: str = "asc",
+    ) -> ResponseList:
+        if page <= 0:
+            raise TypeError("page must be greater then 0")
+
+        if not sort_type in ("asc", "desc"):
+            raise TypeError("sort_type invalid. Choices: asc, desc")
+
+        params = {
+            "page": page,
+            "limit": limit,
+            "customer_id": customer_id,
+            "plan_id": plan_id,
+            "subscription_id": subscription_id,
+            "status": status,
+            "sort": sort,
+            "sort_type": sort_type,
+        }
+
+        response = self._get(self._format_url(), params=params)
+
+        values = [
+            SubscriptionResponse(**subscription)
+            for subscription in response.get("subscriptions")
+        ]
+
+        return ResponseList(
+            values, response.get("page"), response.get("limit"), response.get("total")
+        )
+
+    def get(self, subscription_id: Union[UUID, str]) -> SubscriptionResponse:
+        response = self._get(self._format_url(subscription_id=str(subscription_id)))
+        return SubscriptionResponse(**response)
+
+    def cancel(
+        self, subscription_id: Union[UUID, str], details: str = None
+    ) -> SubscriptionResponse:
+        data = {"seller_id": self._client.seller_id, "status_details": details}
+
+        response = self._post(
+            self._format_url(path="/cancel", subscription_id=str(subscription_id)),
+            json=data,
+        )
+        return SubscriptionResponse(**response)
+
+    def update_status(
+        self, plan: Union[Plan, UUID, str], active: bool = True
+    ) -> PlanResponse:
+        if isinstance(plan, str):
+            plan_id = UUID(plan)
+        elif isinstance(plan, Plan):
+            plan_id = plan.plan_id
+        else:
+            plan_id = plan
+
+        url = self._format_url(plan_id=plan_id) + "/status/{}".format(
+            "active" if active else "inactive"
+        )
+        response = self._patch(url)
+        return PlanResponse(**response)

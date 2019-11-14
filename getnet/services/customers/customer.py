@@ -77,6 +77,6 @@ class Customer:
         return "{} {}".format(self.first_name, self.last_name)
 
     def as_dict(self):
-        data = self.__dict__
+        data = self.__dict__.copy()
         data["address"] = self.address.as_dict()
         return data

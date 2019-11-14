@@ -29,4 +29,4 @@ class Address:
         self.postal_code = postal_code
 
     def as_dict(self):
-        return self.__dict__
+        return self.__dict__.copy()

@@ -53,7 +53,7 @@ class Credit:
         self.soft_descriptor = soft_descriptor
 
     def as_dict(self):
-        data = self.__dict__
+        data = self.__dict__.copy()
         data["card"] = self.card.as_dict()
 
         if self.dynamic_mcc is None:

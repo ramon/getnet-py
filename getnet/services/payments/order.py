@@ -28,4 +28,4 @@ class Order:
         self.product_type = product_type
 
     def as_dict(self):
-        return self.__dict__
+        return self.__dict__.copy()

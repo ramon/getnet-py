@@ -8,7 +8,18 @@ from typing import Union
 
 from getnet.services.token.card_token import CardToken
 
-BRANDS = ("mastercard", "visa", "amex", "elo", "hipercard")
+BRANDS = (
+    "mastercard",
+    "visa",
+    "amex",
+    "elo",
+    "hipercard",
+    "Mastercard",
+    "Visa",
+    "Amex",
+    "Elo",
+    "Hipercard",
+)
 CARDHOLDER_IDENTIFICATION_REGEX = re.compile(r"\A\d+\Z")
 VERIFY_CODE = re.compile(r"\A\d{3,4}\Z")
 
@@ -23,6 +34,7 @@ class Card:
     cardholder_identification: str
     security_code: str
     verify_card: bool = False
+    bin: str = None
 
     def __init__(
         self,
@@ -35,6 +47,7 @@ class Card:
         security_code: str,
         verify_card: bool = False,
         brand: str = None,
+        bin: str = None,
     ):
         if brand is not None and brand not in BRANDS:
             raise TypeError("Brand is invalid")
@@ -67,9 +80,11 @@ class Card:
         self.security_code = security_code
         self.verify_card = verify_card
         self.brand = brand
+        self.bin = bin
 
     def as_dict(self):
-        data = self.__dict__
+        data = self.__dict__.copy()
+        data.pop("bin")
         data["number_token"] = self.number_token.number_token
         data["expiration_month"] = str(self.expiration_month).zfill(2)
         data["expiration_year"] = str(self.expiration_year).zfill(2)

@@ -25,7 +25,6 @@ class Plan:
     sales_tax: int = 0
     product_type: str
     period: Period
-    plan_id: UUID
 
     def __init__(
         self,
@@ -38,7 +37,6 @@ class Plan:
         product_type: str = None,
         seller_id: str = None,
         period: Union[Period, dict] = None,
-        plan_id: Union[UUID, str] = None,
     ):
         self.product_type = product_type
         self.name = name
@@ -49,9 +47,6 @@ class Plan:
         self.sales_tax = sales_tax
         self.seller_id = seller_id
         self.period = period if isinstance(period, Period) else Period(**period)
-        self.plan_id = (
-            plan_id if isinstance(plan_id, UUID) or plan_id is None else UUID(plan_id)
-        )
 
     def __str__(self):
         return self.name
@@ -68,9 +63,5 @@ class Plan:
 
         period = data.pop("period")
         data["period"] = period.as_dict()
-
-        plan_id = data.pop("plan_id")
-        if plan_id is not None:
-            data["plan_id"] = str(plan_id)
 
         return data
