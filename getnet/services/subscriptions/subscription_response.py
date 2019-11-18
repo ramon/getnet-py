@@ -57,18 +57,18 @@ class SubscriptionResponse(Subscription):
     def __init__(
         self,
         create_date: str,
-        end_date: str,
         payment_date: str,
         next_scheduled_date: str,
         subscription: dict,
         plan: dict,
         status: str,
         customer: dict,
+        end_date: str = None,
         payment: dict = None,
         **kwargs,
     ):
         self.create_date = parser.isoparse(create_date)
-        self.end_date = parser.isoparse(end_date)
+        self.end_date = end_date if end_date is None else parser.isoparse(end_date)
         self.payment_date = int(payment_date)
         self.next_scheduled_date = (
             parser.isoparse(next_scheduled_date)
