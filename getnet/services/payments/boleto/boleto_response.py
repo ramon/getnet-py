@@ -48,10 +48,10 @@ class BoletoResponse(Boleto):
 class BoletoPaymentResponse(PaymentResponse):
     boleto: BoletoResponse = None
 
-    def __init__(self, boleto: Union[BoletoResponse, dict], **kwargs):
+    def __init__(self, boleto: Union[BoletoResponse, dict], _base_uri: str = "", **kwargs):
         super(BoletoPaymentResponse, self).__init__(**kwargs)
         self.boleto = (
             boleto
             if isinstance(boleto, BoletoResponse) or boleto is None
-            else BoletoResponse(**boleto)
+            else BoletoResponse(_base_uri=_base_uri, **boleto)
         )
