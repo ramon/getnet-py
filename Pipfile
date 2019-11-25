@@ -8,6 +8,7 @@ setuptools = "*"
 wheel = "*"
 tox = "*"
 vcrpy-unittest = "*"
+twine = "*"
 
 [packages]
 requests = "*"

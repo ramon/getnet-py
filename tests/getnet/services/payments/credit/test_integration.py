@@ -26,7 +26,7 @@ class PaymentCreditIntegrationTest(VCRTestCase):
         self.order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")
         self.customer = Customer(**customer_sample.copy())
 
-    def xtestCreate(self):
+    def testCreate(self):
         card_token = self.client.generate_token_card(
             "4012001037141112", "customer_21081826"
         )
@@ -46,7 +46,7 @@ class PaymentCreditIntegrationTest(VCRTestCase):
         self.assertEqual(response.status, "APPROVED")
         self.assertIsNotNone(response.credit.transaction_id)
 
-    def xtestCreateWithInstall(self):
+    def testCreateWithInstall(self):
         card_token = self.client.generate_token_card(
             "4012001037141112", "customer_21081826"
         )
