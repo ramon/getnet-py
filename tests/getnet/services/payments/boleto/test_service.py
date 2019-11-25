@@ -19,6 +19,7 @@ class ServiceTest(unittest.TestCase):
         self.customer = Customer(**customer_sample.copy())
 
     def testCreate(self, client_mock):
+        client_mock.base_url = "http://sample.org/"
         client_mock.post.return_value = payment_sample.copy()
 
         service = Service(client_mock)

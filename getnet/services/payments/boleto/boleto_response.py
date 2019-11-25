@@ -48,7 +48,9 @@ class BoletoResponse(Boleto):
 class BoletoPaymentResponse(PaymentResponse):
     boleto: BoletoResponse = None
 
-    def __init__(self, boleto: Union[BoletoResponse, dict], _base_uri: str = "", **kwargs):
+    def __init__(
+        self, boleto: Union[BoletoResponse, dict], _base_uri: str = "", **kwargs
+    ):
         super(BoletoPaymentResponse, self).__init__(**kwargs)
         self.boleto = (
             boleto
