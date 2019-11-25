@@ -26,4 +26,4 @@ class Service(ServiceBase):
         }
 
         response = self._post(self._format_url(), json=data)
-        return BoletoPaymentResponse(**response)
+        return BoletoPaymentResponse(_base_uri=self._client.base_url, **response)

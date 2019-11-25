@@ -63,15 +63,3 @@ class Credit:
             data.pop("soft_descriptor")
 
         return data
-
-    # def toSubscriptionJSON(self):
-    #     data = {
-    #         "transaction_type": self.transaction_type,
-    #         "number_installments": self.number_installments,
-    #         "card": _format_card(self.card)
-    #     }
-    #
-    #     if self.soft_descriptor is not None:
-    #         data["soft_descriptor"] = self.soft_descriptor
-    #
-    #     return data
