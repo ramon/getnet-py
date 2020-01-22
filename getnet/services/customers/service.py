@@ -1,5 +1,6 @@
 import re
 
+from getnet import GetnetException
 from getnet.services.base import ServiceBase, ResponseList
 from getnet.services.customers.customer import Customer
 from getnet.services.customers.customer_response import CustomerResponse
@@ -11,11 +12,17 @@ DOCUMENT_NUMBER_REGEX = re.compile(r"\A\d{11,15}\Z")
 class Service(ServiceBase):
     path = "/v1/customers/{customer_id}"
 
-    def create(self, customer: Customer) -> Customer:
+    def create(self, customer: Customer, return_if_exists: bool = True) -> Customer:
         customer.seller_id = self._client.seller_id
 
-        response = self._post(self._format_url(), json=customer.as_dict())
-        return CustomerResponse(**response)
+        try:
+            response = self._post(self._format_url(), json=customer.as_dict())
+            return CustomerResponse(**response)
+        except GetnetException as err:
+            if return_if_exists and err.error_code == 400:
+                return self.get(customer.customer_id)
+            else:
+                raise
 
     def all(
         self,
