@@ -31,7 +31,7 @@ setuptools.setup(
     url="https://github.com/ramon/getnet-py",
     packages=setuptools.find_packages(),
     python_requires=">=3.2",
-    install_requires=["requests>=2.0.0", "requests-oauthlib>=1.2.0"],
+    install_requires=["requests>=2.0.0", "requests-oauthlib>=1.2.0", "python-dateutil==2.8.1"],
     classifiers=[
         "Intended Audience :: Developers",
         "Natural Language :: English",
