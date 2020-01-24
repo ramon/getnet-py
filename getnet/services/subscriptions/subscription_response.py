@@ -43,14 +43,6 @@ class PaymentErrorResponse:
             self.status = error.pop('status')
             self.terminal_nsu = error.pop('terminal_nsu')
 
-    # def __init__(self, credit: dict, payment_received_timestamp: str, **kwargs):
-    #     kwargs["received_at"] = payment_received_timestamp
-    #     super(PaymentResponse, self).__init__(**kwargs)
-    #     if "authorization_timestamp" in credit:
-    #         credit["authorized_at"] = credit.pop("authorization_timestamp")
-    #     credit["card"] = None
-    #     self.credit = BaseCreditResponse(**credit)
-
 
 class SubscriptionResponse(Subscription):
     subscription_id: str
@@ -87,7 +79,6 @@ class SubscriptionResponse(Subscription):
         )
         self.plan = PlanResponse(**plan)
         self.status = status
-        print(payment)
         self.payment = PaymentErrorResponse(**payment) if payment is not None and 'error' not in payment else None
         self.subscription_id = subscription.get("subscription_id")
         self.customer = Customer(**customer)
