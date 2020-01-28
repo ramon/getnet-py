@@ -1,7 +1,7 @@
 from .api import Client, API, LOGGER
 from .exceptions import *
 
-__version__ = "1.0.6"
+__version__ = "1.0.7"
 
 import requests
 
