@@ -19,7 +19,7 @@ class Service(ServiceBase):
             response = self._post(self._format_url(), json=customer.as_dict())
             return CustomerResponse(**response)
         except GetnetException as err:
-            if return_if_exists and err.error_code == 400:
+            if return_if_exists and err.error_code == "400":
                 return self.get(customer.customer_id)
             else:
                 raise

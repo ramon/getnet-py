@@ -58,6 +58,7 @@ sample = {
         "status": "active",
     },
     "status": "success",
+    "status_details": "Assinatura Plano flex criada com sucesso",
     "end_date": "2020-10-14T14:14:06.596Z",
     "payment": {
         "payment_id": "12f35188-f156-4809-b7ea-0fe184c36984",
@@ -82,6 +83,28 @@ sample = {
         },
     },
 }
+
+sample_error = sample.copy()
+sample_error.update({
+    "payment": {
+        "error": {
+            "message": "string",
+            "name": "string",
+            "status_code": 0,
+            "details": [
+                {
+                    "acquirer_transaction_id": "string",
+                    "description": "string",
+                    "description_detail": "string",
+                    "error_code": "string",
+                    "payment_id": "string",
+                    "status": "string",
+                    "terminal_nsu": "string"
+                }
+            ]
+        }
+    }
+})
 
 
 class SubscriptionResponseTest(unittest.TestCase):

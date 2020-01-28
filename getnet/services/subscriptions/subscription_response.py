@@ -4,6 +4,12 @@ from typing import Union
 from dateutil import parser
 
 from getnet.services.cards.card_response import CardResponse
+from getnet.services.payments.credit.credit_response import (
+    CreditResponse as BaseCreditResponse,
+)
+from getnet.services.payments.payment_response import (
+    PaymentResponse as BasePaymentResponse,
+)
 from getnet.services.plans.plan_response import PlanResponse
 from getnet.services.subscriptions.customer import Customer
 from getnet.services.subscriptions.subscription import Subscription
@@ -22,6 +28,18 @@ class CreditResponse:
             else CardResponse(**card)
         )
         kwargs["card"] = card
+
+
+class PaymentResponse(BasePaymentResponse):
+    credit: BaseCreditResponse
+
+    def __init__(self, credit: dict, payment_received_timestamp: str, **kwargs):
+        kwargs["received_at"] = payment_received_timestamp
+        super(PaymentResponse, self).__init__(**kwargs)
+        if "authorization_timestamp" in credit:
+            credit["authorized_at"] = credit.pop("authorization_timestamp")
+        credit["card"] = None
+        self.credit = BaseCreditResponse(**credit)
 
 
 class PaymentErrorResponse:
@@ -52,7 +70,8 @@ class SubscriptionResponse(Subscription):
     next_scheduled_date: datetime
     plan: PlanResponse
     status: str
-    payment: PaymentErrorResponse
+    status_details: str
+    payment: Union[PaymentResponse, PaymentErrorResponse, None]
     customer: Customer
     credit: CreditResponse
 
@@ -60,11 +79,12 @@ class SubscriptionResponse(Subscription):
         self,
         create_date: str,
         payment_date: str,
-        next_scheduled_date: str,
         subscription: dict,
         plan: dict,
         status: str,
+        status_details: str,
         customer: dict,
+        next_scheduled_date: str = None,
         end_date: str = None,
         payment: dict = None,
         **kwargs,
@@ -74,14 +94,19 @@ class SubscriptionResponse(Subscription):
         self.payment_date = int(payment_date)
         self.next_scheduled_date = (
             parser.isoparse(next_scheduled_date)
-            if next_scheduled_date is not None
+            if next_scheduled_date is not None and next_scheduled_date != ''
             else next_scheduled_date
         )
         self.plan = PlanResponse(**plan)
         self.status = status
-        self.payment = PaymentErrorResponse(**payment) if payment is not None and 'error' not in payment else None
+        self.status_details = status_details
         self.subscription_id = subscription.get("subscription_id")
         self.customer = Customer(**customer)
+
+        if payment is not None:
+            self.payment = PaymentResponse(**payment) if 'error' not in payment else PaymentErrorResponse(**payment)
+        else:
+            self.payment = None
 
         kwargs.update(
             {
