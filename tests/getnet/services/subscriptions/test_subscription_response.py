@@ -1,5 +1,7 @@
 import unittest
 
+from getnet.services.subscriptions.subscription_response import PaymentErrorResponse
+
 sample = {
     "seller_id": "eb523ac0-10e0-4acd-96b4-24436227e5b1",
     "order_id": "test-99243222",
@@ -107,9 +109,12 @@ sample_error.update({
 })
 
 
-class SubscriptionResponseTest(unittest.TestCase):
-    pass
+class PaymentErrorResponseTest(unittest.TestCase):
+    def testInit(self):
+        error = PaymentErrorResponse(**sample_error.get('payment'))
 
+        self.assertEqual(0, error.status_code)
+        self.assertEqual('string', error.acquirer_transaction_id)
 
 if __name__ == "__main__":
     unittest.main()

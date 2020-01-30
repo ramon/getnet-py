@@ -43,23 +43,31 @@ class PaymentResponse(BasePaymentResponse):
 
 
 class PaymentErrorResponse:
-    acquirer_transaction_id: str
-    description: str
-    description_detail: str
-    error_code: str
-    payment_id: str
-    status: str
-    terminal_nsu: str
+    def __init__(self, error):
+        self.message = error.pop("message")
+        self.name = error.pop("name")
+        self.status_code = error.pop("status_code")
+        self.details = error.pop("details")[0]
 
-    def __init__(self, error=dict):
-        if 'error' in error:
-            self.acquirer_transaction_id = error.pop('acquirer_transaction_id')
-            self.description = error.pop('description')
-            self.description_detail = error.pop('description_detail')
-            self.error_code = error.pop('error_code')
-            self.payment_id = error.pop('payment_id')
-            self.status = error.pop('status')
-            self.terminal_nsu = error.pop('terminal_nsu')
+    @property
+    def payment_id(self):
+        return self.details.get("payment_id")
+
+    @property
+    def authorization_code(self):
+        return self.details.get("authorization_code")
+
+    @property
+    def terminal_nsu(self):
+        return self.details.get("terminal_nsu")
+
+    @property
+    def acquirer_transaction_id(self):
+        return self.details.get("acquirer_transaction_id")
+
+    @property
+    def status(self):
+        return self.details.get("status")
 
 
 class SubscriptionResponse(Subscription):
