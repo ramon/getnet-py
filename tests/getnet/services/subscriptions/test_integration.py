@@ -49,7 +49,7 @@ class SubscriptionIntegrationTest(VCRTestCase):
 
         self.card = Card(**card_sample.copy())
 
-    def xtestCreateInvalid(self):
+    def testCreateInvalid(self):
         card_token = self.client.generate_token_card(
             "5155901222270002", "customer_21081826"
         )

@@ -54,11 +54,11 @@ class PaymentErrorResponse:
         return self.details.get("payment_id")
 
     @property
-    def authorization_code(self):
-        return self.details.get("authorization_code")
+    def description(self):
+        return self.details.get("description")
 
     @property
-    def terminal_nsu(self):
+    def description_detail(self):
         return self.details.get("terminal_nsu")
 
     @property
@@ -68,6 +68,14 @@ class PaymentErrorResponse:
     @property
     def status(self):
         return self.details.get("status")
+
+    @property
+    def error_code(self):
+        return self.details.get("error_code") \
+ \
+    @property
+    def terminal_nsu(self):
+        return self.details.get("error_code")
 
 
 class SubscriptionResponse(Subscription):
