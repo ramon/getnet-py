@@ -1,10 +1,6 @@
-import re
 from typing import Union
 
 from getnet.services.customers.address import Address
-
-DOCUMENT_TYPES = ("CPF", "CNPJ")
-DOCUMENT_NUMBER_REGEX = re.compile(r"\A\d{11,15}\Z")
 
 
 class Customer:
@@ -36,16 +32,6 @@ class Customer:
         seller_id: str = None,
         address: Union[Address, dict] = None,
     ):
-        if not document_type in DOCUMENT_TYPES:
-            raise TypeError(
-                "Document Type invalid. Choices {}".format(", ".join(DOCUMENT_TYPES))
-            )
-
-        if not DOCUMENT_NUMBER_REGEX.match(document_number):
-            raise TypeError(
-                "Document Number invalid, Only digits and between 11 and 15 characters"
-            )
-
         self.seller_id = seller_id
         self.customer_id = customer_id
         self.first_name = first_name

@@ -59,7 +59,7 @@ class PaymentErrorResponse:
 
     @property
     def description_detail(self):
-        return self.details.get("terminal_nsu")
+        return self.details.get("description_detail")
 
     @property
     def acquirer_transaction_id(self):
@@ -75,7 +75,7 @@ class PaymentErrorResponse:
  \
     @property
     def terminal_nsu(self):
-        return self.details.get("error_code")
+        return self.details.get("terminal_nsu")
 
 
 class SubscriptionResponse(Subscription):

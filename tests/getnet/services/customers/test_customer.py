@@ -28,18 +28,6 @@ sample = {
 
 
 class CustomerTest(unittest.TestCase):
-    def testInvalidDocumentType(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["document_type"] = "Fail"
-            Customer(**data)
-
-    def testInvalidDocumentNumber(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["document_number"] = "0123456789"
-            Customer(**data)
-
     def testAddressConversion(self):
         data = sample.copy()
         customer = Customer(**data)

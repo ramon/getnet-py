@@ -2,8 +2,7 @@ from typing import Union
 from uuid import UUID
 
 from getnet.services.base import ServiceBase, ResponseList
-from getnet.services.plans.plan import Plan
-from getnet.services.plans.plan_response import PlanResponse
+from getnet.services.subscriptions.card import Card
 from getnet.services.subscriptions.subscription import Subscription
 from getnet.services.subscriptions.subscription_response import SubscriptionResponse
 
@@ -70,18 +69,19 @@ class Service(ServiceBase):
         )
         return SubscriptionResponse(**response)
 
-    def update_status(
-        self, plan: Union[Plan, UUID, str], active: bool = True
-    ) -> PlanResponse:
-        if isinstance(plan, str):
-            plan_id = UUID(plan)
-        elif isinstance(plan, Plan):
-            plan_id = plan.plan_id
-        else:
-            plan_id = plan
+    def change_payment_date(self, subscription_id: Union[UUID, str], day: int) -> SubscriptionResponse:
+        data = {"day": day}
 
-        url = self._format_url(plan_id=plan_id) + "/status/{}".format(
-            "active" if active else "inactive"
+        response = self._patch(
+            self._format_url(path="/paymentDate", subscription_id=str(subscription_id)),
+            json=data
         )
-        response = self._patch(url)
-        return PlanResponse(**response)
+        return SubscriptionResponse(**response)
+
+    def change_payment_data(self, subscription_id: Union[UUID, str], card: Card):
+        response = self._patch(
+            self._format_url(path="/paymentType/credit/card", subscription_id=str(subscription_id)),
+            json=card.as_dict()
+        )
+
+        return SubscriptionResponse(**response)
