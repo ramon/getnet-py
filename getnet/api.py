@@ -114,7 +114,7 @@ class Client:
     def _access_token_expired(self):
         return (
             self.access_token is not None
-            and self.access_token_expires > datetime.timestamp(datetime.now())
+            and self.access_token_expires < datetime.timestamp(datetime.now())
         )
 
     def _handler_request(self):
