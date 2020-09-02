@@ -21,7 +21,7 @@ class CardTest(unittest.TestCase):
         self.assertIsNone(self.obj.cardholder_identification)
 
     def testAsDictIgnoreUselessFields(self):
-        obj = self.obj.as_dict()
+        obj = self.obj._as_dict()
 
         self.assertNotIn("customer_id", obj)
         self.assertNotIn("verify_card", obj)

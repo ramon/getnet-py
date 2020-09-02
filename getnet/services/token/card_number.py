@@ -1,13 +1,22 @@
+"""Implements the CardNumber entity"""
 import re
 
 
 class CardNumber:
+    """Implements the CardNumber data required to generate the tokenized
+    version
+    """
     card_number: str
     customer_id: str
 
     card_number_regex = re.compile(r"\A\d{13,19}\Z")
 
     def __init__(self, card_number: str, customer_id: str):
+        """
+        Args:
+            card_number (str): An valid card number
+            customer_id (str): Customer identify
+        """
         if not self.card_number_regex.match(card_number):
             raise AttributeError(
                 "Card Number is invalid, must contain only numbers and between 13 and 19 chars"
@@ -29,4 +38,5 @@ class CardNumber:
         )
 
     def as_dict(self) -> dict:
+        """Format the data as dict to be sent to Getnet"""
         return self.__dict__.copy()

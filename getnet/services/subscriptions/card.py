@@ -28,7 +28,7 @@ class Card(BaseCard):
         self.brand = brand
         self.bin = bin
 
-    def as_dict(self):
+    def _as_dict(self):
         data = {
             "number_token": self.number_token.number_token,
             "cardholder_name": self.cardholder_name,

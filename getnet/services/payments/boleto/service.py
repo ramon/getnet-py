@@ -1,11 +1,11 @@
-from getnet.services.base import ServiceBase
 from getnet.services.payments import Customer
 from getnet.services.payments.boleto.boleto import Boleto
 from getnet.services.payments.boleto.boleto_response import BoletoPaymentResponse
 from getnet.services.payments.order import Order
+from getnet.services.service import Service
 
 
-class Service(ServiceBase):
+class Service(Service):
     path = "/v1/payments/boleto"
 
     def create(

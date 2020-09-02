@@ -54,7 +54,7 @@ class Credit:
 
     def as_dict(self):
         data = self.__dict__.copy()
-        data["card"] = self.card.as_dict()
+        data["card"] = self.card._as_dict()
 
         if self.dynamic_mcc is None:
             data.pop("dynamic_mcc")

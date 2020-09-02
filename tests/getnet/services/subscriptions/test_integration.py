@@ -24,7 +24,7 @@ class SubscriptionIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG,
+            getnet.client.HOMOLOG,
         )
         self.service = Service(self.client)
 

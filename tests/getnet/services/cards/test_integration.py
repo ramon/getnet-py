@@ -5,9 +5,9 @@ from vcr_unittest import VCRTestCase
 
 import getnet
 from getnet import NotFound
-from getnet.services.base import ResponseList
 from getnet.services.cards import Service, Card
 from getnet.services.cards.card_response import NewCardResponse
+from getnet.services.service import ResponseList
 from tests.getnet.services.cards.test_card import sample
 
 
@@ -18,7 +18,7 @@ class CardsIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG,
+            getnet.client.HOMOLOG,
         )
         self.number_token = self.client.generate_token_card(
             "5155901222280001", "customer_01"
@@ -34,7 +34,7 @@ class CardsIntegrationTest(VCRTestCase):
         self.assertEqual(self.number_token, card.number_token.number_token)
 
     def testInvalidCreate(self):
-        with self.assertRaises(getnet.exceptions.BadRequest) as err:
+        with self.assertRaises(getnet.errors.exceptions.BadRequest) as err:
             data = sample.copy()
             data["number_token"] = "123"
             self.service.create(Card(**data))
@@ -53,7 +53,7 @@ class CardsIntegrationTest(VCRTestCase):
         self.assertEqual(sample_card.card_id, card.card_id)
 
     def testInvalidGet(self):
-        with self.assertRaises(getnet.exceptions.NotFound) as err:
+        with self.assertRaises(getnet.errors.exceptions.NotFound) as err:
             self.service.get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
 
         self.assertEqual("404", err.exception.error_code)

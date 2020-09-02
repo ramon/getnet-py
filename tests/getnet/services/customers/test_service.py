@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-from getnet.services.base import ResponseList
 from getnet.services.customers import Service, Customer
+from getnet.services.service import ResponseList
 from tests.getnet.services.customers.test_customer import sample
 
 

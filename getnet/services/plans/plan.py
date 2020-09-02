@@ -1,5 +1,4 @@
 from typing import Union, List
-from uuid import UUID
 
 from getnet.services.plans.period import Period
 
@@ -62,6 +61,6 @@ class Plan:
         data = self.__dict__.copy()
 
         period = data.pop("period")
-        data["period"] = period.as_dict()
+        data["period"] = period._as_dict()
 
         return data

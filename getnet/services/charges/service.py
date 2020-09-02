@@ -1,8 +1,8 @@
-from getnet.services.base import ServiceBase, ResponseList
 from getnet.services.charges.charge_response import ChargeResponse
+from getnet.services.service import Service, ResponseList
 
 
-class Service(ServiceBase):
+class Service(Service):
     path = "/v1/charges"
 
     def all(

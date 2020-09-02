@@ -4,7 +4,7 @@ import unittest
 from vcr_unittest import VCRTestCase
 
 import getnet
-from getnet import BusinessError
+from getnet.errors.business_error import BusinessError
 from getnet.services.payments import Order, Customer
 from getnet.services.payments.credit import Service, Card, Credit
 from getnet.services.payments.credit.credit_cancel import CreditCancelResponse
@@ -20,7 +20,7 @@ class PaymentCreditIntegrationTest(VCRTestCase):
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG,
+            getnet.client.HOMOLOG,
         )
         self.service = Service(self.client)
         self.order = Order("6d2e4380-d8a3-4ccb-9138-c289182818a3", 0, "physical_goods")

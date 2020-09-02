@@ -1,10 +1,9 @@
 """
-    module:: card
-    :synopsis: Getnet Safe ("Cofre") Card entity
+Implements Card Entity
 """
 
 import re
-from typing import Union
+from typing import Union, Optional
 
 from getnet.services.token.card_token import CardToken
 
@@ -24,17 +23,18 @@ CARDHOLDER_IDENTIFICATION_REGEX = re.compile(r"\A\d+\Z")
 VERIFY_CODE = re.compile(r"\A\d{3,4}\Z")
 
 
-class Card:
+class Card(object):
+    """Card represents the Card entity for the Cards operations"""
     customer_id: str
     number_token: CardToken
-    brand: str = None
+    brand: Union[str, None] = None
     cardholder_name: str
     expiration_month: str
     expiration_year: str
-    cardholder_identification: str
-    security_code: str
+    cardholder_identification: Union[str, None]
+    security_code: Union[str, None]
     verify_card: bool = False
-    bin: str = None
+    bin: Union[str, None] = None
 
     def __init__(
         self,
@@ -45,10 +45,24 @@ class Card:
         expiration_year: int,
         cardholder_identification: str,
         security_code: str,
-        verify_card: bool = False,
-        brand: str = None,
-        bin: str = None,
+        verify_card: Optional[bool] = False,
+        brand: Union[str, None] = None,
+        bin: Union[str, None] = None,
     ):
+        """
+        Args:
+            customer_id (str): Customer Identify
+            number_token (CardToken|str): token of the number of card
+            cardholder_name (str): Customer name as in the card
+            expiration_month (int): Card expiration month
+            expiration_year (int): Card expiration year (2 digits)
+            cardholder_identification (str): Card owner identify (CPF, RG, etc.)
+            security_code (str): Card security code (CVV or CVC)
+            verify_card (bool): Optional. If true execute a transaction to check
+                the card (cancel, blocked or with restriction)
+            brand (str): Optional. Brand name
+            bin (str): Ignore is for internal use only
+        """
         if brand is not None and brand not in BRANDS:
             raise TypeError("Brand is invalid")
 
@@ -74,15 +88,16 @@ class Card:
             else CardToken(number_token)
         )
         self.cardholder_name = cardholder_name
-        self.expiration_month = expiration_month
-        self.expiration_year = expiration_year
+        self.expiration_month = str(expiration_month)
+        self.expiration_year = str(expiration_year)
         self.cardholder_identification = cardholder_identification
         self.security_code = security_code
         self.verify_card = verify_card
         self.brand = brand
         self.bin = bin
 
-    def as_dict(self):
+    def _as_dict(self):
+        """Format the data as dict to be sent to Getnet"""
         data = self.__dict__.copy()
         data.pop("bin")
         data["number_token"] = self.number_token.number_token

@@ -1,13 +1,19 @@
+"""
+Module implements the Card service responses
+"""
+
 import uuid
-from dateutil import parser
 from datetime import datetime
 from typing import Union
+
+from dateutil import parser
 
 from getnet.services.cards.card import Card
 from getnet.services.token.card_token import CardToken
 
 
-class NewCardResponse:
+class NewCardResponse(object):
+    """Represents the new card registration on safe response"""
     card_id: uuid.UUID
     number_token: CardToken
 
@@ -21,6 +27,7 @@ class NewCardResponse:
 
 
 class CardResponse(Card):
+    """Represents the card in safe responses"""
     card_id: uuid.UUID
     last_four_digits: str
     used_at: datetime
@@ -33,9 +40,9 @@ class CardResponse(Card):
         self,
         card_id: Union[uuid.UUID, str],
         last_four_digits: str = None,
-        used_at: datetime = None,
-        created_at: datetime = None,
-        updated_at: datetime = None,
+        used_at: str = None,
+        created_at: str = None,
+        updated_at: str = None,
         status: str = None,
         bin: str = None,
         **kwargs,
@@ -52,8 +59,8 @@ class CardResponse(Card):
 
         super(CardResponse, self).__init__(**kwargs)
 
-    def as_dict(self):
-        data = super(CardResponse, self).as_dict()
+    def _as_dict(self):
+        data = super(CardResponse, self)._as_dict()
         data.pop("used_at")
         data.pop("created_at")
         data.pop("updated_at")

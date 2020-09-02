@@ -19,7 +19,7 @@ class Credit(BaseCredit):
         data = {
             "transaction_type": self.transaction_type,
             "number_installments": self.number_installments,
-            "card": self.card.as_dict(),
+            "card": self.card._as_dict(),
         }
 
         if self.billing_address is not None:

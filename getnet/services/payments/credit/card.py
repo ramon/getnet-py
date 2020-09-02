@@ -7,8 +7,8 @@ class Card(BaseCard):
 
         super(Card, self).__init__(**kwargs)
 
-    def as_dict(self):
-        data = super(Card, self).as_dict()
+    def _as_dict(self):
+        data = super(Card, self)._as_dict()
         data.pop("customer_id")
         data.pop("verify_card")
         data.pop("cardholder_identification")

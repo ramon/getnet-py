@@ -63,7 +63,7 @@ class CardTest(unittest.TestCase):
 
     def testAsDict(self):
         card = Card(**sample)
-        self.assertDictEqual(card.as_dict(), sample)
+        self.assertDictEqual(card._as_dict(), sample)
 
 
 if __name__ == "__main__":

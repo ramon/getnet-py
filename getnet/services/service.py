@@ -1,11 +1,18 @@
+"""
+Base service module
+"""
+
 import re
 
 
-class ServiceBase:
+class Service(object):
+    """
+    Service Abstract an service needs
+    """
     _client = None
     path: str = None
 
-    def __init__(self, client) -> None:
+    def __init__(self, client: "Client") -> None:
         if not self.path:
             raise NotImplementedError("The classes parameter path must be defined")
 

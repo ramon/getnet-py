@@ -1,7 +1,15 @@
-from .api import Client, API, LOGGER
-from .exceptions import *
+"""
+GetNet-Py
+=========
 
-__version__ = "1.0.11"
+This package implements an API client to Santander Getnet.
+"""
+import logging
+
+from .client import Client
+from .environment import Environment
+
+__version__ = "1.1.0"
 
 import requests
 
@@ -11,3 +19,5 @@ if requests.__version__ < "2.0.0":
         "getnet-py expects, please upgrade to 2.0.0 or later."
     )
     raise Warning(msg % requests.__version__)
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())

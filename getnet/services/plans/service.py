@@ -1,12 +1,12 @@
 from typing import Union
 from uuid import UUID
 
-from getnet.services.base import ServiceBase, ResponseList
 from getnet.services.plans.plan import Plan
 from getnet.services.plans.plan_response import PlanResponse
+from getnet.services.service import Service, ResponseList
 
 
-class Service(ServiceBase):
+class Service(Service):
     path = "/v1/plans/{plan_id}"
 
     def create(self, plan: Plan) -> PlanResponse:

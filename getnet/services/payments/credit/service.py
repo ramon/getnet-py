@@ -1,16 +1,16 @@
 from typing import Union
 from uuid import UUID
 
-from getnet.services.base import ServiceBase
 from getnet.services.payments import Customer
 from getnet.services.payments.credit.credit import Credit
 from getnet.services.payments.credit.credit_cancel import CreditCancelPaymentResponse
 from getnet.services.payments.credit.credit_response import CreditPaymentResponse
 from getnet.services.payments.order import Order
+from getnet.services.service import Service
 from getnet.services.utils import Device
 
 
-class Service(ServiceBase):
+class Service(Service):
     path = "/v1/payments/credit"
 
     def create(

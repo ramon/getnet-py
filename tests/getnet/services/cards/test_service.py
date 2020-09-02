@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import patch
 
-from getnet.services.base import ResponseList
 from getnet.services.cards import Service, Card
-from getnet.services.cards.card_response import CardResponse, NewCardResponse
+from getnet.services.cards.card_response import NewCardResponse
+from getnet.services.service import ResponseList
 from tests.getnet.services.cards.test_card import sample
 from tests.getnet.services.cards.test_card_response import sample as response_sample
 

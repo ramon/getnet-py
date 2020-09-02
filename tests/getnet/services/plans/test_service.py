@@ -1,11 +1,10 @@
 import unittest
 from unittest.mock import patch
 
-from getnet.services.base import ResponseList
 from getnet.services.plans import Service, Plan
 from getnet.services.plans.plan_response import PlanResponse
+from getnet.services.service import ResponseList
 from tests.getnet.services.plans.test_plan import sample
-
 
 response_sample = sample.copy()
 response_sample.update(

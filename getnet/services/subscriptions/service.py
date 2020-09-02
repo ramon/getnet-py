@@ -1,13 +1,13 @@
 from typing import Union
 from uuid import UUID
 
-from getnet.services.base import ServiceBase, ResponseList
+from getnet.services.service import Service, ResponseList
 from getnet.services.subscriptions.card import Card
 from getnet.services.subscriptions.subscription import Subscription
 from getnet.services.subscriptions.subscription_response import SubscriptionResponse
 
 
-class Service(ServiceBase):
+class Service(Service):
     path = "/v1/subscriptions/{subscription_id}"
 
     def create(self, subscription: Subscription) -> SubscriptionResponse:
@@ -81,7 +81,7 @@ class Service(ServiceBase):
     def change_payment_data(self, subscription_id: Union[UUID, str], card: Card):
         response = self._patch(
             self._format_url(path="/paymentType/credit/card", subscription_id=str(subscription_id)),
-            json=card.as_dict()
+            json=card._as_dict()
         )
 
         return SubscriptionResponse(**response)

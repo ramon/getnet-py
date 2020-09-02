@@ -3,7 +3,7 @@ import unittest
 
 from vcr_unittest import VCRTestCase
 
-import getnet
+from getnet import Environment, Client
 from getnet.services.token import Service, CardNumber
 from getnet.services.token.card_token import CardToken
 
@@ -11,11 +11,11 @@ from getnet.services.token.card_token import CardToken
 class TokenIntegrationTest(VCRTestCase):
     def setUp(self) -> None:
         super(TokenIntegrationTest, self).setUp()
-        self.client = getnet.Client(
+        self.client = Client(
             os.environ.get("GETNET_SELLER_ID"),
             os.environ.get("GETNET_CLIENT_ID"),
             os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.api.HOMOLOG,
+            Environment.HOMOLOG
         )
         self.service = Service(self.client)
 

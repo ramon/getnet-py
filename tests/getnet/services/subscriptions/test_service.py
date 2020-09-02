@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from getnet.services.base import ResponseList
+from getnet.services.service import ResponseList
 from getnet.services.subscriptions import Service, Subscription
 from getnet.services.subscriptions.subscription_response import SubscriptionResponse
 from tests.getnet.services.subscriptions.test_subscription import sample

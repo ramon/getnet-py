@@ -34,7 +34,7 @@ class CardResponseTest(unittest.TestCase):
     def testAsDict(self):
         data = sample.copy()
         card = CardResponse(**data)
-        value = card.as_dict()
+        value = card._as_dict()
         self.assertNotIn("used_at", value)
         self.assertNotIn("created_at", value)
         self.assertNotIn("updated_at", value)
