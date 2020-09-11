@@ -1,4 +1,4 @@
 """
 Getnet Card Safe Service Module
 """
-from .service import Service, Card
+from .service import Status, Service, Card

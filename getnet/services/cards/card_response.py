@@ -28,8 +28,7 @@ class NewCardResponse(object):
 
 
 class CardResponse(Card):
-    """Represents the card in safe responses"""
-
+    """Represents the card (in safe) responses"""
     card_id: uuid.UUID
     last_four_digits: str
     used_at: datetime
