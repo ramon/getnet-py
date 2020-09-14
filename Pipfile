@@ -11,6 +11,7 @@ vcrpy-unittest = "*"
 twine = "*"
 pytest = "*"
 pytest-mock = "*"
+pytest-vcr = "*"
 
 [packages]
 requests = "*"
