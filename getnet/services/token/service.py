@@ -10,7 +10,7 @@ class Service(BaseService):
     path = "/v1/tokens/card"
 
     def generate(self, card: CardNumber):
-        """Generate an token for the card dat
+        """Generate an token for the card data
 
         Args:
             card (CardNumber):

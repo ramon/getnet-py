@@ -1,24 +1,28 @@
 import unittest
 from unittest.mock import patch
 
+import pytest
+from pytest_mock import MockFixture
+
 from getnet.services.token import Service, CardNumber
 from getnet.services.token.card_token import CardToken
 
 
-@patch("getnet.Client")
-class ServiceTest(unittest.TestCase):
-    def setUp(self) -> None:
-        self.card_number = CardNumber("5155901222280001", "customer_21081826")
+@pytest.fixture
+def client(mocker: MockFixture):
+    return mocker.patch("getnet.Client")
 
-    def testGenerate(self, clientMock):
-        clientMock.post.return_value = {"number_token": "123456789"}
-
-        service = Service(clientMock)
-        token = service.generate(self.card_number)
-
-        self.assertIsInstance(token, CardToken)
-        self.assertEqual("123456789", token.number_token)
+@pytest.fixture
+def card_number():
+    return CardNumber("5155901222280001", "customer_21081826")
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_token_generate(client, card_number):
+    client.post.return_value = {"number_token": "123456789"}
+
+    service = Service(client)
+    token = service.generate(card_number)
+
+    assert isinstance(token, CardToken)
+    assert "123456789" == token.number_token
+
