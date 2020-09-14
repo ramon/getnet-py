@@ -1,70 +1,53 @@
-import unittest
+import pytest
 
 from getnet.services.cards.card import Card
 from getnet.services.token.card_token import CardToken
 
-sample = {
-    "number_token": CardToken("123"),
-    "brand": "visa",
-    "cardholder_name": "John Doe",
-    "cardholder_identification": "5155901222280001",
-    "security_code": "123",
-    "expiration_month": "02",
-    "expiration_year": "25",
-    "customer_id": "johndoe",
-    "verify_card": False,
-}
+
+def test_invalid_expiration_month(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["expiration_month"] = 13
+        Card(**card_sample)
 
 
-class CardTest(unittest.TestCase):
-    def testInvalidExpirationMonth(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["expiration_month"] = 13
-            Card(**data)
-
-    def testInvalidExpirationYear(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["expiration_year"] = 100
-            Card(**data)
-
-    def testInvalidCustomerId(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["customer_id"] = "1" * 101
-            Card(**data)
-
-    def testInvalidSecurityCode2(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["security_code"] = "12"
-            Card(**data)
-
-    def testInvalidSecurityCode5(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["security_code"] = "12345"
-            Card(**data)
-
-    def testNumberTokenAsStr(self):
-        data = sample.copy()
-        data["number_token"] = "12345"
-        card = Card(**data)
-
-        self.assertIsInstance(card.number_token, CardToken)
-        self.assertEqual(card.number_token.number_token, "12345")
-
-    def testInvalidBrand(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data["brand"] = "12345"
-            Card(**data)
-
-    def testAsDict(self):
-        card = Card(**sample)
-        self.assertDictEqual(card._as_dict(), sample)
+def test_invalid_expiration_year(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["expiration_year"] = 100
+        Card(**card_sample)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_invalid_customer_id(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["customer_id"] = "1" * 101
+        Card(**card_sample)
+
+
+def test_invalid_security_code2(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["security_code"] = "12"
+        Card(**card_sample)
+
+
+def test_invalid_security_code5(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["security_code"] = "12345"
+        Card(**card_sample)
+
+
+def test_number_token_as_str(card_sample: dict):
+    card_sample["number_token"] = "12345"
+    card = Card(**card_sample)
+
+    assert isinstance(card.number_token, CardToken)
+    assert "12345" == card.number_token.number_token
+
+
+def test_invalid_brand(card_sample: dict):
+    with pytest.raises(TypeError):
+        card_sample["brand"] = "12345"
+        Card(**card_sample)
+
+
+def test_as_dict(card_sample: dict):
+    card = Card(**card_sample)
+    assert card_sample == card._as_dict()

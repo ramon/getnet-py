@@ -27,7 +27,7 @@ class Service(BaseService):
         response = self._post(
             self._format_url(card_id="verification"), json=card._as_dict()
         )
-        return response.get("status") == Status.RENEWED
+        return response.get("status") == "VERIFIED"
 
     def create(self, card: Card) -> NewCardResponse:
         """Store the card in the safe

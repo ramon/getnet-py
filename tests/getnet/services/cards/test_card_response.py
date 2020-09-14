@@ -1,44 +1,17 @@
-import unittest
-import uuid
+import pytest
 
 from getnet.services.cards.card_response import CardResponse
-from getnet.services.token.card_token import CardToken
-
-sample = {
-    "card_id": uuid.UUID("e8ad2ae4-9e3e-4532-998f-1a5a11e56e58"),
-    "number_token": CardToken("123"),
-    "brand": "visa",
-    "cardholder_name": "John Doe",
-    "cardholder_identification": "5155901222280001",
-    "security_code": "123",
-    "expiration_month": "02",
-    "expiration_year": "25",
-    "customer_id": "johndoe",
-    "verify_card": True,
-    "last_four_digits": "1212",
-    "used_at": "2017-04-19T16:30:30.003Z",
-    "created_at": "2017-04-19T16:30:30.003Z",
-    "updated_at": "2017-04-19T16:30:30.003Z",
-    "status": "active",
-    "bin": "123",
-}
 
 
-class CardResponseTest(unittest.TestCase):
-    def testInvalidInitWithoutCardId(self):
-        with self.assertRaises(TypeError):
-            data = sample.copy()
-            data.pop("card_id")
-            CardResponse(**data)
-
-    def testAsDict(self):
-        data = sample.copy()
-        card = CardResponse(**data)
-        value = card._as_dict()
-        self.assertNotIn("used_at", value)
-        self.assertNotIn("created_at", value)
-        self.assertNotIn("updated_at", value)
+def test_invalid_without_card_id(card_response_sample: dict):
+    with pytest.raises(TypeError):
+        card_response_sample.pop("card_id")
+        CardResponse(**card_response_sample)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def testAsDict(card_response_sample: dict):
+    card = CardResponse(**card_response_sample)
+    value = card._as_dict()
+    assert "used_at" not in value
+    assert "created_at" not in value
+    assert "updated_at" not in value

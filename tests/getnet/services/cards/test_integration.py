@@ -1,97 +1,81 @@
-import os
-import unittest
+import pytest
 
-from vcr_unittest import VCRTestCase
-
-import getnet
-from getnet import NotFound
+from getnet.errors import BadRequest, NotFound
 from getnet.services.cards import Service, Card
 from getnet.services.cards.card_response import NewCardResponse
 from getnet.services.service import ResponseList
-from tests.getnet.services.cards.test_card import sample
 
 
-class CardsIntegrationTest(VCRTestCase):
-    def setUp(self) -> None:
-        super(CardsIntegrationTest, self).setUp()
-        self.client = getnet.Client(
-            os.environ.get("GETNET_SELLER_ID"),
-            os.environ.get("GETNET_CLIENT_ID"),
-            os.environ.get("GETNET_CLIENT_SECRET"),
-            getnet.client.HOMOLOG,
-        )
-        self.number_token = self.client.generate_token_card(
-            "5155901222280001", "customer_01"
-        )
-        self.service = Service(self.client)
+@pytest.mark.vcr()
+def test_create(client, card_sample: dict):
+    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    card = Service(client).create(Card(**card_sample))
 
-    def testCreate(self):
-        data = sample.copy()
-        data["number_token"] = self.number_token
-        card = self.service.create(Card(**data))
-
-        self.assertIsInstance(card, NewCardResponse)
-        self.assertEqual(self.number_token, card.number_token.number_token)
-
-    def testInvalidCreate(self):
-        with self.assertRaises(getnet.errors.exceptions.BadRequest) as err:
-            data = sample.copy()
-            data["number_token"] = "123"
-            self.service.create(Card(**data))
-
-        self.assertEqual("TOKENIZATION-400", err.exception.error_code)
-
-    def testGet(self):
-        data = sample.copy()
-        data["number_token"] = self.number_token
-        sample_card = self.service.create(Card(**data))
-
-        card = self.service.get(sample_card.card_id)
-
-        self.assertIsInstance(card, Card)
-        self.assertEqual(card, card)
-        self.assertEqual(sample_card.card_id, card.card_id)
-
-    def testInvalidGet(self):
-        with self.assertRaises(getnet.errors.exceptions.NotFound) as err:
-            self.service.get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
-
-        self.assertEqual("404", err.exception.error_code)
-
-    def testAll(self):
-        with self.assertRaises(TypeError):
-            cards = self.service.all()
-
-        cards = self.service.all(sample.get("customer_id"))
-        self.assertIsInstance(cards, ResponseList)
-        self.assertIsNone(cards.page)
-        self.assertIsNone(cards.limit)
-        self.assertIsNotNone(cards.total)
-
-    def testAll404(self):
-        with self.assertRaises(NotFound) as err:
-            cards = self.service.all("foobar")
-
-        self.assertEqual("404", err.exception.error_code)
-
-    def testDelete(self):
-        data = sample.copy()
-        data["number_token"] = self.client.generate_token_card(
-            "5155901222280001", "customer_01"
-        )
-
-        created_card = self.service.create(Card(**data))
-        card = self.service.get(created_card.card_id)
-
-        resp = self.service.delete(card.card_id)
-        self.assertTrue(resp)
-
-    def testDelete404(self):
-        with self.assertRaises(NotFound) as err:
-            cards = self.service.delete("72402c54-6bd3-4895-a6b4-adfded0c11dc")
-
-        self.assertEqual("VAULT-404", err.exception.error_code)
+    assert isinstance(card, NewCardResponse)
+    assert card_sample["number_token"] == card.number_token.number_token
 
 
-if __name__ == "__main__":
-    unittest.main()
+@pytest.mark.vcr
+def test_invalid_create(client, card_sample: dict):
+    with pytest.raises(BadRequest) as excinfo:
+        card_sample["number_token"] = "123"
+        Service(client).create(Card(**card_sample))
+
+    assert "TOKENIZATION-400" == excinfo.value.error_code
+
+
+@pytest.mark.vcr
+def test_get(client, card_sample: dict):
+    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    service = Service(client)
+    sample_card = service.create(Card(**card_sample))
+
+    card = service.get(sample_card.card_id)
+
+    assert isinstance(card, Card)
+    assert sample_card.card_id == card.card_id
+
+
+@pytest.mark.vcr
+def test_invalid_get(client):
+    with pytest.raises(NotFound) as excinfo:
+        Service(client).get("14a2ce5d-ebc3-49dc-a516-cb5239b02285")
+
+    assert "404" == excinfo.value.error_code
+
+
+@pytest.mark.vcr
+def test_all(client, card_sample: dict):
+    cards = Service(client).all(card_sample.get("customer_id"))
+    assert isinstance(cards, ResponseList)
+    assert cards.page is None
+    assert cards.limit is None
+    assert cards.total is not None
+
+
+@pytest.mark.vcr
+def test_all_not_found(client):
+    with pytest.raises(NotFound) as excinfo:
+        Service(client).all("foobar")
+
+    assert "404" == excinfo.value.error_code
+
+
+@pytest.mark.vcr
+def test_delete(client, card_sample: dict):
+    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    service = Service(client)
+
+    created_card = service.create(Card(**card_sample))
+    card = service.get(created_card.card_id)
+
+    resp = service.delete(card.card_id)
+    assert True == resp
+
+
+@pytest.mark.vcr
+def test_delete_not_found(client):
+    with pytest.raises(NotFound) as excinfo:
+        cards = Service(client).delete("72402c54-6bd3-4895-a6b4-adfded0c11dc")
+
+    assert "VAULT-404" == excinfo.value.error_code
