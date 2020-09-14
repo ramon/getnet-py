@@ -4,7 +4,7 @@ import unittest
 from vcr_unittest import VCRTestCase
 
 import getnet
-from getnet import NotFound
+from getnet.errors import NotFound
 from getnet.services.plans import Service, Plan
 from getnet.services.service import ResponseList
 from tests.getnet.services.plans.test_plan import sample

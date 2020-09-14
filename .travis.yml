@@ -10,7 +10,7 @@ install:
   - pip install requests-mock
   - pip install coveralls
 script:
-  - coverage run -m pytest --vcr-record=none
+  - coverage run -m pytest --vcr-record=none tests/
 after_success:
   - coveralls
 
