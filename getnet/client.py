@@ -50,29 +50,28 @@ class Client(object):
 
         self._setup_client()
 
-    def _setup_client(self):
+    def _setup_client(self) -> None:
         self.request = requests.Session()
         self.request.headers.update(
             {"user-agent": "getnet-py/1.1", "seller_id": self.seller_id}
         )
-        self.auth()
 
     def _handler_request(self):
         return handler_request(self)
 
-    def access_token_expired(self):
-        """Returns true if have a expired token
+    def access_token_expired(self) -> bool:
+        """Returns true if not have an token or is expired
 
         Returns:
             bool
         """
         return (
-            self.access_token is not None
-            and self.access_token_expires < datetime.timestamp(datetime.now())
+            self.access_token is None
+            or self.access_token_expires < datetime.timestamp(datetime.now())
         )
 
     def auth(self) -> None:
-        if not self.access_token or self.access_token_expired():
+        if self.access_token_expired():
             path = "/auth/oauth/v2/token"
             data = {"scope": "oob", "grant_type": "client_credentials"}
 

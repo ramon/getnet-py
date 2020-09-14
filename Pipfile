@@ -9,6 +9,8 @@ wheel = "*"
 tox = "*"
 vcrpy-unittest = "*"
 twine = "*"
+pytest = "*"
+pytest-mock = "*"
 
 [packages]
 requests = "*"

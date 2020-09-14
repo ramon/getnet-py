@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "93158d4e69fe799519cc19805f1d04533d0eecf64b6e41c77243567549c3eae7"
+            "sha256": "0fbce16deec94025da0135d739e0da53cc3ac4d671851b41998d135c9874053b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -127,6 +127,14 @@
             ],
             "version": "==1.4.4"
         },
+        "attrs": {
+            "hashes": [
+                "sha256:26b54ddbbb9ee1d34d5d3668dd37d6cf74990ab23c828c2888dccdceee395594",
+                "sha256:fce7fc47dfc976152e82d53ff92fa0407700c21acd20886a13777a0d20e655dc"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==20.2.0"
+        },
         "bleach": {
             "hashes": [
                 "sha256:2bce3d8fab545a6528c8fa5d9f9ae8ebc85a56da365c7f85180bfe96a35ef22f",
@@ -248,6 +256,13 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.10"
         },
+        "iniconfig": {
+            "hashes": [
+                "sha256:80cf40c597eb564e86346103f609d74efce0f6b4d4f30ec8ce9e2c26411ba437",
+                "sha256:e5f92f89355a67de0595932a6c6c02ab4afddc6fcdc0bfc5becd0d60884d3f69"
+            ],
+            "version": "==1.0.1"
+        },
         "jeepney": {
             "hashes": [
                 "sha256:3479b861cc2b6407de5188695fa1a8d57e5072d7059322469b62628869b8e36e",
@@ -263,6 +278,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==21.4.0"
+        },
+        "more-itertools": {
+            "hashes": [
+                "sha256:6f83822ae94818eae2612063a5101a7311e68ae8002005b5e05f03fd74a86a20",
+                "sha256:9b30f12df9393f0d28af9210ff8efe48d10c94f73e5daf886f10c4b0b0b4f03c"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==8.5.0"
         },
         "multidict": {
             "hashes": [
@@ -328,11 +351,11 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:647344a061c249a3b74e230c739f434d7ea4d8b1d5f3721bc0f3558049b38f44",
-                "sha256:ff7a40b4860b727ab48fad6360eb351cc1b33cbf9b15a0f689ca5353e9463324"
+                "sha256:2594e8fdb06fef91552f86f4fd3a244d148ab24b66042036e64f29a291515048",
+                "sha256:2df50d16b45b977217e02cba6c8422aaddb859f3d0570a88e09b00eafae89c6e"
             ],
             "markers": "python_version >= '3.5'",
-            "version": "==2.6.1"
+            "version": "==2.7.0"
         },
         "pyparsing": {
             "hashes": [
@@ -341,6 +364,22 @@
             ],
             "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.4.7"
+        },
+        "pytest": {
+            "hashes": [
+                "sha256:0e37f61339c4578776e090c3b8f6b16ce4db333889d65d0efb305243ec544b40",
+                "sha256:c8f57c2a30983f469bf03e68cdfa74dc474ce56b8f280ddcb080dfd91df01043"
+            ],
+            "index": "pypi",
+            "version": "==6.0.2"
+        },
+        "pytest-mock": {
+            "hashes": [
+                "sha256:024e405ad382646318c4281948aadf6fe1135632bea9cc67366ea0c4098ef5f2",
+                "sha256:a4d6d37329e4a893e77d9ffa89e838dd2b45d5dc099984cf03c703ac8411bb82"
+            ],
+            "index": "pypi",
+            "version": "==3.3.1"
         },
         "pyyaml": {
             "hashes": [
@@ -420,11 +459,11 @@
         },
         "tqdm": {
             "hashes": [
-                "sha256:1a336d2b829be50e46b84668691e0a2719f26c97c62846298dd5ae2937e4d5cf",
-                "sha256:564d632ea2b9cb52979f7956e093e831c28d441c11751682f84c86fc46e4fd21"
+                "sha256:8f3c5815e3b5e20bc40463fa6b42a352178859692a68ffaa469706e6d38342a5",
+                "sha256:faf9c671bd3fad5ebaeee366949d969dca2b2be32c872a7092a1e1a9048d105b"
             ],
             "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==4.48.2"
+            "version": "==4.49.0"
         },
         "twine": {
             "hashes": [
