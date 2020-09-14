@@ -1,42 +1,15 @@
-import unittest
-
 from getnet.services.customers import Customer, Address
 
-sample = {
-    "seller_id": "6eb2412c-165a-41cd-b1d9-76c575d70a28",
-    "customer_id": "customer_21081826",
-    "first_name": "João",
-    "last_name": "da Silva",
-    "document_type": "CPF",
-    "document_number": "78075751159",
-    "birth_date": "1976-02-21",
-    "phone_number": "5551999887766",
-    "celphone_number": "5551999887766",
-    "email": "customer@email.com.br",
-    "observation": "O cliente tem interesse no plano x.",
-    "address": {
-        "street": "Av. Brasil",
-        "number": "1000",
-        "complement": "Sala 1",
-        "district": "São Geraldo",
-        "city": "Porto Alegre",
-        "state": "RS",
-        "country": "Brasil",
-        "postal_code": "90230060",
-    },
-}
 
+def test_address_conversion(customer_sample: dict):
+    customer = Customer(**customer_sample)
 
-class CustomerTest(unittest.TestCase):
-    def testAddressConversion(self):
-        data = sample.copy()
-        customer = Customer(**data)
+    assert isinstance(customer.address, Address)
+    assert customer_sample.get("address").get("postal_code") == customer.address.postal_code
 
-        self.assertIsInstance(customer.address, Address)
-        self.assertEqual(
-            customer.address.postal_code, data.get("address").get("postal_code")
-        )
+def test_full_name(customer_sample: dict):
+    customer = Customer(**customer_sample)
 
+    sample_full_name = f'{customer_sample["first_name"]} {customer_sample["last_name"]}'
 
-if __name__ == "__main__":
-    unittest.main()
+    assert  sample_full_name == customer.full_name

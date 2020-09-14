@@ -5,7 +5,7 @@ from typing import Union
 import requests
 
 from getnet.environment import Environment
-from getnet.services import token
+from getnet.services import token, cards, customers
 from getnet.services.token.card_token import CardToken
 from getnet.utils import handler_request, handler_request_exception
 
@@ -163,3 +163,11 @@ class Client(object):
             * AttributeError, RequestError
         """
         return self.token_service().generate(token.CardNumber(card_number, customer_id))
+
+    def card_service(self) -> cards.Service:
+        """Return a instance of cards ("Cofre") service"""
+        return cards.Service(self)
+
+    def customer_service(self) -> customers.Service:
+        """Return a instance of subscription customers service"""
+        return customers.Service(self)

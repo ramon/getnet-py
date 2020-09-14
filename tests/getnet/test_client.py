@@ -5,17 +5,18 @@ from pytest_mock import MockerFixture
 
 from getnet import Client
 from getnet.errors import RequestError
-from getnet.services import token
+from getnet.services import token, cards, customers
 from getnet.services.token.card_token import CardToken
 
 
 @pytest.fixture
 def client():
     return Client(
-            "d1c3d817-1676-4e28-a789-1e10c3af15b0",
-            "d1c3d817-1676-4e28-a789-1e10c3af15b0",
-            "388183f9-ab04-4c21-9234",
-        )
+        "d1c3d817-1676-4e28-a789-1e10c3af15b0",
+        "d1c3d817-1676-4e28-a789-1e10c3af15b0",
+        "388183f9-ab04-4c21-9234",
+    )
+
 
 class TestClientAuth:
     def test_invalid_data(self, client: Client, mocker: MockerFixture) -> None:
@@ -51,22 +52,35 @@ class TestClientAuth:
         client.auth.assert_called_once()
 
 
-class TestClient:
-    def test_invalid_environment(self):
-        with pytest.raises(AttributeError):
-            Client("a", "b", "c", "10")
+def test_invalid_environment():
+    with pytest.raises(AttributeError):
+        Client("a", "b", "c", "10")
 
-    def test_token_service(self, client: Client, mocker: MockerFixture) -> None:
-        mocker.patch("getnet.Client.auth", return_value=True)
 
-        assert isinstance(client.token_service(), token.Service)
+def test_token_service(client: Client, mocker: MockerFixture) -> None:
+    mocker.patch("getnet.Client.auth", return_value=True)
 
-    def test_generate_token_card_shortcut(self, client: Client, mocker: MockerFixture):
-        mocker.patch("getnet.Client.auth", return_value=True)
-        tokenServiceMock = mocker.patch.object(token.Service, "generate")
-        tokenServiceMock.return_value = CardToken("123")
+    assert isinstance(client.token_service(), token.Service)
 
-        response = client.generate_token_card("5155901222280001", "customer_21081826")
 
-        assert response.number_token == "123"
-        tokenServiceMock.assert_called_once()
+def test_generate_token_card_shortcut(client: Client, mocker: MockerFixture):
+    mocker.patch("getnet.Client.auth", return_value=True)
+    tokenServiceMock = mocker.patch.object(token.Service, "generate")
+    tokenServiceMock.return_value = CardToken("123")
+
+    response = client.generate_token_card("5155901222280001", "customer_21081826")
+
+    assert response.number_token == "123"
+    tokenServiceMock.assert_called_once()
+
+
+def test_card_service(client: Client, mocker: MockerFixture) -> None:
+    mocker.patch("getnet.Client.auth", return_value=True)
+
+    assert isinstance(client.card_service(), cards.Service)
+
+
+def test_customer_service(client: Client, mocker: MockerFixture) -> None:
+    mocker.patch("getnet.Client.auth", return_value=True)
+
+    assert isinstance(client.customer_service(), customers.Service)

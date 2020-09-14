@@ -1,15 +1,15 @@
 import re
 
-from getnet import RequestError
+from getnet.errors import RequestError
 from getnet.services.customers.customer import Customer
 from getnet.services.customers.customer_response import CustomerResponse
-from getnet.services.service import Service, ResponseList
+from getnet.services.service import Service as BaseService, ResponseList
 
 DOCUMENT_TYPES = ("CPF", "CNPJ")
 DOCUMENT_NUMBER_REGEX = re.compile(r"\A\d{11,15}\Z")
 
 
-class Service(Service):
+class Service(BaseService):
     path = "/v1/customers/{customer_id}"
 
     def create(self, customer: Customer, return_if_exists: bool = True) -> Customer:
