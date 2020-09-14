@@ -19,17 +19,17 @@ def client():
 
 
 class TestClientAuth:
-    def test_invalid_data(self, client: Client, mocker: MockerFixture) -> None:
-        sessionGetMock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
-        sessionGetMock.ok.return_value = False
+    def test_invalid_data(self, client, mocker: MockerFixture) -> None:
+        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock.ok.return_value = False
 
         with pytest.raises(RequestError):
             client.auth()
 
-    def test_missing_access_token(self, client: Client, mocker: MockerFixture) -> None:
+    def test_missing_access_token(self, client, mocker: MockerFixture) -> None:
         mocker.patch("getnet.Client.auth", return_value=True)
-        sessionGetMock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
-        sessionGetMock.ok.return_value = True
+        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock.ok.return_value = True
 
         access_token_expired = mocker.spy(client, 'access_token_expired')
         client.access_token = None
@@ -38,10 +38,10 @@ class TestClientAuth:
         access_token_expired.assert_called_once()
         client.auth.assert_called_once()
 
-    def test_expired_access_token(self, client: Client, mocker: MockerFixture) -> None:
+    def test_expired_access_token(self, client, mocker: MockerFixture) -> None:
         mocker.patch("getnet.Client.auth", return_value=True)
-        sessionGetMock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
-        sessionGetMock.ok.return_value = True
+        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock.ok.return_value = True
 
         access_token_expired = mocker.spy(client, 'access_token_expired')
         client.access_token = "test"
@@ -52,35 +52,30 @@ class TestClientAuth:
         client.auth.assert_called_once()
 
 
-def test_invalid_environment():
-    with pytest.raises(AttributeError):
-        Client("a", "b", "c", "10")
-
-
-def test_token_service(client: Client, mocker: MockerFixture) -> None:
+def test_token_service(client, mocker: MockerFixture) -> None:
     mocker.patch("getnet.Client.auth", return_value=True)
 
     assert isinstance(client.token_service(), token.Service)
 
 
-def test_generate_token_card_shortcut(client: Client, mocker: MockerFixture):
+def test_generate_token_card_shortcut(client, mocker: MockerFixture):
     mocker.patch("getnet.Client.auth", return_value=True)
-    tokenServiceMock = mocker.patch.object(token.Service, "generate")
-    tokenServiceMock.return_value = CardToken("123")
+    token_service_mock = mocker.patch.object(token.Service, "generate")
+    token_service_mock.return_value = CardToken("123")
 
     response = client.generate_token_card("5155901222280001", "customer_21081826")
 
     assert response.number_token == "123"
-    tokenServiceMock.assert_called_once()
+    token_service_mock.assert_called_once()
 
 
-def test_card_service(client: Client, mocker: MockerFixture) -> None:
+def test_card_service(client, mocker: MockerFixture) -> None:
     mocker.patch("getnet.Client.auth", return_value=True)
 
     assert isinstance(client.card_service(), cards.Service)
 
 
-def test_customer_service(client: Client, mocker: MockerFixture) -> None:
+def test_customer_service(client, mocker: MockerFixture) -> None:
     mocker.patch("getnet.Client.auth", return_value=True)
 
     assert isinstance(client.customer_service(), customers.Service)

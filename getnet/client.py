@@ -57,7 +57,7 @@ class Client(object):
         )
 
     def _handler_request(self):
-        return handler_request(self)
+        return handler_request(self, LOGGER)
 
     def access_token_expired(self) -> bool:
         """Returns true if not have an token or is expired
@@ -165,7 +165,7 @@ class Client(object):
         return self.token_service().generate(token.CardNumber(card_number, customer_id))
 
     def card_service(self) -> cards.Service:
-        """Return a instance of cards ("Cofre") service"""
+        """Return a instance of cards service"""
         return cards.Service(self)
 
     def customer_service(self) -> customers.Service:
