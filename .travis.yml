@@ -10,7 +10,7 @@ install:
   - pip install requests-mock
   - pip install coveralls
 script:
-  - coverage run --source=getnet -m unittest discover
+  - coverage run -m pytest --vcr-record=none
 after_success:
   - coveralls
 
