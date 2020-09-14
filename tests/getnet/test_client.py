@@ -20,7 +20,9 @@ def client():
 
 class TestClientAuth:
     def test_invalid_data(self, client, mocker: MockerFixture) -> None:
-        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock = mocker.patch(
+            "requests.Session.get", return_value=mocker.MagicMock()
+        )
         session_get_mock.ok.return_value = False
 
         with pytest.raises(RequestError):
@@ -28,10 +30,12 @@ class TestClientAuth:
 
     def test_missing_access_token(self, client, mocker: MockerFixture) -> None:
         mocker.patch("getnet.Client.auth", return_value=True)
-        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock = mocker.patch(
+            "requests.Session.get", return_value=mocker.MagicMock()
+        )
         session_get_mock.ok.return_value = True
 
-        access_token_expired = mocker.spy(client, 'access_token_expired')
+        access_token_expired = mocker.spy(client, "access_token_expired")
         client.access_token = None
 
         client.get("/test")
@@ -40,12 +44,16 @@ class TestClientAuth:
 
     def test_expired_access_token(self, client, mocker: MockerFixture) -> None:
         mocker.patch("getnet.Client.auth", return_value=True)
-        session_get_mock = mocker.patch("requests.Session.get", return_value=mocker.MagicMock())
+        session_get_mock = mocker.patch(
+            "requests.Session.get", return_value=mocker.MagicMock()
+        )
         session_get_mock.ok.return_value = True
 
-        access_token_expired = mocker.spy(client, 'access_token_expired')
+        access_token_expired = mocker.spy(client, "access_token_expired")
         client.access_token = "test"
-        client.access_token_expires = int(datetime.timestamp(datetime.now() + timedelta(seconds=-3600)))
+        client.access_token_expires = int(
+            datetime.timestamp(datetime.now() + timedelta(seconds=-3600))
+        )
 
         client.get("/test")
         access_token_expired.assert_called_once()

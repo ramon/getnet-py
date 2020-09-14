@@ -25,6 +25,7 @@ VERIFY_CODE = re.compile(r"\A\d{3,4}\Z")
 
 class Card(object):
     """Card represents the Card entity for the Cards operations"""
+
     customer_id: str
     number_token: CardToken
     brand: Union[str, None] = None

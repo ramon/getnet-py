@@ -9,6 +9,7 @@ class Service(object):
     """
     Service Abstract an service needs
     """
+
     _client = None
     path: str = None
 

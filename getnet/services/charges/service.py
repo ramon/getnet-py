@@ -41,9 +41,7 @@ class Service(Service):
 
         response = self._get(self._format_url(), params=params)
 
-        values = [
-            ChargeResponse(**charge) for charge in response.get("charges")
-        ]
+        values = [ChargeResponse(**charge) for charge in response.get("charges")]
 
         return ResponseList(
             values, response.get("page"), response.get("limit"), response.get("total")

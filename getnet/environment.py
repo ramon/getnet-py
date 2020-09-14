@@ -11,6 +11,7 @@ API_URLS = {
 @unique
 class Environment(Enum):
     """Environment represents the API envinments specs"""
+
     SANDBOX = 0
     HOMOLOG = 1
     PRODUCTION = 2

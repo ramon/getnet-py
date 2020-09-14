@@ -7,6 +7,7 @@ from getnet.services.token.card_token import CardToken
 
 class Service(BaseService):
     """Represents the token service operations"""
+
     path = "/v1/tokens/card"
 
     def generate(self, card: CardNumber):

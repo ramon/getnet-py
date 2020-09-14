@@ -17,5 +17,5 @@ def client():
         os.environ.get("GETNET_SELLER_ID"),
         os.environ.get("GETNET_CLIENT_ID"),
         os.environ.get("GETNET_CLIENT_SECRET"),
-        Environment.HOMOLOG
+        Environment.HOMOLOG,
     )

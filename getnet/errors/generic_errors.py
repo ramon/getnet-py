@@ -1,6 +1,12 @@
 from getnet.errors.request_error import RequestError
 
-__ALL__ = ["BadRequest", "NotFound", "ServerError", "ServiceUnavailable", "GatewayTimeout"]
+__ALL__ = [
+    "BadRequest",
+    "NotFound",
+    "ServerError",
+    "ServiceUnavailable",
+    "GatewayTimeout",
+]
 
 
 class BadRequest(RequestError):

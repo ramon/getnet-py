@@ -35,7 +35,7 @@ class Card(BaseCard):
             "brand": self.brand,
             "expiration_month": str(self.expiration_month).zfill(2),
             "expiration_year": str(self.expiration_year).zfill(2),
-            "bin": self.bin
+            "bin": self.bin,
         }
 
         if self.brand is None:

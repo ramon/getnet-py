@@ -14,6 +14,7 @@ from getnet.services.token.card_token import CardToken
 
 class NewCardResponse(object):
     """Represents the new card registration on safe response"""
+
     card_id: uuid.UUID
     number_token: CardToken
 
@@ -28,6 +29,7 @@ class NewCardResponse(object):
 
 class CardResponse(Card):
     """Represents the card in safe responses"""
+
     card_id: uuid.UUID
     last_four_digits: str
     used_at: datetime

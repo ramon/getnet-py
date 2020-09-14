@@ -24,7 +24,7 @@ def customer_sample():
             "state": "RS",
             "country": "Brasil",
             "postal_code": "90230060",
-        }
+        },
     }.copy()
 
 

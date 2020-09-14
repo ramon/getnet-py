@@ -21,4 +21,3 @@ def test_token_generate(client_mock, card_number):
 
     assert isinstance(token, CardToken)
     assert "123456789" == token.number_token
-

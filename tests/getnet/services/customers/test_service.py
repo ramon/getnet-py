@@ -3,7 +3,9 @@ from getnet.services.customers import Service, Customer
 from getnet.services.service import ResponseList
 
 
-def test_create(client_mock: Client, customer_sample: dict, customer_response_sample: dict):
+def test_create(
+    client_mock: Client, customer_sample: dict, customer_response_sample: dict
+):
     client_mock.post.return_value = customer_response_sample
 
     service = Service(client_mock)
@@ -15,7 +17,11 @@ def test_create(client_mock: Client, customer_sample: dict, customer_response_sa
 
 def test_all(client_mock: Client, customer_response_sample: dict):
     client_mock.get.return_value = {
-        "customers": [customer_response_sample, customer_response_sample, customer_response_sample],
+        "customers": [
+            customer_response_sample,
+            customer_response_sample,
+            customer_response_sample,
+        ],
         "page": 1,
         "limit": 100,
         "total": 3,

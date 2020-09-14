@@ -16,6 +16,7 @@ LOGGER = logging.getLogger(__name__)
 
 class Service(BaseService):
     """Service implements the Card service operations"""
+
     path = "/v1/cards/{card_id}"
 
     def verify(self, card: Card) -> bool:

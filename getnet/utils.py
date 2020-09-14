@@ -40,17 +40,19 @@ def handler_request_exception(response: Response):
 
     kwargs = {
         "error_code": data.get("error_code")
-                      or data.get("error")
-                      or str(data.get("status_code")),
+        or data.get("error")
+        or str(data.get("status_code")),
         "description": data.get("description_detail")
-                       or data.get("description")
-                       or data.get("error_description")
-                       or data.get("message"),
+        or data.get("description")
+        or data.get("error_description")
+        or data.get("message"),
         "response": response,
     }
 
     message = "{} {} ({})".format(
-        kwargs.get("error_code"), kwargs.get("description"), response.url,
+        kwargs.get("error_code"),
+        kwargs.get("description"),
+        response.url,
     )
 
     if status_code == 400:

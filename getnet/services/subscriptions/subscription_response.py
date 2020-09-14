@@ -71,9 +71,8 @@ class PaymentErrorResponse:
 
     @property
     def error_code(self):
-        return self.details.get("error_code") \
- \
-    @property
+        return self.details.get("error_code") @ property
+
     def terminal_nsu(self):
         return self.details.get("terminal_nsu")
 
@@ -110,7 +109,7 @@ class SubscriptionResponse(Subscription):
         self.payment_date = int(payment_date)
         self.next_scheduled_date = (
             parser.isoparse(next_scheduled_date)
-            if next_scheduled_date is not None and next_scheduled_date != ''
+            if next_scheduled_date is not None and next_scheduled_date != ""
             else next_scheduled_date
         )
         self.plan = PlanResponse(**plan)
@@ -120,7 +119,11 @@ class SubscriptionResponse(Subscription):
         self.customer = Customer(**customer)
 
         if payment is not None:
-            self.payment = PaymentResponse(**payment) if 'error' not in payment else PaymentErrorResponse(**payment)
+            self.payment = (
+                PaymentResponse(**payment)
+                if "error" not in payment
+                else PaymentErrorResponse(**payment)
+            )
         else:
             self.payment = None
 

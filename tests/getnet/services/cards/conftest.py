@@ -19,6 +19,7 @@ def card_sample():
         "verify_card": False,
     }.copy()
 
+
 @pytest.fixture
 def card_response_sample():
     return {

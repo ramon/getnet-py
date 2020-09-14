@@ -8,7 +8,9 @@ from getnet.services.service import ResponseList
 
 @pytest.mark.vcr()
 def test_create(client, card_sample: dict):
-    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    card_sample["number_token"] = client.generate_token_card(
+        "5155901222280001", "getnet-py"
+    )
     card = Service(client).create(Card(**card_sample))
 
     assert isinstance(card, NewCardResponse)
@@ -26,7 +28,9 @@ def test_invalid_create(client, card_sample: dict):
 
 @pytest.mark.vcr
 def test_get(client, card_sample: dict):
-    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    card_sample["number_token"] = client.generate_token_card(
+        "5155901222280001", "getnet-py"
+    )
     service = Service(client)
     sample_card = service.create(Card(**card_sample))
 
@@ -63,7 +67,9 @@ def test_all_not_found(client):
 
 @pytest.mark.vcr
 def test_delete(client, card_sample: dict):
-    card_sample["number_token"] = client.generate_token_card("5155901222280001", "getnet-py")
+    card_sample["number_token"] = client.generate_token_card(
+        "5155901222280001", "getnet-py"
+    )
     service = Service(client)
 
     created_card = service.create(Card(**card_sample))

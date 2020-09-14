@@ -69,19 +69,23 @@ class Service(Service):
         )
         return SubscriptionResponse(**response)
 
-    def change_payment_date(self, subscription_id: Union[UUID, str], day: int) -> SubscriptionResponse:
+    def change_payment_date(
+        self, subscription_id: Union[UUID, str], day: int
+    ) -> SubscriptionResponse:
         data = {"day": day}
 
         response = self._patch(
             self._format_url(path="/paymentDate", subscription_id=str(subscription_id)),
-            json=data
+            json=data,
         )
         return SubscriptionResponse(**response)
 
     def change_payment_data(self, subscription_id: Union[UUID, str], card: Card):
         response = self._patch(
-            self._format_url(path="/paymentType/credit/card", subscription_id=str(subscription_id)),
-            json=card._as_dict()
+            self._format_url(
+                path="/paymentType/credit/card", subscription_id=str(subscription_id)
+            ),
+            json=card._as_dict(),
         )
 
         return SubscriptionResponse(**response)

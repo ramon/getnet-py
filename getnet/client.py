@@ -16,6 +16,7 @@ LOGGER = logging.getLogger(__name__)
 
 class Client(object):
     """Return an SDK client"""
+
     request: requests.Session
     seller_id: str = None
     client_id: str = None
@@ -43,7 +44,7 @@ class Client(object):
         self.client_secret = client_secret
 
         if not isinstance(environment, Environment):
-            raise AttributeError('Invalid environment')
+            raise AttributeError("Invalid environment")
 
         self.environment = environment
         self.base_url = environment.base_url()

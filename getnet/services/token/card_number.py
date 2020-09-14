@@ -6,6 +6,7 @@ class CardNumber:
     """Implements the CardNumber data required to generate the tokenized
     version
     """
+
     card_number: str
     customer_id: str
 

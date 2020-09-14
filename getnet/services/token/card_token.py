@@ -3,6 +3,7 @@
 
 class CardToken:
     """Represent the card number tokenized version"""
+
     number_token: str
 
     def __init__(self, number_token: str):
