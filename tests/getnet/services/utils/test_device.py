@@ -1,24 +1,19 @@
 import ipaddress
-import unittest
+
+import pytest
 
 from getnet.services.utils import Device
 
 
-class DeviceTest(unittest.TestCase):
-    def testInvalidDeviceId(self):
-        with self.assertRaises(TypeError):
+class TestDevice:
+    def test_invalid_device_id(self):
+        with pytest.raises(TypeError):
             Device("127.0.0.1", "A" * 81)
 
-    def testInvalidPDeviceUD(self):
-        with self.assertRaises(ipaddress.AddressValueError):
+    def test_invalid_ipaddress(self):
+        with pytest.raises(ipaddress.AddressValueError):
             Device("127.0.0.300", "ABC")
 
-    def testAsDict(self):
+    def test_get_as_dict(self):
         object = Device("127.0.0.3", "ABC")
-        self.assertDictEqual(
-            {"ip_address": "127.0.0.3", "device_id": "ABC"}, object.as_dict(),
-        )
-
-
-if __name__ == "__main__":
-    unittest.main()
+        assert {"ip_address": "127.0.0.3", "device_id": "ABC"} == object.as_dict()
