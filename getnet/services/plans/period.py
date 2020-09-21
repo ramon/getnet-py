@@ -8,6 +8,7 @@ from typing import Union
 @unique
 class PeriodType(Enum):
     """PeriodType is the enum with Plan Period options"""
+
     YEARLY = "yearly"
     MONTHLY = "monthly"
     BIMONTHLY = "bimonthly"
@@ -18,12 +19,16 @@ class PeriodType(Enum):
 
 class Period:
     """Period represents the Plan Period entity"""
+
     type: PeriodType
     billing_cycle: int
     specific_cycle_in_days: int
 
     def __init__(
-        self, type: Union[PeriodType, str], billing_cycle: int, specific_cycle_in_days: int = None
+        self,
+        type: Union[PeriodType, str],
+        billing_cycle: int,
+        specific_cycle_in_days: int = None,
     ):
 
         """
@@ -39,7 +44,9 @@ class Period:
                 raise AttributeError("Invalid Type")
 
         if type == PeriodType.SPECIFIC and specific_cycle_in_days is None:
-            raise AttributeError("'specific_cycle_in_days' required if type is specific")
+            raise AttributeError(
+                "'specific_cycle_in_days' required if type is specific"
+            )
 
         self.type = type
         self.billing_cycle = billing_cycle

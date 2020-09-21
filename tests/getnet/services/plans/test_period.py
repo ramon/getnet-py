@@ -11,4 +11,3 @@ def test_invalid_type():
 def test_require_specific_cycle_if_type_is_specific():
     with pytest.raises(AttributeError):
         Period("specific", 1)
-

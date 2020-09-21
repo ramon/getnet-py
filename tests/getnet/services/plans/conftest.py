@@ -17,7 +17,11 @@ def plan_sample():
         "payment_types": ["credit_card"],
         "sales_tax": 0,
         "product_type": ProductType.SERVICE,
-        "period": {"type": PeriodType.MONTHLY, "billing_cycle": 12, "specific_cycle_in_days": 0},
+        "period": {
+            "type": PeriodType.MONTHLY,
+            "billing_cycle": 12,
+            "specific_cycle_in_days": 0,
+        },
     }.copy()
 
 
