@@ -1,0 +1,127 @@
+interactions:
+- request:
+    body: scope=oob&grant_type=client_credentials
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic MTFlNzkzMzEtMzcwNS00OWE4LTk0OGYtMGNmNDU0ODg2MTJkOjVkMzkzNDIwLWIyMjEtNDQyMy1iNDg2LTE2MWUyYTgyZjMzMg==
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/auth/oauth/v2/token
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC3MwQqFIBAF0H3QP8SsE0xFq2U/IjMyQgQZ2uI9on9/4Wt77z33apuuAwyBS/Fn
+        2niHGRzFUQVygqR1wlBkgUppYQxObtAWoxygr7ISf34PftzCmDm/DX+ONXPx6/OorZT/tIRUpykR
+        tM39A59Ho7t/AAAA
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '126'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:03:56 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache-Coyote/1.1
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '134'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '85'
+      X-Powered-By:
+      - '59925'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"product_type": "service", "name": "Plano #51.508265530309686", "description":
+      "Plano flex", "amount": 19990, "currency": "BRL", "payment_types": ["credit_card"],
+      "sales_tax": 0, "seller_id": "d167cde9-1c7f-4af9-a8a2-d38424dad863", "period":
+      {"type": "monthly", "billing_cycle": 12}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '284'
+      Content-Type:
+      - application/json
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/plans
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAD2QwU7DMAyGXwWF64KSNE2THjlzQIgTCFWek0KkNK3SdFo17d3xNMTFB3/fb1u+
+        sDWkFMoQPeuZl6ZDHxyX2I1cw+g4WFDcN1Yr7cFb07ADWxLke8Ci6GxQktvOSK47deTQaeCgHTZa
+        H3E0gQIZpkD2K+Xmh8dWPrXCKtO2jWiEM9aQ4sOKJS41zvnfHFM4E4Jp3nJlvXTOiQPDrZSQcSft
+        +e2F+AoprEOFM+sJL2X2G9ah7stt5xrKKeLtiAX2KeQ7WFn/ybAEH+uAUDz7ojEV6kaAAdZ4uiVI
+        gBoGT4XaSijBheNKvsu2F03fmifbtR+30aHEmf5xYX9bpznXn7QTOsaUYv4ecMdERKrr9RcLRQ/f
+        dAEAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '289'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:03:57 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=5f1ad24f8e69240ef05f465af4cdb9c1; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '122'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '291'
+      X-Powered-By:
+      - '59925'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+version: 1

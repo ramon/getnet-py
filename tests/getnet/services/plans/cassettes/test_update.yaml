@@ -1,0 +1,266 @@
+interactions:
+- request:
+    body: '{"product_type": "service", "name": "Plano #45.24699433064608", "description":
+      "Plano flex", "amount": 19990, "currency": "BRL", "payment_types": ["credit_card"],
+      "sales_tax": 0, "seller_id": "d167cde9-1c7f-4af9-a8a2-d38424dad863", "period":
+      {"type": "monthly", "billing_cycle": 12}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '283'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e;
+        50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: POST
+    uri: https://api-homologacao.getnet.com.br/v1/plans
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAD2QwU7EIBCGX8XgdTFAKQs9evZgjCeNaaYwqySUNpRuttnsuzvNGi9zmO/7/yFc
+        2YIpYeljYB0L0hx9QMelP564hpPjYEHx0FitdIBgTcMObE6Q74HhaIQdDHLrwXDtraJAsFwIjarV
+        shkaoECGEcl+pdz08KjbJ6WNc7pphNFUQEbAxZc41zjlf/GU8EIIxmnNlXXSOScOzK+lYPYbac9v
+        L8QXSLj0FS6sIzyXKay+9nWb95MLlnP0uD8athHzHSys+2S+YIi191AC+6KaCnUlwMDXeN4TJEDF
+        PtCgtRJKcOG4ku+y7aTuVPukjfzYq7HEib7jyv6ujlOuP2kjNMSUYv7u/eYTEalut1+cxr6ocwEA
+        AA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '286'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:14:25 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '13'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '159'
+      X-Powered-By:
+      - '60100'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #1", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e;
+        50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/b7608b6e-8ca6-4c82-a8d8-004e25413b3a
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAC2QvW7DMAyEXyVQ16iwFPl3zNCpQ1F0alEYNEWnAmTJkOUgRpB3L4120XD33Ynk
+        XcweQu+s6IQdsG5MW0owg5LG6FFCZQZJA5YD2npQ6iSOAqa4hiw61bZtcRSYCDL1lh/u0IUuZNFK
+        rT6U6cq60+pZVeUn53BNiQJuTJ3fX1mwtGByc3YxsPbGc8TD6OnGVoBpb3uJ8Qzp8KRYmmGbKOQ+
+        bzMtovvaP7Yu9wjJim/2KbnIa9zFTnB4iiH/+I2jg/PehUuPG3p2lH4wnqJd8a+O4YXS1SExvICn
+        pc9wEx1vt5D3lP7vo6oaLbVSYT1KA2MroQEt7akx2liwTbXfZ8mQV55QAGZ3JfH4BV8ckFBkAQAA
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '285'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:14:25 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=5f1ad24f8e69240ef05f465af4cdb9c1; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '12'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '122'
+      X-Powered-By:
+      - '60100'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #2", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; c4c8a95d3eb7a29ca158fae307fb79ad=5f1ad24f8e69240ef05f465af4cdb9c1;
+        50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/b7608b6e-8ca6-4c82-a8d8-004e25413b3a
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAACWQsW7EIBBEf+VE2iMCjGzj8opUKaIoVaIIrWGdIGGwMD6ddbp/z1ppKGbeDLt7
+        Z0uEZINnA2sdSPAg+Nhgy/XkRw7CdFyAGTvVjy00gp0ZzHlLlQ3SGCPOzBWEitbTQx1KKMGF4Up+
+        SD1oMyj5rKX8pJzbSsHkdqIu768keFxdCUsNOZH2RnPk0xTxRlaC+Wh7yfkC5fSkSFpgnzFVW/cF
+        VzZ8HR/7UK2D4tk3+VhCpjXu7CAoPOdUf+NO0THEGNKPdbuL5Ej1ILxkv7n/OoJXLNfgkOAVIq62
+        wo0NtN2KMWL5v4+Xbec8Gi5dN3ENk+HQg+K+6bXSHnzfNkdBhbrRhAxcDVdkjz9ZKQ0MZAEAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '283'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:14:25 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '12'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '115'
+      X-Powered-By:
+      - '60100'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"name": "FooBar #3", "description": "Plano flex"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/json
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e;
+        50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: PATCH
+    uri: https://api-homologacao.getnet.com.br/v1/plans/b7608b6e-8ca6-4c82-a8d8-004e25413b3a
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAACVQPW/DIBD9KxFdQ2WwTYzHDJ06VFWnVpV1hnOKhMECHMWK8t97VpYb3te9uztb
+        PITBWdazujVWTqrlLZqaN+0EHITouFQTNmocoZMjOzKY4xoK64XWujoykxAKDpYGZchKVrzSXIov
+        0fTtqa/lq1bqm3xmTQmD2Uh1/nwnwGI2yS3FxUDYB/WIh8njjagA8572FuMZ0uGlJmiBbcZQhrIt
+        mFn/sy+2rgwGkmW/xGNykc64s11B5jmG8uc3so7Oexcug9mMJ0bIB8lTtKt5xpE4Y7o6gyTO4DEP
+        BW6sp+syeo/p+R8r1MlY1FyY08QbmDSHDiS3ddfIxoLt1F40FygrNWRgirsie/wDp6hhI2QBAAA=
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '284'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:14:26 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=5f1ad24f8e69240ef05f465af4cdb9c1; Path=/v1/plans;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '8'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '84'
+      X-Powered-By:
+      - '60100'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+version: 1

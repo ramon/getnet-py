@@ -1,17 +1,19 @@
-from typing import Union, List
+from enum import Enum, unique
+from typing import Union, List, Optional
 
 from getnet.services.plans.period import Period
 
-PRODUCT_TYPES = (
-    "cash_carry",
-    "digital_content",
-    "digital_goods",
-    "gift_card",
-    "physical_goods",
-    "renew_subs",
-    "shareware",
-    "service",
-)
+
+@unique
+class ProductType(Enum):
+    CASH_CARRY = "cash_carry"
+    DIGITAL_CONTENT = "digital_content"
+    DIGITAL_GOODS = "digital_goods"
+    GIFT_CARD = "gift_card"
+    PHYSICAL_GOODS = "physical_goods"
+    RENEW_SUBS = "renew_subs"
+    SHAREWARE = "shareware"
+    SERVICE = "service"
 
 
 class Plan:
@@ -22,7 +24,7 @@ class Plan:
     currency: str
     payment_types: List[str] = ("credit_card",)
     sales_tax: int = 0
-    product_type: str
+    product_type: Optional[Union[ProductType, str]]
     period: Period
 
     def __init__(
@@ -32,11 +34,17 @@ class Plan:
         currency: str,
         payment_types: List[str] = ("credit_card",),
         sales_tax: int = 0,
-        description: str = None,
-        product_type: str = None,
-        seller_id: str = None,
-        period: Union[Period, dict] = None,
+        description: Optional[str] = None,
+        product_type: Optional[ProductType] = None,
+        seller_id: Optional[str] = None,
+        period: Optional[Union[Period, dict]] = None,
     ):
+        if isinstance(product_type, str):
+            try:
+                product_type = ProductType[product_type.upper()]
+            except Exception:
+                raise AttributeError("Invalid Product Type")
+
         self.product_type = product_type
         self.name = name
         self.description = description
@@ -59,8 +67,9 @@ class Plan:
 
     def as_dict(self):
         data = self.__dict__.copy()
+        data["product_type"] = self.product_type.value
 
         period = data.pop("period")
-        data["period"] = period._as_dict()
+        data["period"] = period.as_dict()
 
         return data

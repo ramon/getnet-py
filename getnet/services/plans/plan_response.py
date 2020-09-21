@@ -4,7 +4,7 @@ from uuid import UUID
 
 from dateutil import parser
 
-from getnet.services.plans.plan import Plan
+from getnet.services.plans.plan import Plan, ProductType
 
 
 class PlanResponse(Plan):
@@ -15,6 +15,13 @@ class PlanResponse(Plan):
     def __init__(
         self, plan_id: Union[UUID, str], status: str, create_date: str = None, **kwargs
     ):
+        """
+        Args:
+            plan_id:
+            status (str):
+            create_date (str):
+            **kwargs:
+        """
         self.plan_id = (
             plan_id if isinstance(plan_id, UUID) or plan_id is None else UUID(plan_id)
         )

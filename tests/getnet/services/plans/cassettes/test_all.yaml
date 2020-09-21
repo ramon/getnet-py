@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Bearer 7bf82cb7-b067-4bfe-a223-44a97136af01
+      Connection:
+      - keep-alive
+      Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e;
+        50d7ab163603b0393a70ef4f24c58ff1=a9e3a93d34c9a041616054c748856805; c4c8a95d3eb7a29ca158fae307fb79ad=ed096d8d7e14e7cfffc3432ed836a77e
+      seller_id:
+      - d167cde9-1c7f-4af9-a8a2-d38424dad863
+      user-agent:
+      - getnet-py/1.1
+    method: GET
+    uri: https://api-homologacao.getnet.com.br/v1/plans?page=1&limit=100&status=active&sort=name&sort_type=asc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAM2UPY/bMAyG/8pBt0aGvj883tCpQ1F0alEYFCXfCXDswFYODYL899K9pWtuymIQ
+        9MuX1ANRVzbVY22sl0Ic2AleC4UUTDBvrP91/RcNNbOe5YQ+mGg5mCS5MWrk4EziJaFNmH2SUrMD
+        g+NynnfDGCNZ4lqglSHThzyUUIKLyJX8IU1vfa9kJ539SXV4Xtcy44VUL9+/UiKXDdd6anWZKUeJ
+        GY67x5dleYH16VmyfeDLscxtaJdT2efd2+XaBoQ1s9/0v6x1oeGvbFdQ8XGZ29t0odJUp6nOrwNe
+        cNoPrW4kX5d8xg87Em9lfa9YSLzBVLahwR/W05m2Bu1M7Rhgq++F3Q7/c3IIEjIInnRx3Iw5cRDR
+        cwExeRWSAy3u42TizslI+SlO6kE5aYtZjc5yW1BzY0fgIGXgyo3FuJQgqHT3fdKqi859ipN+UE4B
+        hQ9FSR68o73ziu6TNwTLRNTGJBxduYeT7YXureuCv2/vvtFEy9OzlZ0VQTlrtdAiuuAelNsYwUUt
+        FE9JI+2hzxxGjzyDBxNyyD7f9V59cPOdc+Yz3KLrvDdRK69kMMY80PNFndrSYGK9vf0FtBBd1BEG
+        AAA=
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '458'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 21 Sep 2020 15:03:59 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - 50d7ab163603b0393a70ef4f24c58ff1=bd25528a5dd8b32a7b5a5c1f2b312b79; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      - c4c8a95d3eb7a29ca158fae307fb79ad=5f1ad24f8e69240ef05f465af4cdb9c1; Path=/v1;
+        HttpOnly; Secure; Domain=api-homologacao.getnet.com.br
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      X-EdgeConnect-MidMile-RTT:
+      - '122'
+      X-EdgeConnect-Origin-MEX-Latency:
+      - '82'
+      X-Powered-By:
+      - '59928'
+      preload:
+      - ''
+    status:
+      code: 200
+      message: OK
+version: 1

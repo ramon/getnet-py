@@ -6,7 +6,7 @@ from getnet.services.cards.card_response import NewCardResponse
 from getnet.services.service import ResponseList
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr
 def test_create(client, card_sample: dict):
     card_sample["number_token"] = client.generate_token_card(
         "5155901222280001", "getnet-py"

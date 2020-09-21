@@ -1,15 +1,25 @@
+"""
+Implements Subscription Plan Service
+"""
 from typing import Union
 from uuid import UUID
 
 from getnet.services.plans.plan import Plan
 from getnet.services.plans.plan_response import PlanResponse
-from getnet.services.service import Service, ResponseList
+from getnet.services.service import Service as BaseService, ResponseList
 
 
-class Service(Service):
+class Service(BaseService):
+    """Service implements the Subscription Plan service operations"""
+
     path = "/v1/plans/{plan_id}"
 
     def create(self, plan: Plan) -> PlanResponse:
+        """Create the Plan
+
+        Args:
+            plan (Plan): Plan data
+        """
         plan.seller_id = self._client.seller_id
         response = self._post(self._format_url(), json=plan.as_dict())
         return PlanResponse(**response)
@@ -24,6 +34,17 @@ class Service(Service):
         sort: str = "name",
         sort_type: str = "asc",
     ) -> ResponseList:
+        """Return an list of plans
+
+        Args:
+            page (int):
+            limit (int):
+            plan_id (str):
+            status (str):
+            name (str):
+            sort (str):
+            sort_type (str):
+        """
         if page <= 0:
             raise AttributeError("page must be greater then 0")
 
@@ -49,6 +70,11 @@ class Service(Service):
         )
 
     def get(self, plan_id: Union[UUID, str]):
+        """Return the specific plan data
+
+        Args:
+            plan_id (UUID, str):
+        """
         response = self._get(self._format_url(plan_id=str(plan_id)))
 
         return PlanResponse(**response)
@@ -56,6 +82,13 @@ class Service(Service):
     def update(
         self, plan: Union[Plan, UUID, str], name: str = None, description: str = None
     ) -> PlanResponse:
+        """Update the name and/or description of specific plan
+
+        Args:
+            plan (Plan, UUID, str):
+            name (str): Optional new plan name
+            description (str): Optional new plan description
+        """
         if isinstance(plan, str):
             plan_id = UUID(plan)
         elif isinstance(plan, Plan):
@@ -75,6 +108,12 @@ class Service(Service):
     def update_status(
         self, plan: Union[Plan, UUID, str], active: bool = True
     ) -> PlanResponse:
+        """Update the plan status to active or inactive
+
+        Args:
+            plan (Plan, UUID, str):
+            active (bool): True to active and False to inactive
+        """
         if isinstance(plan, str):
             plan_id = UUID(plan)
         elif isinstance(plan, Plan):
